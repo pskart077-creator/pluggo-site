@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const bodyFont = Poppins({
+const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const displayFont = Poppins({
+const displayFont = Inter({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
