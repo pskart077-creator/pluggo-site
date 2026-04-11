@@ -2307,10 +2307,12 @@ img {
   .site-logo {
     font-size: 1.72rem;
     padding-inline: 0.3rem;
+    z-index: 1;
   }
 
   .site-menu-toggle {
     display: inline-flex;
+    z-index: 97;
   }
 
   .site-contact-btn-desktop {
@@ -2319,14 +2321,16 @@ img {
 
   .site-nav {
     position: fixed;
-    top: calc(env(safe-area-inset-top, 0px) + 0.8rem);
+    top: calc(env(safe-area-inset-top, 0px) + 4.7rem);
     left: 0.75rem;
     right: 0.75rem;
-    z-index: 90;
+    z-index: 96;
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.32rem;
     padding: 0.85rem;
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 5.6rem);
+    overflow-y: auto;
     border-radius: var(--radius-lg);
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: linear-gradient(180deg, #10141d 0%, #0b0f16 100%);
