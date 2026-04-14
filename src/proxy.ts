@@ -45,7 +45,7 @@ export function proxy(request: NextRequest) {
           success: false,
           error: {
             code: "UNAUTHENTICATED",
-            message: "Autenticacao obrigatoria.",
+            message: "Autenticação obrigatória.",
           },
         },
         {

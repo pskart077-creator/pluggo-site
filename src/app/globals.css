@@ -311,7 +311,7 @@ img {
 }
 
 .site-nav-link.is-active {
-  color: var(--white);
+  color: var(--green-primary);
 }
 
 .site-nav-link.is-active::after {
@@ -320,7 +320,7 @@ img {
   left: 0.7rem;
   right: 0.7rem;
   bottom: 0.25rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.84);
+  border-bottom: 2px solid rgba(73, 193, 102, 0.92);
 }
 
 /* =====================================================================================
@@ -390,9 +390,10 @@ img {
     content: "";
     position: absolute;
     top: 100%;
-    left: 0;
-    width: max(100%, 250px);
+    left: 50%;
+    width: min(1120px, calc(100vw - 48px));
     height: 16px;
+    transform: translateX(-50%);
   }
 
   .site-nav-dropdown:hover .site-nav-link-dropdown__icon {
@@ -449,10 +450,168 @@ img {
   background: rgba(255, 255, 255, 0.22);
 }
 
+.site-submenu-mega {
+  left: 50%;
+  width: min(1120px, calc(100vw - 48px));
+  min-width: 0;
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(14, 18, 26, 0.98) 0%, rgba(8, 12, 19, 0.98) 100%);
+  box-shadow:
+    0 36px 80px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transform: translate(-50%, 12px);
+}
+
+.site-nav-dropdown.is-open .site-submenu-mega,
+.site-nav-dropdown:hover .site-submenu-mega {
+  transform: translate(-50%, 0);
+}
+
+.site-submenu-mega-grid {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) minmax(320px, 1.15fr) minmax(250px, 0.88fr);
+  gap: 0.9rem;
+}
+
+.site-submenu-mega-leads {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.site-submenu-mega-lead-card {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  min-height: 132px;
+  padding: 1rem 1rem 0.95rem;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #060b12 0%, #090f19 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-submenu-mega-lead-card::before {
+  content: "";
+  position: absolute;
+  inset: auto -10% -14px -10%;
+  height: 46%;
+  background:
+    radial-gradient(circle at 12px 12px, rgba(255, 255, 255, 0.12) 1px, transparent 1.2px) 0 0 / 16px 16px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.site-submenu-mega-lead-card h4 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #ffffff;
+  font-size: 37px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.site-submenu-mega-lead-card p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 290px;
+  color: rgba(224, 234, 249, 0.78);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.site-submenu-mega-lead-card:hover {
+  border-color: rgba(76, 207, 113, 0.4);
+}
+
+.site-submenu-mega-quick {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.site-submenu-mega-quick-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 74px;
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 11, 17, 0.9);
+  transition:
+    border-color 0.22s ease,
+    background-color 0.22s ease;
+}
+
+.site-submenu-mega-quick-link:hover {
+  border-color: rgba(76, 207, 113, 0.42);
+  background: rgba(10, 14, 20, 0.98);
+}
+
+.site-submenu-mega-quick-label {
+  flex-shrink: 0;
+  width: 44%;
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.site-submenu-mega-quick-description {
+  color: rgba(228, 235, 245, 0.83);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.site-submenu-mega-feature {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.75rem;
+  padding: 0.8rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(7, 11, 18, 0.96) 0%, rgba(9, 14, 22, 0.96) 100%);
+}
+
+.site-submenu-mega-feature-media {
+  position: relative;
+  width: 100%;
+  height: 186px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0c111a;
+}
+
+.site-submenu-mega-feature-media img {
+  object-fit: contain;
+  object-position: center;
+  transform: scale(0.9);
+}
+
+.site-submenu-mega-feature-description {
+  margin: 0;
+  color: rgba(226, 235, 248, 0.82);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.site-submenu-mega-feature-link {
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
 /* =====================================================================================
    RESPONSIVO
 ===================================================================================== */
-@media (max-width: 991px) {
+@media (max-width: 920px) {
   .site-nav {
     position: fixed;
     top: 92px;
@@ -2628,6 +2787,74 @@ img {
     border-left: 1px solid rgba(255, 255, 255, 0.12);
   }
 
+  .site-submenu-mega {
+    left: 0;
+    width: 100%;
+    transform: none;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .site-nav-dropdown.is-open .site-submenu-mega {
+    max-height: 720px;
+    margin-top: 0.12rem;
+    padding: 0.25rem 0 0.2rem 0.6rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .site-submenu-mega-grid {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .site-submenu-mega-leads {
+    gap: 0.35rem;
+  }
+
+  .site-submenu-mega-lead-card {
+    min-height: 0;
+    padding: 0.76rem 0.85rem;
+    border-radius: 12px;
+  }
+
+  .site-submenu-mega-lead-card h4 {
+    font-size: 22px;
+  }
+
+  .site-submenu-mega-lead-card p {
+    max-width: none;
+    font-size: 13px;
+  }
+
+  .site-submenu-mega-quick {
+    gap: 0.35rem;
+  }
+
+  .site-submenu-mega-quick-link {
+    display: grid;
+    min-height: 0;
+    gap: 0.24rem;
+    padding: 0.72rem 0.85rem;
+    border-radius: 12px;
+  }
+
+  .site-submenu-mega-quick-label {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .site-submenu-mega-quick-description {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .site-submenu-mega-feature {
+    display: none;
+  }
+
   .site-submenu-link {
     min-height: 44px;
     padding: 0 0.9rem 0 1rem;
@@ -4758,4 +4985,144 @@ img {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* =======================================================================================
+   PAYMENTS FAQ
+======================================================================================= */
+.payments-faq-section {
+  position: relative;
+  width: 100%;
+  padding: 24px 0;
+  background: #000000;
+}
+
+.payments-faq-container {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  margin-bottom: 80px;;
+  padding: 0 16px;
+}
+
+.payments-faq-title {
+  margin: 0 0 18px;
+  font-size: 32px;
+  line-height: 1.05;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+}
+
+.payments-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payments-faq-item {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: #707177;
+  overflow: hidden;
+  transition:
+    border-color 0.24s ease,
+    transform 0.24s ease,
+    background 0.24s ease;
+}
+
+.payments-faq-item:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.payments-faq-item.is-open {
+  background: #73747a;
+}
+
+.payments-faq-trigger {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 18px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.payments-faq-question {
+  display: block;
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.payments-faq-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  opacity: 0.96;
+}
+
+.payments-faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s ease;
+}
+
+.payments-faq-item.is-open .payments-faq-content {
+  grid-template-rows: 1fr;
+}
+
+.payments-faq-content-inner {
+  overflow: hidden;
+  padding: 0 18px 18px;
+}
+
+.payments-faq-divider {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.payments-faq-content-inner p {
+  margin: 0;
+  max-width: 920px;
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* =======================================================================================
+   RESPONSIVO
+======================================================================================= */
+@media (max-width: 767px) {
+  .payments-faq-title {
+    font-size: 26px;
+  }
+
+  .payments-faq-trigger {
+    padding: 16px 14px;
+    gap: 14px;
+  }
+
+  .payments-faq-question {
+    font-size: 14px;
+  }
+
+  .payments-faq-content-inner {
+    padding: 0 14px 16px;
+  }
+
+  .payments-faq-content-inner p {
+    font-size: 13px;
+    line-height: 1.65;
+  }
 }

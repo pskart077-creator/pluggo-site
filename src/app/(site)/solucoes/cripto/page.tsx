@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import SiteFooter from "@/components/layout/footer/SiteFooter";
-import ServicesHero from "@/components/solucoes/ServiceHero";
-import Services from "@/components/solucoes/services";
+import CriptoAbout from "@/components/solucoes/cripto/CriptoAbout";
+import CriptoHero from "@/components/solucoes/cripto/CriptoHero";
+import CriptoSection from "@/components/solucoes/cripto/CriptoSection";
 import Contact from "@/components/contato/Contact";
-import Solutions from "@/components/solutions/Solutions";
+import FaqCripto from "@/components/solucoes/cripto/FaqCripto";
 import { STATIC_PAGE_SEO, buildPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata(STATIC_PAGE_SEO.solucoes);
@@ -11,9 +12,10 @@ export const metadata: Metadata = buildPageMetadata(STATIC_PAGE_SEO.solucoes);
 export default function ServicesPage() {
   return (
     <>
-      <ServicesHero />
-      <Solutions />
-      <Services />
+      <CriptoHero />
+      <CriptoSection />
+      <CriptoAbout />
+      <FaqCripto />
       <Contact />
       <SiteFooter />
     </>

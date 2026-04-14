@@ -1,6 +1,33 @@
+export type NavDropdownLeadCard = {
+  title: string;
+  description: string;
+  href: string;
+};
+
+export type NavDropdownQuickLink = {
+  label: string;
+  description: string;
+  href: string;
+};
+
+export type NavDropdownFeature = {
+  title: string;
+  description: string;
+  href: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
+export type NavDropdownContent = {
+  leadCards: NavDropdownLeadCard[];
+  quickLinks: NavDropdownQuickLink[];
+  feature: NavDropdownFeature;
+};
+
 export type NavItem = {
   href: string;
   label: string;
+  dropdown?: NavDropdownContent;
 };
 
 export type SlugPageDetail = {

@@ -26,7 +26,7 @@ export function buildNewsListMetadata(params?: {
     canonical.searchParams.set("tag", params.tag);
   }
 
-  const title = "News | Plug Go";
+  const title = "News";
   const description =
     "Noticias, atualizacoes e analises da Plug Go com foco em tecnologia, seguranca e mercado.";
 
