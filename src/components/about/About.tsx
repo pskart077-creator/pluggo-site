@@ -1,70 +1,70 @@
 import {
   Wallet,
-  ReceiptText,
+  ShoppingCart,
+  RefreshCcw,
+  Split,
   ShieldCheck,
-  UserRound,
-  Building2,
-  Bitcoin,
+  PlugZap,
 } from "lucide-react";
 
-const aboutItems = [
+const productItems = [
   {
     icon: Wallet,
-    title: "Conta Digital",
+    title: "Infraestrutura de Pagamentos",
     description:
-      "Movimente, acompanhe e organize sua rotina financeira em uma experiência mais simples e funcional.",
+      "Centralize fluxos financeiros com mais controle, flexibilidade e inteligência para a sua operação digital.",
   },
   {
-    icon: ReceiptText,
-    title: "Cobranças Integradas",
+    icon: ShoppingCart,
+    title: "Checkout Inteligente",
     description:
-      "Receba com mais praticidade e traga mais fluidez para sua operação com soluções pensadas para o dia a dia.",
+      "Ofereça uma experiência de pagamento mais fluida, responsiva e pensada para elevar a conversão.",
+  },
+  {
+    icon: RefreshCcw,
+    title: "Pagamentos Recorrentes",
+    description:
+      "Gerencie assinaturas e cobranças programadas com mais previsibilidade, automação e eficiência operacional.",
+  },
+  {
+    icon: Split,
+    title: "Split de Pagamentos",
+    description:
+      "Automatize repasses entre múltiplos recebedores com mais organização, precisão e escalabilidade.",
   },
   {
     icon: ShieldCheck,
-    title: "Segurança Financeira",
+    title: "Antifraude e Proteção",
     description:
-      "Uma jornada com mais confiança, clareza e proteção para pessoas e empresas em cada etapa da experiência.",
+      "Reduza riscos com uma camada de segurança voltada à proteção de dados e à confiança das transações.",
   },
   {
-    icon: UserRound,
-    title: "Soluções Para Você",
+    icon: PlugZap,
+    title: "Integrações e Conexões",
     description:
-      "Recursos pensados para trazer mais controle, praticidade e organização para sua rotina financeira pessoal.",
-  },
-  {
-    icon: Building2,
-    title: "Soluções Para Empresas",
-    description:
-      "Mais eficiência para receber, acompanhar processos e conduzir a operação com mais fluidez.",
-  },
-  {
-    icon: Bitcoin,
-    title: "Cripto",
-    description:
-      "Acesso a novas possibilidades em uma experiência integrada, moderna e alinhada à evolução do mercado.",
+      "Conecte sistemas, parceiros e módulos da operação em um ambiente mais integrado, robusto e funcional.",
   },
 ];
 
-export default function About() {
+export default function Products() {
   return (
-    <section id="sobre" className="about-section section-anchor">
+    <section id="produtos" className="about-section section-anchor">
       <div className="about-section-header">
         <h2 className="about-section-title">
-          Soluções Que Conectam
+          Produtos que impulsionam
           <br />
-          Sua Rotina Financeira
+          sua operação digital
         </h2>
 
         <p className="about-section-subtitle">
-          A Plug Go reúne soluções essenciais para pessoas e empresas em uma
-          experiência mais simples, segura e funcional. Mais praticidade para
-          movimentar, receber e organizar a vida financeira no dia a dia.
+          A Plug Go reúne produtos pensados para dar mais controle, segurança e
+          eficiência à sua operação. Da jornada de pagamento às integrações e à
+          proteção de dados, tudo em uma experiência mais robusta e escalável.
         </p>
       </div>
 
       <div className="about-cards-grid">
-        {aboutItems.map((item) => {
+        {productItems.map((item) => {
           const Icon = item.icon;
 
           return (
