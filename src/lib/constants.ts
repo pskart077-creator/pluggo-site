@@ -85,9 +85,7 @@ export const SITE_NAV_ITEMS: NavItem[] = [
     label: "Recursos",
     href: "/recursos",
     dropdown: {
-      simpleLinks: [
-        { label: "News", href: "/news" },
-      ],
+      simpleLinks: [{ label: "News", href: "/news" }],
     },
   },
   {
