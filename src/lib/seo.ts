@@ -27,6 +27,13 @@ export type StaticPageSlug =
   | "seguranca"
   | "pf"
   | "pj"
+  | "solucoesParaVoce"
+  | "solucoesParaEmpresas"
+  | "solucoesParaFintechs"
+  | "solucoesParaEcommerce"
+  | "solucoesParaMarketplaces"
+  | "solucoesParaPlataformasDigitais"
+  | "solucoesParaNegociosRecorrentes"
   | "termsOfServices"
   | "privacyPolicy"
   | "cookiePolicy";
@@ -84,20 +91,20 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
     keywords: [
       ...COMMON_KEYWORDS,
       "segmentos",
-      "para voce",
+      "para você",
       "para sua empresa",
     ],
   },
   news: {
     title: "News",
     description:
-      "Acompanhe as novidades da Plug Go com atualizacoes sobre tecnologia, seguranca e mercado financeiro.",
+      "Acompanhe as novidades da Plug Go com atualizações sobre tecnologia, segurança e mercado financeiro.",
     path: "/news",
     keywords: [
       ...COMMON_KEYWORDS,
       "news",
       "novidades plug go",
-      "conteudo financeiro",
+      "conteúdo financeiro",
     ],
   },
   seguranca: {
@@ -138,10 +145,94 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
       "serviços para empresas",
     ],
   },
+  solucoesParaVoce: {
+    title: "Soluções para Você",
+    description:
+      "Conheça as soluções da Plug Go para pessoa física e descubra mais praticidade, segurança e agilidade no dia a dia.",
+    path: "/solucoes/para-voce",
+    keywords: [
+      ...COMMON_KEYWORDS,
+      "solucoes para voce",
+      "pessoa fisica",
+      "servicos para pessoa fisica",
+    ],
+  },
+  solucoesParaEmpresas: {
+    title: "Soluções para Empresas",
+    description:
+      "Explore as soluções da Plug Go para empresas com foco em eficiência operacional, segurança e escalabilidade.",
+    path: "/solucoes/para-empresa",
+    keywords: [
+      ...COMMON_KEYWORDS,
+      "solucoes para empresas",
+      "pessoa juridica",
+      "servicos para empresas",
+    ],
+  },
+  solucoesParaFintechs: {
+    title: "Soluções para Fintechs",
+    description:
+      "Conheça as soluções da Plug Go para fintechs e escale sua operação com segurança, performance e flexibilidade.",
+    path: "/solucoes/para-fintechs",
+    keywords: [
+      ...COMMON_KEYWORDS,
+      "solucoes para fintechs",
+      "infraestrutura para fintech",
+      "pagamentos digitais",
+    ],
+  },
+  solucoesParaEcommerce: {
+    title: "Soluções para E-commerce",
+    description:
+      "Conheça as soluções da Plug Go para e-commerce com foco em conversão, fluidez da jornada e eficiência de pagamento.",
+    path: "/solucoes/para-e-commerce",
+    keywords: [
+      ...COMMON_KEYWORDS,
+      "solucoes para e-commerce",
+      "pagamentos para ecommerce",
+      "conversao em checkout",
+    ],
+  },
+  solucoesParaMarketplaces: {
+    title: "Soluções para Marketplaces",
+    description:
+      "Conheça as soluções da Plug Go para marketplaces com mais controle em repasses, cobranças e operações complexas.",
+    path: "/solucoes/para-marketplaces",
+    keywords: [
+      ...COMMON_KEYWORDS,
+      "solucoes para marketplaces",
+      "repasses marketplace",
+      "pagamentos marketplace",
+    ],
+  },
+  solucoesParaPlataformasDigitais: {
+    title: "Soluções para Plataformas Digitais",
+    description:
+      "Conheça as soluções da Plug Go para plataformas digitais com integração, automação e base para crescimento.",
+    path: "/solucoes/para-plataformas-digitais",
+    keywords: [
+      ...COMMON_KEYWORDS,
+      "solucoes para plataformas digitais",
+      "integracao financeira",
+      "automacao financeira",
+    ],
+  },
+  solucoesParaNegociosRecorrentes: {
+    title: "Soluções para Negócios Recorrentes",
+    description:
+      "Conheça as soluções da Plug Go para negócios recorrentes com mais previsibilidade de receita e eficiência em cobranças.",
+    path: "/solucoes/para-negocios-recorrentes",
+    keywords: [
+      ...COMMON_KEYWORDS,
+      "solucoes para negocios recorrentes",
+      "cobranca recorrente",
+      "gestao de assinaturas",
+    ],
+  },
   termsOfServices: {
     title: "Termos de Serviço",
     description:
-      "Consulte os termos que regem o uso dos canais e servicos da Plug Go.",
+      "Consulte os termos que regem o uso dos canais e serviços da Plug Go.",
     path: "/terms-of-services",
     keywords: [...COMMON_KEYWORDS, "termos de uso", "terms of services"],
   },
@@ -155,7 +246,7 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
   cookiePolicy: {
     title: "Política de Cookies",
     description:
-      "Saiba como a Plug Go utiliza cookies e como voce pode gerenciar preferencias.",
+      "Saiba como a Plug Go utiliza cookies e como você pode gerenciar preferências.",
     path: "/cookie-policy",
     keywords: [...COMMON_KEYWORDS, "politica de cookies", "cookie policy"],
   },
@@ -195,6 +286,11 @@ export function buildServiceMetadata(service: Service): Metadata {
   return buildDetailMetadata(service, `/solucoes/${service.slug}`);
 }
 
+type SegmentServiceMetadataOptions = {
+  segmentTitle: string;
+  segmentKeywords: string[];
+};
+
 export function buildDetailMetadata(
   detail: SlugPageDetail,
   path: string,
@@ -220,6 +316,38 @@ export function buildDetailMetadata(
       card: "summary_large_image",
       title: `${detail.title} | ${SITE_NAME}`,
       description: detail.seoDescription,
+    },
+  };
+}
+
+export function buildSegmentServiceMetadata(
+  detail: SlugPageDetail,
+  path: string,
+  options: SegmentServiceMetadataOptions,
+): Metadata {
+  const absoluteUrl = new URL(path, SITE_URL).toString();
+  const title = `${options.segmentTitle} | ${detail.title}`;
+  const description = detail.seoDescription;
+
+  return {
+    title,
+    description,
+    keywords: [...COMMON_KEYWORDS, ...options.segmentKeywords, ...detail.seoKeywords],
+    alternates: {
+      canonical: absoluteUrl,
+    },
+    openGraph: {
+      title: `${title} | ${SITE_NAME}`,
+      description,
+      url: absoluteUrl,
+      siteName: SITE_NAME,
+      locale: "pt_BR",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | ${SITE_NAME}`,
+      description,
     },
   };
 }

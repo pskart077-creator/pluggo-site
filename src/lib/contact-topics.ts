@@ -5,35 +5,35 @@ export const CONTACT_TOPICS: SlugPageDetail[] = [
     slug: "atendimento-comercial",
     title: "Atendimento comercial",
     seoDescription:
-      "Fale com o time comercial da Plug Go para avaliar solucoes aderentes ao seu momento.",
+      "Fale com o time comercial da Plug Go para avaliar soluções aderentes ao seu momento.",
     seoKeywords: [
       "atendimento comercial",
       "contato comercial plug go",
       "consultoria financeira",
     ],
     description:
-      "Converse com nosso time comercial para entender como as solucoes da Plug Go podem se encaixar na sua operacao.",
+      "Converse com nosso time comercial para entender como as soluções da Plug Go podem se encaixar na sua operação.",
     highlights: [
       "Mapeamento do seu contexto",
-      "Orientacao sobre servicos aderentes",
-      "Suporte para inicio da jornada",
+      "Orientação sobre serviços aderentes",
+      "Suporte para início da jornada",
     ],
   },
   {
     slug: "suporte",
     title: "Suporte",
     seoDescription:
-      "Acesse o suporte da Plug Go para tirar duvidas e manter sua rotina financeira operando com fluidez.",
+      "Acesse o suporte da Plug Go para tirar dúvidas e manter sua rotina financeira operando com fluidez.",
     seoKeywords: [
       "suporte plug go",
       "atendimento financeiro",
       "ajuda plataforma financeira",
     ],
     description:
-      "Nosso suporte ajuda a manter sua operacao estavel e funcional, com respostas objetivas para o dia a dia.",
+      "Nosso suporte ajuda a manter sua operação estável e funcional, com respostas objetivas para o dia a dia.",
     highlights: [
-      "Apoio em duvidas operacionais",
-      "Orientacao sobre fluxos da plataforma",
+      "Apoio em dúvidas operacionais",
+      "Orientação sobre fluxos da plataforma",
       "Atendimento para pessoas e empresas",
     ],
   },
@@ -41,18 +41,18 @@ export const CONTACT_TOPICS: SlugPageDetail[] = [
     slug: "parcerias",
     title: "Parcerias",
     seoDescription:
-      "Entre em contato com a Plug Go para avaliar oportunidades de parceria e colaboracao.",
+      "Entre em contato com a Plug Go para avaliar oportunidades de parceria e colaboração.",
     seoKeywords: [
       "parcerias plug go",
       "oportunidades de parceria",
       "ecossistema financeiro",
     ],
     description:
-      "Construimos parcerias para ampliar o acesso a solucoes financeiras e fortalecer a experiencia de pessoas e empresas.",
+      "Construímos parcerias para ampliar o acesso a soluções financeiras e fortalecer a experiência de pessoas e empresas.",
     highlights: [
-      "Modelos de colaboracao alinhados ao negocio",
-      "Integracao com foco em valor para o cliente",
-      "Relacao de longo prazo com evolucao continua",
+      "Modelos de colaboração alinhados ao negócio",
+      "Integração com foco em valor para o cliente",
+      "Relação de longo prazo com evolução contínua",
     ],
   },
 ];

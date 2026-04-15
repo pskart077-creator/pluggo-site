@@ -4,7 +4,7 @@ import Contact from "@/components/contato/Contact";
 import Hero from "@/components/hero/Hero";
 import SiteFooter from "@/components/layout/footer/SiteFooter";
 import NewsList from "@/components/news/NewsList";
-import Services from "@/components/solucoes/services";
+import ServiceCard from "@/components/solucoes/ServiceCard";
 import Process from "@/components/process/Process";
 import Showcase from "@/components/showcase/Showcase";
 import Solutions from "@/components/solutions/Solutions";
@@ -18,7 +18,7 @@ export default function HomePage() {
       <Hero />
       <Showcase />
       <About />
-      <Services />
+      <ServiceCard />
       <Solutions />
       <Process />
       <NewsList limit={3} />

@@ -5,53 +5,53 @@ export const ABOUT_TOPICS: SlugPageDetail[] = [
     slug: "hub-financeiro",
     title: "Hub financeiro completo",
     seoDescription:
-      "Entenda como a Plug Go conecta solucoes financeiras para pessoas e empresas em uma experiencia unificada.",
+      "Entenda como a Plug Go conecta soluções financeiras para pessoas e empresas em uma experiência unificada.",
     seoKeywords: [
       "hub financeiro completo",
       "sobre plug go",
       "plataforma financeira integrada",
     ],
     description:
-      "A Plug Go conecta solucoes financeiras para pessoas e empresas em uma experiencia mais simples, segura e funcional.",
+      "A Plug Go conecta soluções financeiras para pessoas e empresas em uma experiência mais simples, segura e funcional.",
     highlights: [
-      "Gestao inteligente da rotina financeira",
+      "Gestão inteligente da rotina financeira",
       "Mais clareza para movimentar e receber",
-      "Experiencia simples e segura",
+      "Experiência simples e segura",
     ],
   },
   {
     slug: "missao",
-    title: "Nossa missao",
+    title: "Nossa missão",
     seoDescription:
-      "Conheca a missao da Plug Go para simplificar a rotina financeira com uma plataforma moderna e eficiente.",
+      "Conheça a missão da Plug Go para simplificar a rotina financeira com uma plataforma moderna e eficiente.",
     seoKeywords: [
       "missao plug go",
       "simplificar rotina financeira",
       "plataforma financeira moderna",
     ],
     description:
-      "Nossa missao e simplificar a rotina financeira com uma plataforma moderna, organizada e eficiente para pessoas e empresas.",
+      "Nossa missão é simplificar a rotina financeira com uma plataforma moderna, organizada e eficiente para pessoas e empresas.",
     highlights: [
       "Mais praticidade no dia a dia",
-      "Operacao centralizada",
-      "Solucoes para PF e PJ",
+      "Operação centralizada",
+      "Soluções para PF e PJ",
     ],
   },
   {
     slug: "visao",
-    title: "Nossa visao",
+    title: "Nossa visão",
     seoDescription:
-      "Veja a visao da Plug Go sobre o futuro das solucoes financeiras para pessoas e empresas.",
+      "Veja a visão da Plug Go sobre o futuro das soluções financeiras para pessoas e empresas.",
     seoKeywords: [
       "visao plug go",
       "futuro financeiro",
       "inovacao em solucoes financeiras",
     ],
     description:
-      "Queremos transformar a relacao com solucoes financeiras, entregando mais clareza, confianca e eficiencia em cada etapa.",
+      "Queremos transformar a relação com soluções financeiras, entregando mais clareza, confiança e eficiência em cada etapa.",
     highlights: [
-      "Mais confianca nas operacoes",
-      "Visao mais clara da rotina financeira",
+      "Mais confiança nas operações",
+      "Visão mais clara da rotina financeira",
       "Tecnologia com praticidade",
     ],
   },

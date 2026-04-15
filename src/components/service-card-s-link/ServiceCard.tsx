@@ -30,9 +30,6 @@ export default function ServiceCard({
 
       <p className="service-card__description">{description}</p>
 
-      <Link href={href} className="service-card__link">
-        {linkLabel}
-      </Link>
     </article>
   );
 }

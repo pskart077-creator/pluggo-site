@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import SiteFooter from "@/components/layout/footer/SiteFooter";
 import ServicesHero from "@/components/solucoes/ServiceHero";
-import Services from "@/components/solucoes/services";
+import ServiceCard from "@/components/solucoes/ServiceCard";
 import Contact from "@/components/contato/Contact";
 import Solutions from "@/components/solutions/Solutions";
 import { STATIC_PAGE_SEO, buildPageMetadata } from "@/lib/seo";
@@ -13,7 +13,7 @@ export default function ServicesPage() {
     <>
       <ServicesHero />
       <Solutions />
-      <Services />
+      <ServiceCard />
       <Contact />
       <SiteFooter />
     </>
