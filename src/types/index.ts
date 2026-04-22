@@ -67,9 +67,3 @@ export type StickyHeaderState = {
   isHeaderVisible: boolean;
   isScrolled: boolean;
 };
-
-export type BackToTopController = {
-  isVisible: boolean;
-  isNearFooter: boolean;
-  scrollToTop: () => void;
-};

@@ -115,6 +115,35 @@ export type AdminNewsQueryInput = {
   orderBy: "newest" | "oldest" | "updated";
 };
 
+export type AdminNewsDashboardOverview = {
+  generatedAt: string;
+  counts: {
+    total: number;
+    draft: number;
+    scheduled: number;
+    published: number;
+    archived: number;
+    featured: number;
+    highlighted: number;
+    scheduledNext48h: number;
+    updatedLast7d: number;
+  };
+  topCategories: Array<{
+    id: string;
+    name: string;
+    postCount: number;
+  }>;
+  recentUpdates: Array<{
+    id: string;
+    title: string;
+    slug: string;
+    status: NewsStatus;
+    updatedAt: string;
+    authorName: string;
+    categoryName: string;
+  }>;
+};
+
 export type NewsActionName =
   | "news:create"
   | "news:update"

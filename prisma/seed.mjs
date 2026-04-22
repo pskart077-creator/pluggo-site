@@ -1,12 +1,27 @@
 import { randomBytes, scryptSync } from "node:crypto";
-import { PrismaClient, UserRole } from "@prisma/client";
+import { InternalAdminRoleKey, PrismaClient, UserRole } from "@prisma/client";
 
 const prisma = new PrismaClient();
+const SCRYPT_KEY_LEN = 64;
+const SCRYPT_N = 16_384;
+const SCRYPT_R = 8;
+const SCRYPT_P = 1;
 
-function hashPassword(password) {
+function hashPasswordS1(password) {
   const salt = randomBytes(16).toString("hex");
   const hash = scryptSync(password, salt, 64).toString("hex");
   return `s1$${salt}$${hash}`;
+}
+
+function hashPasswordS2(password) {
+  const salt = randomBytes(16);
+  const hash = scryptSync(password, salt, SCRYPT_KEY_LEN, {
+    N: SCRYPT_N,
+    r: SCRYPT_R,
+    p: SCRYPT_P,
+  });
+
+  return `s2$${SCRYPT_N}$${SCRYPT_R}$${SCRYPT_P}$${salt.toString("base64")}$${hash.toString("base64")}`;
 }
 
 function normalizeRole(input) {
@@ -15,6 +30,19 @@ function normalizeRole(input) {
   if (value === "EDITOR") return UserRole.EDITOR;
   if (value === "AUTHOR") return UserRole.AUTHOR;
   return UserRole.SUPER_ADMIN;
+}
+
+function normalizeInternalRole(input) {
+  const value = String(input || "SUPERADMIN")
+    .trim()
+    .toUpperCase()
+    .replace(/[\s-]+/g, "_");
+  if (value === "SUPERADMIN") return InternalAdminRoleKey.SUPERADMIN;
+  if (value === "ADMIN") return InternalAdminRoleKey.ADMIN;
+  if (value === "VISUALIZADOR" || value === "VIEWER") {
+    return InternalAdminRoleKey.VISUALIZADOR;
+  }
+  return InternalAdminRoleKey.SUPERADMIN;
 }
 
 async function main() {
@@ -46,16 +74,66 @@ async function main() {
     where: { email: adminEmail },
     update: {
       displayName: adminName,
-      passwordHash: hashPassword(adminPassword),
+      passwordHash: hashPasswordS1(adminPassword),
       roleId: adminRole.id,
       isActive: true,
     },
     create: {
       email: adminEmail,
       displayName: adminName,
-      passwordHash: hashPassword(adminPassword),
+      passwordHash: hashPasswordS1(adminPassword),
       roleId: adminRole.id,
       isActive: true,
+    },
+  });
+
+  const internalRoles = [
+    { key: InternalAdminRoleKey.SUPERADMIN, name: "Superadmin" },
+    { key: InternalAdminRoleKey.ADMIN, name: "Admin" },
+    { key: InternalAdminRoleKey.VISUALIZADOR, name: "Visualizador" },
+  ];
+
+  for (const role of internalRoles) {
+    await prisma.internalAdminRole.upsert({
+      where: { key: role.key },
+      update: { name: role.name },
+      create: role,
+    });
+  }
+
+  const internalEmail = String(process.env.INTERNAL_ADMIN_EMAIL || adminEmail)
+    .trim()
+    .toLowerCase();
+  const internalPassword = String(process.env.INTERNAL_ADMIN_PASSWORD || adminPassword);
+  const internalName = String(process.env.INTERNAL_ADMIN_NAME || adminName).trim();
+  const internalRoleKey = normalizeInternalRole(process.env.INTERNAL_ADMIN_ROLE);
+
+  const internalRole = await prisma.internalAdminRole.findUnique({
+    where: { key: internalRoleKey },
+  });
+  if (!internalRole) {
+    throw new Error("Internal role not found for internal admin seed.");
+  }
+
+  await prisma.internalAdminUser.upsert({
+    where: { email: internalEmail },
+    update: {
+      fullName: internalName,
+      passwordHash: hashPasswordS2(internalPassword),
+      roleId: internalRole.id,
+      isActive: true,
+      lockedUntil: null,
+      failedLoginCount: 0,
+      deletedAt: null,
+      lastPasswordChangeAt: new Date(),
+    },
+    create: {
+      email: internalEmail,
+      fullName: internalName,
+      passwordHash: hashPasswordS2(internalPassword),
+      roleId: internalRole.id,
+      isActive: true,
+      lastPasswordChangeAt: new Date(),
     },
   });
 

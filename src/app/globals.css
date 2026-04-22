@@ -121,88 +121,466 @@ img {
 }
 
 /* =====================================================================================
-   BACK TO TOP
+   PUBLIC CHAT WIDGET • WHATSAPP STYLE MINIMAL
 ===================================================================================== */
-.back-to-top-btn {
+.site-chat-widget {
   position: fixed;
   right: 24px;
   bottom: 24px;
-  z-index: 120;
+  z-index: 140;
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+
+.site-chat-toggle {
   width: 52px;
   height: 52px;
   border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: linear-gradient(140deg, #49c166 0%, #35b857 100%);
+  box-shadow:
+    0 12px 24px rgba(53, 184, 87, 0.26),
+    0 0 0 4px rgba(73, 193, 102, 0.12);
+  transition:
+    transform 0.22s ease,
+    filter 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.site-chat-toggle:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+.site-chat-toggle svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  stroke: currentColor;
+}
+
+
+.site-chat-toggle:focus-visible {
   outline: none;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.24),
+    0 0 0 4px rgba(255, 255, 255, 0.08),
+    0 0 0 8px rgba(73, 193, 102, 0.18);
+}
+
+.site-chat-toggle svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  stroke: currentColor;
+}
+
+.site-chat-panel {
+  width: min(360px, calc(100vw - 24px));
+  height: min(600px, 78vh);
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  border-radius: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #efeae2;
+  color: #1f1f1f;
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+}
+
+/* =====================================================================================
+   HEADER
+===================================================================================== */
+.site-chat-header {
+  min-height: 72px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #ffffff;
+  background: linear-gradient(180deg, #1f1f1f 0%, #191919 100%);
+}
+
+.site-chat-agent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.site-chat-avatar {
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #06070a;
+  color: #ffffff;
+}
+
+.site-chat-avatar--brand {
+  width: 46px;
+  height: 46px;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+}
+
+.site-chat-avatar--mini {
+  width: 38px;
+  height: 38px;
+}
+
+.site-chat-avatar-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.site-chat-avatar--mini .site-chat-avatar-text {
+  font-size: 0.95rem;
+}
+
+.site-chat-avatar-dot {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid #1f1f1f;
+  background: #25d366;
+}
+
+.site-chat-agent-copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.site-chat-agent-copy strong {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.1;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site-chat-agent-copy small {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.site-chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-chat-header-button {
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  color: #ffffff;
+  background: transparent;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.site-chat-header-button:hover,
+.site-chat-header-button:focus-visible {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+
+/* esconde o botão de mais opções para ficar mais clean */
+.site-chat-header-button.is-ghost {
+  display: none;
+}
+
+/* =====================================================================================
+   BODY
+===================================================================================== */
+.site-chat-body {
+  min-height: 0;
+  padding: 10px 10px 6px;
+  background: #efeae2;
+}
+
+.site-chat-messages {
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  padding: 0 2px 8px;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  background:
+    radial-gradient(circle at center, rgba(0, 0, 0, 0.015) 0%, transparent 70%),
+    #efeae2;
+}
+
+.site-chat-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.site-chat-row.is-attendant {
+  justify-content: flex-start;
+}
+
+.site-chat-row.is-visitor {
+  justify-content: flex-end;
+}
+
+.site-chat-message {
+  min-width: clamp(140px, 48%, 220px);
+  max-width: 80%;
+  border-radius: 14px;
+  padding: 8px 10px 6px;
+  border: 0;
+  position: relative;
+}
+
+.site-chat-message.is-attendant {
+  background: #ffffff;
+  color: #1f1f1f;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.site-chat-message.is-visitor {
+  background: #dcf8c6;
+  color: #1f1f1f;
+  margin-left: auto;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.site-chat-message-header {
+  margin-bottom: 3px;
+}
+
+.site-chat-message-header strong {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: rgba(30, 30, 30, 0.66);
+}
+
+.site-chat-message p {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #222222;
+}
+
+.site-chat-message-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.site-chat-message-footer span {
+  font-size: 0.7rem;
+  color: rgba(30, 30, 30, 0.52);
+}
+
+/* =====================================================================================
+   FORM
+===================================================================================== */
+.site-chat-form {
+  padding: 8px 10px 10px;
+  background: #f0f2f5;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.site-chat-protocol-hint {
+  margin: 0 4px 6px;
+  font-size: 0.76rem;
+  color: #4a4f59;
+}
+
+.site-chat-input-shell {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  background: #ffffff;
+  padding: 6px 6px 6px 14px;
+}
+
+.site-chat-input {
+  flex: 1;
+  min-width: 0;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  outline: none;
+  color: #2d2d2d;
+  font-size: 0.95rem;
+  font-family: inherit, sans-serif;
+}
+
+.site-chat-input::placeholder {
+  color: #8a8f98;
+}
+
+.site-chat-send {
+  width: 38px;
+  height: 38px;
+  border: 0;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  font-weight: 700;
   color: #ffffff;
-  background:
-    linear-gradient(135deg, rgba(71, 215, 100, 1) 0%, rgba(53, 184, 87, 1) 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  transform: translateY(18px) scale(0.9);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  font-size: 1.05rem;
+  background: #1f1f1f;
+  cursor: pointer;
   transition:
-    opacity 0.28s ease,
-    transform 0.28s ease,
-    visibility 0.28s ease,
-    box-shadow 0.28s ease,
-    filter 0.28s ease;
+    transform 0.2s ease,
+    filter 0.2s ease,
+    opacity 0.2s ease;
 }
 
-.back-to-top-btn.is-visible {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0) scale(1);
-}
-
-.back-to-top-btn:hover {
-  transform: translateY(-4px) scale(1.03);
-  filter: brightness(1.04);
-}
-
-.back-to-top-btn:active {
-  transform: translateY(-1px) scale(0.98);
-}
-
-.back-to-top-btn:focus-visible {
-  box-shadow:
-    0 0 0 4px rgba(71, 215, 100, 0.18),
-    0 14px 34px rgba(24, 126, 53, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
-}
-
-.back-to-top-btn svg {
-  transition: transform 0.28s ease;
-}
-
-.back-to-top-btn:hover svg {
+.site-chat-send:hover:not(:disabled) {
   transform: translateY(-1px);
+  filter: brightness(1.05);
 }
 
-/* Opcional: sobe um pouco quando estiver perto do footer */
-.back-to-top-btn.is-near-footer {
-  bottom: 34px;
+.site-chat-send:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* =====================================================================================
+   STATES
+===================================================================================== */
+.site-chat-state {
+  margin: 0;
+  color: rgba(43, 48, 61, 0.7);
+  font-size: 0.82rem;
+  padding: 10px 6px;
+}
+
+.site-chat-error {
+  margin: 0;
+  padding: 0 12px 10px;
+  font-size: 0.8rem;
+  color: #9e2d2d;
+  background: transparent;
 }
 
 /* =====================================================================================
    RESPONSIVE
 ===================================================================================== */
 @media (max-width: 767px) {
-  .back-to-top-btn {
-    right: 16px;
+  .site-chat-widget {
+    right: 12px;
     bottom: 16px;
-    width: 48px;
-    height: 48px;
   }
 
-  .back-to-top-btn.is-near-footer {
-    bottom: 22px;
+  .site-chat-toggle {
+    width: 2.55rem;
+    height: 2.55rem;
+    font-size: 0.88rem;
+  }
+
+  .site-chat-panel {
+    width: min(100vw - 12px, 360px);
+    height: min(78vh, 560px);
+    border-radius: 18px;
+  }
+
+  .site-chat-header {
+    min-height: 66px;
+    padding: 10px 12px;
+  }
+
+  .site-chat-avatar--brand {
+    width: 42px;
+    height: 42px;
+  }
+
+  .site-chat-avatar--mini {
+    width: 34px;
+    height: 34px;
+  }
+
+  .site-chat-avatar-text {
+    font-size: 1rem;
+  }
+
+  .site-chat-avatar--mini .site-chat-avatar-text {
+    font-size: 0.82rem;
+  }
+
+  .site-chat-avatar-dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .site-chat-agent-copy strong {
+    font-size: 0.92rem;
+  }
+
+  .site-chat-agent-copy small {
+    font-size: 0.72rem;
+  }
+
+  .site-chat-body {
+    padding: 8px 8px 4px;
+  }
+
+  .site-chat-message {
+    max-width: 88%;
+  }
+
+  .site-chat-form {
+    padding: 8px;
+  }
+
+  .site-chat-input-shell {
+    min-height: 44px;
+    padding-left: 12px;
+  }
+
+  .site-chat-input {
+    font-size: 0.92rem;
+  }
+
+  .site-chat-send {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
   }
 }
 
@@ -610,12 +988,10 @@ img {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.04) 0%,
-    rgba(0, 0, 0, 0.08) 38%,
-    rgba(0, 0, 0, 0.28) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.04) 0%,
+      rgba(0, 0, 0, 0.08) 38%,
+      rgba(0, 0, 0, 0.28) 100%);
 }
 
 .site-submenu-mega-lead-card::after {
@@ -870,6 +1246,7 @@ img {
    RESPONSIVO
 ===================================================================================== */
 @media (max-width: 1200px) {
+
   .site-submenu:not(.site-submenu-simple),
   .site-submenu-mega {
     width: min(1080px, calc(100vw - 24px));
@@ -1170,27 +1547,17 @@ img {
 }
 
 /* =====================================================================================
-   Hero
+   HERO
 ===================================================================================== */
 .pluggo-hero {
   position: relative;
   overflow: hidden;
   min-height: 760px;
-  padding: 210px 0 140px;
-  background: url("/assets/img/bg/bg-01.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+  padding: 168px 0 110px;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.16) 100%),
+    url("/assets/img/bg/bg-01.png") center center / cover no-repeat;
   isolation: isolate;
-}
-
-.pluggo-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.18) 100%);
-  z-index: 0;
-  pointer-events: none;
 }
 
 .pluggo-hero__bg {
@@ -1200,10 +1567,12 @@ img {
   pointer-events: none;
 }
 
-.pluggo-hero__wave,
-.pluggo-hero__wave--left,
-.pluggo-hero__wave--right {
-  display: none;
+.pluggo-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 26%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0) 34%);
 }
 
 .pluggo-hero__container {
@@ -1215,25 +1584,43 @@ img {
   padding: 0 24px;
 }
 
+.pluggo-hero__inner {
+  display: grid;
+  align-items: center;
+  gap: 54px;
+}
+
+@media (min-width: 1024px) {
+  .pluggo-hero__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(520px, 0.98fr);
+    gap: 56px;
+  }
+}
+
+/* =====================================================================================
+   CONTEÚDO
+===================================================================================== */
 .pluggo-hero__content {
-  max-width: 640px;
+  display: grid;
+  gap: 18px;
+  max-width: 560px;
 }
 
 .pluggo-hero__title {
   margin: 0;
-  color: var(--white);
-  font-size: 42px;
-  line-height: 1.03;
-  font-weight: 600;
-  letter-spacing: -0.04em;
+  color: #ffffff;
+  font-size: 38px;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  font-weight: 700;
 }
 
 .pluggo-hero__description {
-  max-width: 620px;
-  margin: 28px 0 0;
-  color: var(--white);
+  margin: 0;
+  max-width: 600px;
+  color: rgba(255, 255, 255, 0.84);
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.7;
   font-weight: 300;
 }
 
@@ -1241,7 +1628,477 @@ img {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-top: 38px;
+  margin-top: 10px;
+}
+
+.pluggo-hero__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #52db75 0%, #42c961 100%);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 14px 30px rgba(73, 193, 102, 0.22);
+  transition:
+    transform 0.22s ease,
+    filter 0.22s ease,
+    background 0.22s ease;
+}
+
+.pluggo-hero__button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  background: linear-gradient(180deg, #5be27d 0%, #4cd06b 100%);
+}
+
+/* =====================================================================================
+   VISUAL
+===================================================================================== */
+.pluggo-hero__visual {
+  min-width: 0;
+}
+
+.pluggo-hero__grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .pluggo-hero__grid {
+    grid-template-columns: minmax(0, 1fr) 0.92fr;
+    grid-template-areas:
+      "main stack"
+      "banner stack";
+    grid-template-rows: 300px 112px;
+    align-items: stretch;
+  }
+}
+
+.pluggo-hero__card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(6, 10, 16, 0.92);
+  box-shadow:
+    0 24px 54px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.pluggo-hero__card--main {
+  grid-area: main;
+  min-height: 300px;
+}
+
+.pluggo-hero__stack {
+  grid-area: stack;
+  display: grid;
+  gap: 16px;
+  height: 100%;
+  grid-template-rows: 160px minmax(236px, 1fr);
+}
+
+.pluggo-hero__card--top {
+  min-height: 160px;
+}
+
+.pluggo-hero__card--phone {
+  min-height: 236px;
+  background: rgba(4, 8, 13, 0.96);
+}
+
+.pluggo-hero__card--banner {
+  grid-area: banner;
+  min-height: 112px;
+  background: linear-gradient(135deg, #0ea628 0%, #39cb55 100%);
+}
+
+/* =====================================================================================
+   IMAGENS
+===================================================================================== */
+.pluggo-hero__media-slot {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.pluggo-hero__main-image {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.pluggo-hero__top-image {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.pluggo-hero__phone-image-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.pluggo-hero__phone-image {
+  object-fit: contain;
+  object-position: center bottom;
+  transform: translateY(120px) scale(1.8);
+}
+
+/* =====================================================================================
+   BADGE PRINCIPAL
+===================================================================================== */
+.pluggo-hero__brand-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #52db75 0%, #42c961 100%);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 10px 20px rgba(73, 193, 102, 0.22);
+}
+
+/* =====================================================================================
+   FLOATING PRINCIPAL
+===================================================================================== */
+.pluggo-hero__floating {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.14);
+}
+
+.pluggo-hero__floating-avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #d9dee7;
+  flex-shrink: 0;
+}
+
+.pluggo-hero__floating-avatar-image {
+  object-fit: cover;
+}
+
+.pluggo-hero__floating-copy {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.pluggo-hero__floating-copy strong {
+  color: #111827;
+  font-size: 13px;
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.pluggo-hero__floating-copy span {
+  color: #7e8794;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.pluggo-hero__floating-value {
+  display: grid;
+  gap: 1px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.pluggo-hero__floating-value strong {
+  color: #49c166;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.pluggo-hero__floating-value span {
+  color: #7e8794;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+/* =====================================================================================
+   PILL CARD SUPERIOR
+===================================================================================== */
+.pluggo-hero__top-pill {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 12px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.12);
+}
+
+.pluggo-hero__top-pill-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f4f8;
+  color: #0f141c;
+}
+
+.pluggo-hero__top-pill-copy {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.pluggo-hero__top-pill-copy strong {
+  color: #111827;
+  font-size: 13px;
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.pluggo-hero__top-pill-copy span {
+  color: #848c98;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+/* =====================================================================================
+   BANNER
+===================================================================================== */
+.pluggo-hero__banner-copy {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 18px 22px;
+}
+
+.pluggo-hero__banner-copy p {
+  max-width: 13rem;
+  margin: 0;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.04;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.pluggo-hero__banner-arrow {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  color: #ffffff;
+}
+
+.pluggo-hero__banner-mark {
+  position: absolute;
+  right: 16px;
+  bottom: -4px;
+  width: 104px;
+  height: 104px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  transform: rotate(-18deg);
+  opacity: 0.42;
+}
+
+/* =====================================================================================
+   TABLET
+===================================================================================== */
+@media (max-width: 1023px) {
+  .pluggo-hero {
+    min-height: auto;
+    padding: 148px 0 88px;
+  }
+
+  .pluggo-hero__visual {
+    display: none;
+  }
+
+  .pluggo-hero__content {
+    max-width: 100%;
+  }
+
+  .pluggo-hero__title {
+    font-size: 40px;
+  }
+
+  .pluggo-hero__description {
+    max-width: 100%;
+  }
+}
+
+/* =====================================================================================
+   MOBILE
+===================================================================================== */
+@media (max-width: 767px) {
+  .pluggo-hero {
+    padding: 116px 0 68px;
+  }
+
+  .pluggo-hero__inner {
+    gap: 32px;
+  }
+
+  .pluggo-hero__content {
+    gap: 16px;
+  }
+
+  .pluggo-hero__title {
+    font-size: 36px;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  .pluggo-hero__description {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .pluggo-hero__actions {
+    width: 100%;
+  }
+
+  .pluggo-hero__button {
+    width: 100%;
+  }
+
+  .pluggo-hero__grid {
+    gap: 12px;
+  }
+
+  .pluggo-hero__card {
+    border-radius: 24px;
+    height: auto;
+  }
+
+  .pluggo-hero__card--main {
+    min-height: 300px;
+  }
+
+  .pluggo-hero__stack {
+    grid-template-rows: auto;
+    height: auto;
+  }
+
+  .pluggo-hero__card--top {
+    min-height: 170px;
+  }
+
+  .pluggo-hero__card--phone {
+    min-height: 320px;
+    border-radius: 24px;
+  }
+
+  .pluggo-hero__card--banner {
+    min-height: 110px;
+  }
+
+  .pluggo-hero__phone-image {
+    object-fit: contain;
+    object-position: center bottom;
+    transform: translateY(20px) scale(1.02);
+  }
+
+  .pluggo-hero__floating {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+    gap: 10px;
+    min-height: 62px;
+    padding: 10px 12px;
+  }
+
+  .pluggo-hero__floating-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .pluggo-hero__floating-copy strong,
+  .pluggo-hero__top-pill-copy strong {
+    font-size: 12px;
+  }
+
+  .pluggo-hero__floating-copy span,
+  .pluggo-hero__floating-value span,
+  .pluggo-hero__top-pill-copy span {
+    font-size: 10px;
+  }
+
+  .pluggo-hero__floating-value strong {
+    font-size: 14px;
+  }
+
+  .pluggo-hero__banner-copy {
+    padding: 16px 18px;
+  }
+
+  .pluggo-hero__banner-copy p {
+    max-width: 11rem;
+    font-size: 14px;
+  }
+
+  .pluggo-hero__banner-mark {
+    width: 82px;
+    height: 82px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .pluggo-hero__title {
+    font-size: 31px;
+  }
+
+  .pluggo-hero__description {
+    font-size: 14px;
+  }
+
+  .pluggo-hero__card--main {
+    min-height: 270px;
+  }
+
+  .pluggo-hero__card--phone {
+    min-height: 290px;
+  }
 }
 
 /* =====================================================================================
@@ -3087,12 +3944,6 @@ img {
     pointer-events: auto;
   }
 
-  .back-to-top-btn {
-    right: 0.9rem;
-    bottom: 1.2rem;
-    width: 2.55rem;
-    height: 2.55rem;
-  }
 }
 
 /* =====================================================================================
@@ -5480,3 +6331,616 @@ img {
     line-height: 1.65;
   }
 }
+
+/* ============================ PLUGGO CONTACT WIZARD START ============================ */
+/* =======================================================================================
+   PLUGGO CONTACT WIZARD
+======================================================================================= */
+
+/* ==========================================================================
+   01) Estrutura Geral
+   ========================================================================== */
+
+.pluggo-contact-wizard__section {
+  --wizard-accent: var(--green-primary);
+  --wizard-accent-hover: var(--green-primary-hover);
+  --wizard-accent-gradient: var(--green-gradient);
+  --wizard-accent-ink: var(--green-ink);
+
+  --wizard-surface: rgba(9, 13, 21, 0.84);
+  --wizard-surface-strong: rgba(11, 16, 25, 0.94);
+  --wizard-surface-soft: rgba(255, 255, 255, 0.03);
+
+  --wizard-line: rgba(255, 255, 255, 0.1);
+  --wizard-line-strong: rgba(255, 255, 255, 0.16);
+
+  --wizard-ink: #ffffff;
+  --wizard-ink-soft: rgba(255, 255, 255, 0.72);
+  --wizard-ink-muted: rgba(255, 255, 255, 0.5);
+
+  --wizard-error: #ff7a7a;
+  --wizard-error-bg: rgba(255, 122, 122, 0.08);
+  --wizard-success: #82e7a0;
+  --wizard-success-bg: rgba(73, 193, 102, 0.1);
+
+  position: relative;
+  padding: clamp(88px, 11vw, 138px) 0;
+  background:
+    radial-gradient(circle at 10% 12%, rgba(73, 193, 102, 0.1), transparent 28%),
+    radial-gradient(circle at 86% 0%, rgba(255, 255, 255, 0.04), transparent 24%),
+    linear-gradient(180deg, #05070b 0%, #070b12 100%);
+  overflow: hidden;
+}
+
+.pluggo-contact-wizard__section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.02) 0%,
+      transparent 14%,
+      transparent 86%,
+      rgba(255, 255, 255, 0.02) 100%);
+}
+
+.pluggo-contact-wizard__container {
+  position: relative;
+  z-index: 1;
+  width: min(920px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   02) Card
+   ========================================================================== */
+
+.pluggo-contact-wizard__card {
+  position: relative;
+  border-radius: 30px;
+  border: 1px solid var(--wizard-line);
+  background: linear-gradient(180deg, rgba(13, 18, 28, 0.92) 0%, rgba(7, 11, 18, 0.96) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  padding: clamp(22px, 3.2vw, 42px);
+  overflow: hidden;
+}
+
+.pluggo-contact-wizard__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at top right, rgba(73, 193, 102, 0.08), transparent 26%);
+}
+
+/* ==========================================================================
+   03) Header do Formulário
+   ========================================================================== */
+
+.pluggo-contact-wizard__header {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.pluggo-contact-wizard__badge {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 13px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(73, 193, 102, 0.28);
+  background: rgba(73, 193, 102, 0.1);
+  color: #baf3c8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pluggo-contact-wizard__title {
+  margin: 0;
+  color: var(--wizard-ink);
+  font-size: 42px;
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+.pluggo-contact-wizard__subtitle {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--wizard-ink-soft);
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 1.72;
+}
+
+.pluggo-contact-wizard__step-heading {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.pluggo-contact-wizard__step-title {
+  margin: 0;
+  color: var(--wizard-ink);
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.pluggo-contact-wizard__step-description {
+  margin: 0;
+  color: var(--wizard-ink-soft);
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+/* ==========================================================================
+   04) Progresso
+   ========================================================================== */
+
+.pluggo-contact-wizard__progress-wrap {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.pluggo-contact-wizard__progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  color: var(--wizard-ink-soft);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.pluggo-contact-wizard__progress-meta strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.pluggo-contact-wizard__progress-track {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.pluggo-contact-wizard__progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--wizard-accent-gradient);
+  box-shadow: 0 10px 24px rgba(73, 193, 102, 0.24);
+  transition: width 260ms ease;
+}
+
+.pluggo-contact-wizard__progress-steps {
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.pluggo-contact-wizard__progress-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--wizard-ink-muted);
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.pluggo-contact-wizard__progress-step-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  background: transparent;
+  flex-shrink: 0;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.pluggo-contact-wizard__progress-step--active,
+.pluggo-contact-wizard__progress-step--done {
+  color: #ffffff;
+}
+
+.pluggo-contact-wizard__progress-step--active .pluggo-contact-wizard__progress-step-dot {
+  border-color: var(--wizard-accent);
+  box-shadow: 0 0 0 4px rgba(73, 193, 102, 0.12);
+  transform: scale(1.05);
+}
+
+.pluggo-contact-wizard__progress-step--done .pluggo-contact-wizard__progress-step-dot {
+  border-color: var(--wizard-accent);
+  background: var(--wizard-accent);
+}
+
+.pluggo-contact-wizard__progress-step-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   05) Formulário e Campos
+   ========================================================================== */
+
+.pluggo-contact-wizard__form {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 22px;
+}
+
+.pluggo-contact-wizard__step-panel {
+  display: grid;
+  gap: 18px;
+  animation: pluggoContactWizardStepIn 260ms ease;
+}
+
+.pluggo-contact-wizard__fields-grid {
+  color: #ffffff;
+  display: grid;
+  gap: 14px;
+}
+
+.pluggo-contact-wizard__field-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.pluggo-contact-wizard__label {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.pluggo-contact-wizard__input,
+.pluggo-contact-wizard__textarea {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.pluggo-contact-wizard__input {
+  min-height: 56px;
+  padding: 0 16px;
+}
+
+.pluggo-contact-wizard__textarea {
+  min-height: 128px;
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+.pluggo-contact-wizard__input::placeholder,
+.pluggo-contact-wizard__textarea::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.pluggo-contact-wizard__input:hover,
+.pluggo-contact-wizard__textarea:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pluggo-contact-wizard__input:focus,
+.pluggo-contact-wizard__textarea:focus {
+  border-color: rgba(73, 193, 102, 0.7);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 4px rgba(73, 193, 102, 0.12);
+  transform: translateY(-1px);
+}
+
+.pluggo-contact-wizard__input--invalid,
+.pluggo-contact-wizard__textarea--invalid {
+  border-color: rgba(255, 122, 122, 0.52);
+  box-shadow: 0 0 0 4px rgba(255, 122, 122, 0.08);
+}
+
+.pluggo-contact-wizard__field-error {
+  margin: 0;
+  color: #ff9d9d;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   06) Opções de Seleção
+   ========================================================================== */
+
+.pluggo-contact-wizard__choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.pluggo-contact-wizard__choice-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 74px;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.025);
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.pluggo-contact-wizard__choice-card::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  background: transparent;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.pluggo-contact-wizard__choice-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pluggo-contact-wizard__choice-card--selected {
+  border-color: rgba(73, 193, 102, 0.4);
+  background: rgba(73, 193, 102, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(73, 193, 102, 0.12);
+}
+
+.pluggo-contact-wizard__choice-card--selected::before {
+  border-color: var(--wizard-accent);
+  background: var(--wizard-accent);
+  box-shadow: 0 0 0 4px rgba(73, 193, 102, 0.12);
+}
+
+.pluggo-contact-wizard__choice-radio {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+  padding: 0;
+}
+
+.pluggo-contact-wizard__choice-label {
+  display: block;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.42;
+}
+
+/* ==========================================================================
+   07) Rodapé e Botões
+   ========================================================================== */
+
+.pluggo-contact-wizard__footer {
+  display: grid;
+  gap: 14px;
+  margin-top: 4px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pluggo-contact-wizard__helper-text {
+  margin: 0;
+  color: var(--wizard-ink-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.pluggo-contact-wizard__button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pluggo-contact-wizard__button-back,
+.pluggo-contact-wizard__button-next,
+.pluggo-contact-wizard__button-submit {
+  min-height: 54px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    filter 180ms ease;
+}
+
+.pluggo-contact-wizard__button-back {
+  min-width: 118px;
+  padding: 0 18px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.pluggo-contact-wizard__button-next,
+.pluggo-contact-wizard__button-submit {
+  margin-left: auto;
+  min-width: 196px;
+  padding: 0 24px;
+  color: #ffffff;
+  background: var(--wizard-accent-gradient);
+  box-shadow: var(--shadow-hero-button);
+}
+
+.pluggo-contact-wizard__button-back:hover,
+.pluggo-contact-wizard__button-next:hover,
+.pluggo-contact-wizard__button-submit:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+
+.pluggo-contact-wizard__button--disabled,
+.pluggo-contact-wizard__button-back:disabled,
+.pluggo-contact-wizard__button-next:disabled,
+.pluggo-contact-wizard__button-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
+/* ==========================================================================
+   08) Feedback
+   ========================================================================== */
+
+.pluggo-contact-wizard__feedback {
+  margin: 0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.55;
+  font-weight: 600;
+}
+
+.pluggo-contact-wizard__feedback--success {
+  border: 1px solid rgba(73, 193, 102, 0.22);
+  background: var(--wizard-success-bg);
+  color: var(--wizard-success);
+}
+
+.pluggo-contact-wizard__feedback--error {
+  border: 1px solid rgba(255, 122, 122, 0.2);
+  background: var(--wizard-error-bg);
+  color: var(--wizard-error);
+}
+
+/* ==========================================================================
+   09) Responsivo
+   ========================================================================== */
+
+@media (max-width: 980px) {
+  .pluggo-contact-wizard__progress-step-label {
+    display: none;
+  }
+
+  .pluggo-contact-wizard__choice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .pluggo-contact-wizard__container {
+    width: min(100%, calc(100% - 22px));
+  }
+
+  .pluggo-contact-wizard__card {
+    border-radius: 24px;
+    padding: 18px;
+  }
+
+  .pluggo-contact-wizard__progress-wrap {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .pluggo-contact-wizard__button-row {
+    flex-direction: column-reverse;
+  }
+
+  .pluggo-contact-wizard__button-back,
+  .pluggo-contact-wizard__button-next,
+  .pluggo-contact-wizard__button-submit {
+    width: 100%;
+    min-width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .pluggo-contact-wizard__title {
+    font-size: 30px;
+  }
+
+  .pluggo-contact-wizard__step-title {
+    font-size: 22px;
+  }
+
+  .pluggo-contact-wizard__subtitle,
+  .pluggo-contact-wizard__step-description {
+    font-size: 14px;
+  }
+}
+
+/* ==========================================================================
+   10) Animação
+   ========================================================================== */
+
+@keyframes pluggoContactWizardStepIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================= PLUGGO CONTACT WIZARD END ============================= */

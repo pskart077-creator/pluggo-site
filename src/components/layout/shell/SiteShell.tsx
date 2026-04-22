@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import SiteHeader from "@/components/layout/header/SiteHeader";
 import CookieConsentBanner from "@/components/layout/cookies/CookieConsentBanner";
-import BackToTopButton from "@/components/layout/navigation/BackToTopButton";
+import PublicChatWidget from "@/components/layout/chat/PublicChatWidget";
 
 type SiteShellProps = {
   children: ReactNode;
@@ -14,7 +14,7 @@ export default function SiteShell({ children, mainClassName }: SiteShellProps) {
       <SiteHeader />
       <main className={mainClassName}>{children}</main>
       <CookieConsentBanner />
-      <BackToTopButton />
+      <PublicChatWidget />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { Service, SlugPageDetail } from "@/types";
 
 export const SITE_NAME = "Plug Go";
-export const SITE_URL = "https://pluggocapital.com";
+export const SITE_URL = "https://www.pluggopay.com.br";
 
 const COMMON_KEYWORDS = [
   "plug go",

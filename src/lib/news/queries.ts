@@ -26,6 +26,7 @@ import {
   sanitizeSlugOrNull,
 } from "@/lib/news/sanitizers";
 import type {
+  AdminNewsDashboardOverview,
   AdminNewsQueryInput,
   AuthenticatedAdmin,
   PublicNewsQueryInput,
@@ -595,6 +596,160 @@ export async function listAdminNews(input: AdminNewsQueryInput) {
       total: count,
       totalPages: Math.max(1, Math.ceil(count / input.pageSize)),
     },
+  };
+}
+
+export async function getAdminNewsDashboardOverview(): Promise<AdminNewsDashboardOverview> {
+  const now = nowUtc();
+  const in48Hours = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+  const in7DaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+  const [statusBuckets, featuredCount, highlightedCount, scheduledSoonCount, updatedLast7dCount] =
+    await Promise.all([
+      prisma.newsPost.groupBy({
+        by: ["status"],
+        where: {
+          deletedAt: null,
+        },
+        _count: {
+          _all: true,
+        },
+      }),
+      prisma.newsPost.count({
+        where: {
+          deletedAt: null,
+          featured: true,
+        },
+      }),
+      prisma.newsPost.count({
+        where: {
+          deletedAt: null,
+          highlightOnHome: true,
+        },
+      }),
+      prisma.newsPost.count({
+        where: {
+          deletedAt: null,
+          status: NewsStatus.SCHEDULED,
+          scheduledAt: {
+            gte: now,
+            lte: in48Hours,
+          },
+        },
+      }),
+      prisma.newsPost.count({
+        where: {
+          deletedAt: null,
+          updatedAt: {
+            gte: in7DaysAgo,
+          },
+        },
+      }),
+    ]);
+
+  const countByStatus: Record<NewsStatus, number> = {
+    DRAFT: 0,
+    SCHEDULED: 0,
+    PUBLISHED: 0,
+    ARCHIVED: 0,
+  };
+
+  for (const bucket of statusBuckets) {
+    countByStatus[bucket.status] = bucket._count._all;
+  }
+
+  const totalPosts =
+    countByStatus.DRAFT +
+    countByStatus.SCHEDULED +
+    countByStatus.PUBLISHED +
+    countByStatus.ARCHIVED;
+
+  const [categoryGroups, recentUpdatesRaw] = await Promise.all([
+    prisma.newsPost.groupBy({
+      by: ["categoryId"],
+      where: {
+        deletedAt: null,
+      },
+      _count: {
+        _all: true,
+      },
+    }),
+    prisma.newsPost.findMany({
+      where: {
+        deletedAt: null,
+      },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        status: true,
+        updatedAt: true,
+        author: {
+          select: {
+            displayName: true,
+          },
+        },
+        category: {
+          select: {
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+      take: 8,
+    }),
+  ]);
+
+  const topCategoryGroups = [...categoryGroups]
+    .sort((left, right) => right._count._all - left._count._all)
+    .slice(0, 5);
+
+  const topCategoryIds = topCategoryGroups.map((group) => group.categoryId);
+  const categoryNames = topCategoryIds.length
+    ? await prisma.newsCategory.findMany({
+        where: {
+          id: {
+            in: topCategoryIds,
+          },
+        },
+        select: {
+          id: true,
+          name: true,
+        },
+      })
+    : [];
+
+  const categoryNameById = new Map(categoryNames.map((category) => [category.id, category.name]));
+
+  return {
+    generatedAt: now.toISOString(),
+    counts: {
+      total: totalPosts,
+      draft: countByStatus.DRAFT,
+      scheduled: countByStatus.SCHEDULED,
+      published: countByStatus.PUBLISHED,
+      archived: countByStatus.ARCHIVED,
+      featured: featuredCount,
+      highlighted: highlightedCount,
+      scheduledNext48h: scheduledSoonCount,
+      updatedLast7d: updatedLast7dCount,
+    },
+    topCategories: topCategoryGroups.map((group) => ({
+      id: group.categoryId,
+      name: categoryNameById.get(group.categoryId) ?? "Categoria removida",
+      postCount: group._count._all,
+    })),
+    recentUpdates: recentUpdatesRaw.map((item) => ({
+      id: item.id,
+      title: item.title,
+      slug: item.slug,
+      status: item.status,
+      updatedAt: item.updatedAt.toISOString(),
+      authorName: item.author.displayName,
+      categoryName: item.category.name,
+    })),
   };
 }
 

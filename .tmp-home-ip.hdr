@@ -1,0 +1,17 @@
+HTTP/1.1 200 OK
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Cross-Origin-Opener-Policy: same-origin
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com; font-src 'self' data:; connect-src 'self' ws: wss:; frame-src 'self' https://www.youtube.com https://player.vimeo.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+Vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+link: </_next/static/media/47fe1b7cd6e6ed85-s.p.0~mcdl10zdfb3.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/media/8e6fa89aa22d24ec-s.p.0uvzar8hswo3p.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/media/a218039a3287bcfd-s.p.17-1enzs_j91b.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/media/c875c6f5d3e977ac-s.p.0g_ng0t~d_b9n.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/media/e2334d715941921e-s.p.12skym0rqknxy.woff2>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </assets/img/logo/logo.svg>; rel=preload; as="image", </_next/static/chunks/%5Broot-of-the-server%5D__0g9xxb4._.css>; rel=preload; as="style", </_next/static/chunks/src_styles_news_0hm.nv9._.css>; rel=preload; as="style"
+Cache-Control: no-cache, must-revalidate
+Content-Type: text/html; charset=utf-8
+Date: Wed, 22 Apr 2026 16:07:17 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+

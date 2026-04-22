@@ -1,0 +1,13 @@
+
+> site@0.1.0 dev
+> next dev -H 0.0.0.0 -p 3000
+
+▲ Next.js 16.2.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://0.0.0.0:3000
+- Environments: .env
+✓ Ready in 431ms
+
+ GET /admin-interno/login 200 in 1017ms (next.js: 412ms, proxy.ts: 206ms, application-code: 399ms)
+ POST /admin-interno/api/auth/login 200 in 501ms (next.js: 144ms, proxy.ts: 8ms, application-code: 350ms)
+ POST /admin-interno/logout 303 in 141ms (next.js: 42ms, proxy.ts: 6ms, application-code: 93ms)

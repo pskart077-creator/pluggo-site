@@ -76,8 +76,8 @@ export default function SiteFooter() {
 
           <div className="footer-contact-item">
             <Mail size={18} strokeWidth={2} />
-            <a href="mailto:contato@pluggocapital.com">
-              contato@pluggocapital.com
+            <a href="mailto:contato@pluggopay.com.br">
+              contato@pluggopay.com.br
             </a>
           </div>
 

@@ -1,7 +1,24 @@
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "@/styles/news/news-admin.css";
-import "@/styles/news/news-editor.css";
+
+export const metadata: Metadata = {
+  title: "Admin News | Plug Go",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noarchive: true,
+      nosnippet: true,
+      noimageindex: true,
+    },
+  },
+  referrer: "no-referrer",
+};
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
-  return <div className="pluggo-news-admin-layout">{children}</div>;
+  return <div className="pluggo-news-admin-root">{children}</div>;
 }

@@ -1,0 +1,12 @@
+
+> site@0.1.0 dev
+> next dev -H 0.0.0.0 -p 3000
+
+▲ Next.js 16.2.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://0.0.0.0:3000
+- Environments: .env
+✓ Ready in 458ms
+
+ GET / 200 in 1929ms (next.js: 211ms, proxy.ts: 236ms, application-code: 1482ms)
+ POST /api/analytics/ingest 200 in 1698ms (next.js: 1439ms, proxy.ts: 9ms, application-code: 250ms)

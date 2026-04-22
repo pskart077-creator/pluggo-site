@@ -1,4 +1,23 @@
+import os from "node:os";
 import type { NextConfig } from "next";
+
+const defaultDevOrigins = ["localhost", "127.0.0.1", "::1", "[::1]"];
+
+function getAllowedDevOrigins() {
+  const localIpv4Origins = Object.values(os.networkInterfaces())
+    .flatMap((networkInterface) => networkInterface ?? [])
+    .filter((address) => address.family === "IPv4" && !address.internal)
+    .map((address) => address.address);
+
+  const extraOrigins = (process.env.ALLOWED_DEV_ORIGINS ?? "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  return Array.from(
+    new Set([...defaultDevOrigins, ...localIpv4Origins, ...extraOrigins])
+  );
+}
 
 const contentSecurityPolicy = [
   "default-src 'self'",
@@ -17,6 +36,9 @@ const contentSecurityPolicy = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+
+  allowedDevOrigins: getAllowedDevOrigins(),
+
   images: {
     remotePatterns: [
       {
@@ -33,6 +55,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
   async headers() {
     return [
       {

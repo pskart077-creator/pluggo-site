@@ -3,6 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
+type AdminLogoutButtonProps = {
+  buttonClassName?: string;
+};
+
 function readCookie(name: string) {
   if (typeof document === "undefined") {
     return "";
@@ -18,7 +22,9 @@ function readCookie(name: string) {
   return "";
 }
 
-export default function AdminLogoutButton() {
+export default function AdminLogoutButton({
+  buttonClassName = "pluggo-news-admin-button is-muted",
+}: AdminLogoutButtonProps) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -49,7 +55,7 @@ export default function AdminLogoutButton() {
 
   return (
     <div>
-      <button type="button" className="pluggo-news-admin-button is-muted" onClick={handleLogout}>
+      <button type="button" className={buttonClassName} onClick={handleLogout}>
         {isPending ? "Saindo..." : "Sair"}
       </button>
       {error ? <p className="pluggo-news-admin-error">{error}</p> : null}

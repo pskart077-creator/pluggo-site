@@ -1,7 +1,11 @@
 import { adminNewsQuerySchema } from "@/lib/news/validators";
 import { requireServerAdmin } from "@/lib/news/auth";
-import { listAdminNews, listNewsCategories, listNewsTags } from "@/lib/news/queries";
-import AdminHeader from "@/components/news/admin/AdminHeader";
+import {
+  getAdminNewsDashboardOverview,
+  listAdminNews,
+  listNewsCategories,
+  listNewsTags,
+} from "@/lib/news/queries";
 import AdminNewsList from "@/components/news/admin/AdminNewsList";
 
 type Props = {
@@ -25,7 +29,6 @@ export const metadata = {
 
 export default async function AdminNewsPage({ searchParams }: Props) {
   const session = await requireServerAdmin();
-
   const queryRaw = await searchParams;
   const baseQuery = new URLSearchParams();
   for (const [key, rawValue] of Object.entries(queryRaw)) {
@@ -49,7 +52,7 @@ export default async function AdminNewsPage({ searchParams }: Props) {
     orderBy: pickString(queryRaw.orderBy),
   });
 
-  const [result, categories, tags] = await Promise.all([
+  const [result, categories, tags, dashboard] = await Promise.all([
     listAdminNews({
       page: query.page,
       pageSize: query.pageSize,
@@ -61,18 +64,11 @@ export default async function AdminNewsPage({ searchParams }: Props) {
     }),
     listNewsCategories(),
     listNewsTags(),
+    getAdminNewsDashboardOverview(),
   ]);
 
   return (
     <main className="pluggo-news-admin-shell">
-      <AdminHeader
-        user={{
-          displayName: session.displayName,
-          role: session.role,
-        }}
-        activePath="/admin/news"
-      />
-
       <AdminNewsList
         items={result.items}
         pagination={result.pagination}
@@ -92,6 +88,7 @@ export default async function AdminNewsPage({ searchParams }: Props) {
           name: tag.name,
         }))}
         role={session.role}
+        dashboard={dashboard}
         baseQuery={baseQuery.toString()}
       />
     </main>
