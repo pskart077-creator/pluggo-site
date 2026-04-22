@@ -50,7 +50,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     const queryRaw = await searchParams;
     const query = parsePublicNewsQuery(queryRaw);
 
-    return generateNewsListPageMetadata({
+    return await generateNewsListPageMetadata({
       page: query.page,
       pageSize: query.pageSize,
       search: query.search,

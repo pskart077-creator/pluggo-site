@@ -11,8 +11,26 @@ import {
 import type { NewsContentDocument } from "@/lib/news/types";
 
 export function getSiteUrl() {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  return raw.endsWith("/") ? raw.slice(0, -1) : raw;
+  const defaultUrl = "https://www.pluggopay.com.br";
+  const raw = (process.env.NEXT_PUBLIC_SITE_URL ?? defaultUrl).trim();
+
+  if (!raw) {
+    return defaultUrl;
+  }
+
+  const withProtocol = /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(raw)
+    ? raw
+    : `https://${raw}`;
+
+  try {
+    const parsed = new URL(withProtocol);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+      return defaultUrl;
+    }
+    return parsed.toString().replace(/\/$/, "");
+  } catch {
+    return defaultUrl;
+  }
 }
 
 export function createRequestId() {
