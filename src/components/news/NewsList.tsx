@@ -9,14 +9,30 @@ type NewsListProps = {
 };
 
 export default async function NewsList({ limit = 3 }: NewsListProps) {
-  const result = await listPublicNews({
-    page: 1,
-    pageSize: Math.max(1, Math.min(6, limit)),
-    search: "",
-    category: "",
-    tag: "",
-    featuredOnly: false,
-  });
+  const fallback = {
+    items: [],
+    pagination: {
+      page: 1,
+      pageSize: Math.max(1, Math.min(6, limit)),
+      total: 0,
+      totalPages: 1,
+    },
+  };
+
+  let result = fallback;
+
+  try {
+    result = await listPublicNews({
+      page: 1,
+      pageSize: fallback.pagination.pageSize,
+      search: "",
+      category: "",
+      tag: "",
+      featuredOnly: false,
+    });
+  } catch {
+    // Keep home page stable when news storage is temporarily unavailable.
+  }
 
   return (
     <section className="pluggo-home-news section-anchor">

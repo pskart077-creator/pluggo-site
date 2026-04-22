@@ -55,6 +55,10 @@ const adminPostInclude = {
 
 const MAX_SANITIZED_SLUG_LENGTH = ensureValidSlug("a".repeat(256)).length;
 
+function hasDatabaseUrl() {
+  return Boolean(process.env.DATABASE_URL?.trim());
+}
+
 function composeSlugCandidate(baseSlug: string, suffix: string) {
   if (!suffix) {
     return ensureValidSlug(baseSlug);
@@ -406,6 +410,10 @@ async function resolveExistingTagIds(tagIds: string[] | undefined) {
 }
 
 export async function publishDueScheduledPosts() {
+  if (!hasDatabaseUrl()) {
+    return;
+  }
+
   await prisma.newsPost.updateMany({
     where: {
       status: NewsStatus.SCHEDULED,
@@ -422,6 +430,18 @@ export async function publishDueScheduledPosts() {
 }
 
 export async function listPublicNews(input: PublicNewsQueryInput) {
+  if (!hasDatabaseUrl()) {
+    return {
+      items: [],
+      pagination: {
+        page: input.page,
+        pageSize: input.pageSize,
+        total: 0,
+        totalPages: 1,
+      },
+    };
+  }
+
   await publishDueScheduledPosts();
 
   const where: Prisma.NewsPostWhereInput = {
@@ -494,6 +514,10 @@ export async function listPublicNews(input: PublicNewsQueryInput) {
 }
 
 export async function getPublicNewsBySlug(slug: string) {
+  if (!hasDatabaseUrl()) {
+    return null;
+  }
+
   await publishDueScheduledPosts();
 
   const post = await prisma.newsPost.findFirst({
@@ -516,6 +540,10 @@ export async function getPublicNewsBySlug(slug: string) {
 }
 
 export async function getRelatedPublicNews(postId: string, categoryId: string, take = 3) {
+  if (!hasDatabaseUrl()) {
+    return [];
+  }
+
   const posts = await prisma.newsPost.findMany({
     where: {
       id: {
@@ -544,6 +572,10 @@ export async function getRecentPublicNews(
     take?: number;
   },
 ) {
+  if (!hasDatabaseUrl()) {
+    return [];
+  }
+
   const excludePostIds = Array.from(new Set(options?.excludePostIds ?? [])).filter(Boolean);
   const take = Math.max(1, Math.min(12, options?.take ?? 4));
 

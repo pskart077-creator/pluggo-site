@@ -6,25 +6,6 @@ import { publishDueScheduledPosts } from "@/lib/news/queries";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
 
-  await publishDueScheduledPosts();
-
-  const [posts] = await Promise.all([
-    prisma.newsPost.findMany({
-      where: {
-        status: "PUBLISHED",
-        deletedAt: null,
-        allowIndexing: true,
-      },
-      select: {
-        slug: true,
-        updatedAt: true,
-      },
-      orderBy: {
-        updatedAt: "desc",
-      },
-    }),
-  ]);
-
   const staticRoutes = [
     "",
     "/sobre",
@@ -43,6 +24,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: route === "/news" ? "daily" : "weekly",
     priority: route === "" ? 1 : 0.8,
   }));
+
+  if (!process.env.DATABASE_URL?.trim()) {
+    return staticEntries;
+  }
+
+  let posts: Array<{ slug: string; updatedAt: Date }> = [];
+  try {
+    await publishDueScheduledPosts();
+    posts = await prisma.newsPost.findMany({
+      where: {
+        status: "PUBLISHED",
+        deletedAt: null,
+        allowIndexing: true,
+      },
+      select: {
+        slug: true,
+        updatedAt: true,
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+    });
+  } catch {
+    return staticEntries;
+  }
 
   const postEntries: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${siteUrl}/news/${post.slug}`,
