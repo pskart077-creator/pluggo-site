@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+Age: 0
+Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com; font-src 'self' data:; connect-src 'self' ws: wss:; frame-src 'self' https://www.youtube.com https://player.vimeo.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+Content-Type: text/html; charset=utf-8
+Cross-Origin-Opener-Policy: same-origin
+Date: Wed, 22 Apr 2026 21:49:42 GMT
+Link: </_next/static/media/47fe1b7cd6e6ed85-s.p.0~mcdl10zdfb3.woff2?dpl=dpl_4jL5NcRyX2cYvvobCVHnuo6MMe9V>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/media/8e6fa89aa22d24ec-s.p.0uvzar8hswo3p.woff2?dpl=dpl_4jL5NcRyX2cYvvobCVHnuo6MMe9V>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/media/a218039a3287bcfd-s.p.17-1enzs_j91b.woff2?dpl=dpl_4jL5NcRyX2cYvvobCVHnuo6MMe9V>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/media/c875c6f5d3e977ac-s.p.0g_ng0t~d_b9n.woff2?dpl=dpl_4jL5NcRyX2cYvvobCVHnuo6MMe9V>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/media/e2334d715941921e-s.p.12skym0rqknxy.woff2?dpl=dpl_4jL5NcRyX2cYvvobCVHnuo6MMe9V>; rel=preload; as="font"; crossorigin=""; type="font/woff2", </assets/img/logo/logo.svg?dpl=dpl_4jL5NcRyX2cYvvobCVHnuo6MMe9V>; rel=preload; as="image", </_next/static/chunks/00yuaoxhlbxui.css?dpl=dpl_4jL5NcRyX2cYvvobCVHnuo6MMe9V>; rel=preload; as="style", </_next/static/chunks/06cdx8319_m1j.css?dpl=dpl_4jL5NcRyX2cYvvobCVHnuo6MMe9V>; rel=preload; as="style"
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Referrer-Policy: strict-origin-when-cross-origin
+Server: Vercel
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+Vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-Matched-Path: /news
+X-Vercel-Cache: MISS
+X-Vercel-Enable-Rewrite-Caching: 1
+X-Vercel-Id: gru1::iad1::6f447-1776894580141-a84f89904566
+Transfer-Encoding: chunked
+
