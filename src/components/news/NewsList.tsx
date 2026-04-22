@@ -26,12 +26,12 @@ export default async function NewsList({ limit = 3 }: NewsListProps) {
             <span className="pluggo-home-news__eyebrow">Plug Go News</span>
 
             <h2 className="pluggo-home-news__title">
-              Conteúdos e novidades para acompanhar o mercado com mais clareza
+              Conte\u00fados e novidades para acompanhar o mercado com mais clareza
             </h2>
 
             <p className="pluggo-home-news__description">
-              Acompanhe notícias, tendências e conteúdos da Plug Go sobre
-              tecnologia, mercado, inovação e soluções para pessoas e empresas.
+              Acompanhe not\u00edcias, tend\u00eancias e conte\u00fados da Plug Go sobre
+              tecnologia, mercado, inova\u00e7\u00e3o e solu\u00e7\u00f5es para pessoas e empresas.
             </p>
           </div>
 
@@ -42,7 +42,7 @@ export default async function NewsList({ limit = 3 }: NewsListProps) {
 
         {result.items.length === 0 ? (
           <div className="pluggo-home-news__empty">
-            Sem notícias publicadas no momento.
+            Sem not\u00edcias publicadas no momento.
           </div>
         ) : (
           <div className="pluggo-home-news__grid">

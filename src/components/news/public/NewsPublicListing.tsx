@@ -52,7 +52,7 @@ export default function NewsPublicListing({
       <div className="pluggo-news-page__shell">
         {items.length === 0 ? (
           <div className="pluggo-news-page__empty">
-            Nenhuma notícia publicada no momento.
+            Nenhuma not\u00edcia publicada no momento.
           </div>
         ) : (
           <>
@@ -94,7 +94,9 @@ export default function NewsPublicListing({
 
                       <span className="pluggo-news-page-card__date">
                         <CalendarDays size={15} strokeWidth={2} />
-                        {item.publishedAt}
+                        {item.publishedAt
+                          ? new Date(item.publishedAt).toLocaleDateString("pt-BR")
+                          : "-"}
                       </span>
                     </div>
                   </div>
@@ -105,7 +107,7 @@ export default function NewsPublicListing({
             {result.pagination.totalPages > 1 ? (
               <nav
                 className="pluggo-news-page__pagination"
-                aria-label="Paginação das notícias"
+                aria-label="Pagina\u00e7\u00e3o das not\u00edcias"
               >
                 {Array.from(
                   { length: result.pagination.totalPages },
