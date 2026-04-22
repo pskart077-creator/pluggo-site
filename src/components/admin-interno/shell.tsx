@@ -207,7 +207,7 @@ export function InternalAdminShell({ children, user }: InternalShellProps) {
       },
       {
         href: "/admin-interno/usuarios",
-        label: "Usuarios",
+        label: "Usuários",
         icon: Users,
       },
       {
@@ -223,7 +223,7 @@ export function InternalAdminShell({ children, user }: InternalShellProps) {
     () => [
       {
         href: "/admin-interno/configuracoes",
-        label: "Configuracoes",
+        label: "Configurações",
         icon: Settings2,
       },
     ],
@@ -365,7 +365,7 @@ export function InternalAdminShell({ children, user }: InternalShellProps) {
                     ? "admin-header-icon-button is-open"
                     : "admin-header-icon-button"
                 }
-                aria-label="Abrir notificacoes"
+                aria-label="Abrir notificações"
                 aria-haspopup="menu"
                 aria-expanded={isNotificationsOpen}
                 onClick={() => {
@@ -394,14 +394,14 @@ export function InternalAdminShell({ children, user }: InternalShellProps) {
                 <div
                   className="admin-header-notification-menu"
                   role="menu"
-                  aria-label="Menu de notificacoes"
+                  aria-label="Menu de notificações"
                 >
                   <div className="admin-header-notification-head">
-                    <h2>Notificacoes</h2>
+                    <h2>Notificações</h2>
                     <span>
                       {hasUnreadNotifications
                         ? `${unreadNotificationTotal} pendente(s)`
-                        : "Sem pendencias"}
+                        : "Sem pendências"}
                     </span>
                   </div>
 
@@ -412,11 +412,11 @@ export function InternalAdminShell({ children, user }: InternalShellProps) {
                     </div>
                     <div className="admin-header-notification-counter">
                       <strong>{notificationCounters?.unreadChats ?? 0}</strong>
-                      <span>Chats nao lidos</span>
+                      <span>Chats não lidos</span>
                     </div>
                     <div className="admin-header-notification-counter">
                       <strong>{notificationCounters?.pendingNotificationJobs ?? 0}</strong>
-                      <span>Emails pendentes</span>
+                      <span>E-mails pendentes</span>
                     </div>
                     <div className="admin-header-notification-counter">
                       <strong>{notificationCounters?.failedNotificationJobs ?? 0}</strong>
@@ -425,7 +425,7 @@ export function InternalAdminShell({ children, user }: InternalShellProps) {
                   </div>
 
                   {isNotificationsLoading ? (
-                    <p className="admin-header-notification-state">Carregando notificacoes...</p>
+                    <p className="admin-header-notification-state">Carregando notificações...</p>
                   ) : null}
 
                   {notificationsError ? (
@@ -453,7 +453,7 @@ export function InternalAdminShell({ children, user }: InternalShellProps) {
                       </div>
                     ) : (
                       <p className="admin-header-notification-state">
-                        Nenhuma notificacao recente.
+                        Nenhuma notificação recente.
                       </p>
                     )
                   ) : null}
@@ -512,7 +512,7 @@ export function InternalAdminShell({ children, user }: InternalShellProps) {
                     onClick={() => setIsProfileMenuOpen(false)}
                   >
                     <Settings2 size={16} aria-hidden="true" />
-                    <span>Configuracoes</span>
+                    <span>Configurações</span>
                   </Link>
 
                   <form

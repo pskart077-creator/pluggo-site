@@ -181,7 +181,7 @@ export function RecipientsClient({ recipients, canManage }: RecipientsClientProp
     <div className="admin-page-stack">
       <section className="admin-card">
         <div className="admin-card-header">
-          <h2>Destinatarios de alerta</h2>
+          <h2>Destinatários de alerta</h2>
           <button
             type="button"
             className="admin-ghost-button"
@@ -209,7 +209,7 @@ export function RecipientsClient({ recipients, canManage }: RecipientsClientProp
           </label>
 
           <button type="submit" className="admin-primary-button" disabled={!canManage || isPending}>
-            Adicionar destinatario
+            Adicionar destinatário
           </button>
         </form>
       </section>
@@ -218,7 +218,7 @@ export function RecipientsClient({ recipients, canManage }: RecipientsClientProp
       {error ? <p className="admin-feedback error">{error}</p> : null}
 
       <section className="admin-card">
-        <h2>Lista de destinatarios</h2>
+        <h2>Lista de destinatários</h2>
         <div className="admin-users-stack">
           {recipients.map((recipient) => (
             <article key={recipient.id} className="admin-user-item">
@@ -253,7 +253,7 @@ export function RecipientsClient({ recipients, canManage }: RecipientsClientProp
               </form>
             </article>
           ))}
-          {!recipients.length ? <p>Nenhum destinatario cadastrado.</p> : null}
+          {!recipients.length ? <p>Nenhum destinatário cadastrado.</p> : null}
         </div>
       </section>
     </div>

@@ -25,10 +25,10 @@ export default async function InternalSettingsPage() {
         <div className="admin-status-grid">
           <div className="admin-status-item">
             <span>SMTP configurado</span>
-            <strong>{smtpReady ? "Sim" : "Nao"}</strong>
+            <strong>{smtpReady ? "Sim" : "Não"}</strong>
           </div>
           <div className="admin-status-item">
-            <span>Total de destinatarios</span>
+            <span>Total de destinatários</span>
             <strong>{recipients.length}</strong>
           </div>
         </div>

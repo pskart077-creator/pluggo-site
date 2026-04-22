@@ -81,9 +81,9 @@ export default async function InternalDashboardPage({
 
   const kpis = [
     {
-      label: "Leads no periodo",
+      label: "Leads no período",
       value: formatNumber(overview.metrics.total.value),
-      context: `${formatNumber(overview.metrics.total.previous)} no periodo anterior`,
+      context: `${formatNumber(overview.metrics.total.previous)} no período anterior`,
       delta: overview.metrics.total.deltaPercent,
       tone: "emerald",
     },
@@ -109,21 +109,21 @@ export default async function InternalDashboardPage({
       tone: "lime",
     },
     {
-      label: "Taxa de conversao",
+      label: "Taxa de conversão",
       value: formatPercent(overview.metrics.conversionRate.value),
       context: `${formatPercent(overview.metrics.conversionRate.previous)} antes`,
       delta: overview.metrics.conversionRate.deltaPercent,
       tone: "cyan",
     },
     {
-      label: "Sem responsavel",
+      label: "Sem responsável",
       value: formatNumber(overview.metrics.unassigned.value),
       context: `${formatNumber(overview.metrics.unassigned.previous)} antes`,
       delta: overview.metrics.unassigned.deltaPercent,
       tone: "orange",
     },
     {
-      label: "Media diaria",
+      label: "Média diária",
       value: formatDecimal(overview.metrics.averagePerDay),
       context: `${formatDecimal(previousDailyAverage)} antes`,
       delta: Number(dailyAverageDelta.toFixed(1)),
@@ -139,44 +139,44 @@ export default async function InternalDashboardPage({
 
   const operationalInsights = [
     overview.metrics.total.value === 0
-      ? "Nao houve leads no periodo selecionado. Recomendacao: revisar canais ativos e campanhas de captacao."
-      : `${formatNumber(overview.metrics.total.value)} leads captados no periodo. Mantenha foco nas origens com melhor qualidade.`,
+      ? "Não houve leads no período selecionado. Recomendação: revisar canais ativos e campanhas de captação."
+      : `${formatNumber(overview.metrics.total.value)} leads captados no período. Mantenha foco nas origens com melhor qualidade.`,
     overview.metrics.unassigned.value > 0
-      ? `${formatNumber(overview.metrics.unassigned.value)} lead(s) sem responsavel. Priorize distribuicao para reduzir tempo de resposta.`
-      : "Todos os leads estao distribuidos para atendimento.",
+      ? `${formatNumber(overview.metrics.unassigned.value)} lead(s) sem responsável. Priorize distribuição para reduzir tempo de resposta.`
+      : "Todos os leads estão distribuídos para atendimento.",
     topSource
-      ? `Origem lider: ${topSource.source} com ${formatNumber(topSource.count)} lead(s) (${formatPercent(topSource.percent)}).`
-      : "Sem atribuicao de origem no periodo. Ative UTMs e mapeamento de canal nos formularios.",
+      ? `Origem líder: ${topSource.source} com ${formatNumber(topSource.count)} lead(s) (${formatPercent(topSource.percent)}).`
+      : "Sem atribuição de origem no período. Ative UTMs e mapeamento de canal nos formulários.",
     topAssignee
-      ? `Responsavel com maior carteira: ${topAssignee.assignee} (${formatNumber(topAssignee.count)} leads).`
-      : "Nenhum responsavel com leads no periodo. Defina fila de atribuicao automatica para ganho de SLA.",
+      ? `Responsável com maior carteira: ${topAssignee.assignee} (${formatNumber(topAssignee.count)} leads).`
+      : "Nenhum responsável com leads no período. Defina fila de atribuição automática para ganho de SLA.",
     overview.metrics.conversionRate.value > 0
-      ? `Taxa de conversao atual em ${formatPercent(overview.metrics.conversionRate.value)}.`
-      : "Sem conversoes no periodo. Sugestao: revisar abordagem inicial e tempo de primeiro contato.",
+      ? `Taxa de conversão atual em ${formatPercent(overview.metrics.conversionRate.value)}.`
+      : "Sem conversões no período. Sugestão: revisar abordagem inicial e tempo de primeiro contato.",
   ];
 
   return (
     <div className="admin-dashboard-premium">
       <section className="admin-card admin-dashboard-hero">
         <div className="admin-dashboard-hero-main">
-          <p className="admin-dashboard-eyebrow">Visao executiva de leads Pluggo</p>
-          <h2>Painel estrategico de captacao e conversao</h2>
+          <p className="admin-dashboard-eyebrow">Visão executiva de leads Plug Go</p>
+          <h2>Painel estratégico de captação e conversão</h2>
           <p>
             Acompanhe volume, qualidade e desempenho comercial em tempo real para
-            acelerar decisoes do time de atendimento e vendas.
+            acelerar decisões do time de atendimento e vendas.
           </p>
           <div className="admin-dashboard-hero-meta">
             <span>
-              Periodo atual:{" "}
+              Período atual:{" "}
               <strong>
-                {overview.range.from.toLocaleDateString("pt-BR")} ate{" "}
+                {overview.range.from.toLocaleDateString("pt-BR")} até{" "}
                 {overview.range.to.toLocaleDateString("pt-BR")}
               </strong>
             </span>
             <span>
               Comparativo:{" "}
               <strong>
-                {overview.range.previousFrom.toLocaleDateString("pt-BR")} ate{" "}
+                {overview.range.previousFrom.toLocaleDateString("pt-BR")} até{" "}
                 {overview.range.previousTo.toLocaleDateString("pt-BR")}
               </strong>
             </span>
@@ -184,11 +184,11 @@ export default async function InternalDashboardPage({
         </div>
 
         <form method="GET" action="/admin-interno" className="admin-dashboard-range-form">
-          <label htmlFor="dashboard-days">Periodo</label>
+          <label htmlFor="dashboard-days">Período</label>
           <select id="dashboard-days" name="days" defaultValue={String(overview.range.days)}>
             {RANGE_OPTIONS.map((option) => (
               <option key={option} value={option}>
-                Ultimos {option} dias
+                Últimos {option} dias
               </option>
             ))}
           </select>
@@ -216,13 +216,13 @@ export default async function InternalDashboardPage({
       <section className="admin-dashboard-visual-grid">
         <article className="admin-card admin-dashboard-chart-card is-wide">
           <div className="admin-card-header">
-            <h3>Volume diario de leads</h3>
+            <h3>Volume diário de leads</h3>
             <div className="admin-dashboard-legend">
               <span className="is-total">Total</span>
               <span className="is-converted">Convertidos</span>
             </div>
           </div>
-          <div className="admin-dashboard-daily-chart" role="img" aria-label="Grafico diario">
+          <div className="admin-dashboard-daily-chart" role="img" aria-label="Gráfico diário">
             {overview.series.daily.map((item) => (
               <div key={item.key} className="admin-dashboard-daily-col">
                 <div className="admin-dashboard-daily-bars">
@@ -248,7 +248,7 @@ export default async function InternalDashboardPage({
         <div className="admin-dashboard-insights-col">
           <article className="admin-card">
             <div className="admin-card-header">
-              <h3>Distribuicao por status</h3>
+              <h3>Distribuição por status</h3>
             </div>
             <ul className="admin-dashboard-progress-list">
               {overview.distributions.status.map((item) => (
@@ -290,7 +290,7 @@ export default async function InternalDashboardPage({
               ))}
               {!overview.distributions.sources.length ? (
                 <li className="admin-dashboard-empty">
-                  Sem dados de origem no periodo. Ative UTMs nos canais para analise de performance.
+                  Sem dados de origem no período. Ative UTMs nos canais para análise de performance.
                 </li>
               ) : null}
             </ul>
@@ -298,7 +298,7 @@ export default async function InternalDashboardPage({
 
           <article className="admin-card">
             <div className="admin-card-header">
-              <h3>Responsaveis com mais leads</h3>
+              <h3>Responsáveis com mais leads</h3>
             </div>
             <ul className="admin-dashboard-ranking-list">
               {overview.distributions.assignees.map((item) => (
@@ -317,7 +317,7 @@ export default async function InternalDashboardPage({
               ))}
               {!overview.distributions.assignees.length ? (
                 <li className="admin-dashboard-empty">
-                  Sem distribuicao de responsaveis. Configure atribuicao automatica por fila.
+                  Sem distribuição de responsáveis. Configure atribuição automática por fila.
                 </li>
               ) : null}
             </ul>
@@ -338,7 +338,7 @@ export default async function InternalDashboardPage({
 
           <article className="admin-card">
             <div className="admin-card-header">
-              <h3>Distribuicao de prioridade</h3>
+              <h3>Distribuição de prioridade</h3>
             </div>
             <ul className="admin-dashboard-progress-list">
               {overview.distributions.priority.map((item) => (
@@ -380,7 +380,7 @@ export default async function InternalDashboardPage({
               ))}
               {!overview.distributions.campaigns.length ? (
                 <li className="admin-dashboard-empty">
-                  Sem campanhas mapeadas no periodo. Configure UTM para leitura completa.
+                  Sem campanhas mapeadas no período. Configure UTM para leitura completa.
                 </li>
               ) : null}
             </ul>
@@ -390,7 +390,7 @@ export default async function InternalDashboardPage({
 
       <section className="admin-card">
         <div className="admin-card-header">
-          <h3>Leads recentes do periodo</h3>
+          <h3>Leads recentes do período</h3>
         </div>
         <div className="admin-table-wrap">
           <table className="admin-table">
@@ -400,7 +400,7 @@ export default async function InternalDashboardPage({
                 <th>Empresa</th>
                 <th>Origem</th>
                 <th>Status</th>
-                <th>Responsavel</th>
+                <th>Responsável</th>
                 <th>Criado em</th>
               </tr>
             </thead>
@@ -421,13 +421,13 @@ export default async function InternalDashboardPage({
                       {INTERNAL_STATUS_LABEL[lead.status]}
                     </span>
                   </td>
-                  <td>{lead.assignee?.fullName ?? "Nao atribuido"}</td>
+                  <td>{lead.assignee?.fullName ?? "Não atribuído"}</td>
                   <td>{lead.createdAt.toLocaleString("pt-BR")}</td>
                 </tr>
               ))}
               {!overview.recentLeads.length ? (
                 <tr>
-                  <td colSpan={6}>Nenhum lead registrado neste periodo.</td>
+                  <td colSpan={6}>Nenhum lead registrado neste período.</td>
                 </tr>
               ) : null}
             </tbody>

@@ -57,7 +57,7 @@ export default async function InternalAuditPage({
         <h2>Filtros de auditoria</h2>
         <form className="admin-filter-grid" method="GET" action="/admin-interno/auditoria">
           <label>
-            Acao
+            Ação
             <input name="action" defaultValue={action} placeholder="LEAD_STATUS_CHANGED" />
           </label>
 
@@ -72,7 +72,7 @@ export default async function InternalAuditPage({
           </label>
 
           <label>
-            Ate
+            Até
             <input type="date" name="to" defaultValue={typeof params.to === "string" ? params.to : ""} />
           </label>
 
@@ -89,8 +89,8 @@ export default async function InternalAuditPage({
             <thead>
               <tr>
                 <th>Data</th>
-                <th>Usuario</th>
-                <th>Acao</th>
+                <th>Usuário</th>
+                <th>Ação</th>
                 <th>Entidade</th>
                 <th>Contexto</th>
                 <th>IP</th>
@@ -116,7 +116,7 @@ export default async function InternalAuditPage({
 
         <div className="admin-pagination">
           <span>
-            Pagina {page} de {totalPages}
+            Página {page} de {totalPages}
           </span>
           <div>
             {page > 1 ? (
@@ -144,7 +144,7 @@ export default async function InternalAuditPage({
                   page: String(page + 1),
                 }).toString()}`}
               >
-                Proxima
+                Próxima
               </a>
             ) : null}
           </div>

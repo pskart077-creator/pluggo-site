@@ -388,8 +388,7 @@ export function InternalChatClient(props: InternalChatClientProps) {
 
   const refreshConversation = useCallback(async (conversationId: string, trackView = false) => {
     const response = await fetch(
-      `/admin-interno/api/chat/conversations/${conversationId}${
-        trackView ? "?trackView=1" : ""
+      `/admin-interno/api/chat/conversations/${conversationId}${trackView ? "?trackView=1" : ""
       }`,
       {
         credentials: "include",
@@ -571,7 +570,7 @@ export function InternalChatClient(props: InternalChatClientProps) {
         <aside className="admin-chat-sidebar">
           <header className="admin-chat-sidebar-header">
             <h2>Conversas</h2>
-            <p>{metrics.unreadCount} nao lida(s)</p>
+            <p>{metrics.unreadCount} não lida(s)</p>
           </header>
 
           <form className="admin-chat-filters" onSubmit={handleApplyFilters}>
@@ -614,7 +613,7 @@ export function InternalChatClient(props: InternalChatClientProps) {
                 checked={onlyUnread}
                 onChange={(event) => setOnlyUnread(event.target.checked)}
               />
-              Somente nao lidas
+              Somente não lidas
             </label>
           </form>
 
@@ -626,7 +625,7 @@ export function InternalChatClient(props: InternalChatClientProps) {
                 conversation.visitorPhone ??
                 "Visitante";
               const previewText = conversation.latestMessage?.body ?? "Sem mensagens ainda.";
-              const assigneeLabel = conversation.assignedTo?.fullName ?? "Nao atribuido";
+              const assigneeLabel = conversation.assignedTo?.fullName ?? "Não atribuído";
               const stateText = conversation.protocol
                 ? `${CHAT_STATUS_LABEL[conversation.status]} | ${protocolStepLabel(conversation.protocol.step)} | ${assigneeLabel}`
                 : `${CHAT_STATUS_LABEL[conversation.status]} | ${assigneeLabel}`;
@@ -680,9 +679,9 @@ export function InternalChatClient(props: InternalChatClientProps) {
                   <span className="admin-chat-header-avatar" aria-hidden="true">
                     {initialsFromName(
                       selectedConversation.visitorName ??
-                        selectedConversation.visitorEmail ??
-                        selectedConversation.visitorPhone ??
-                        "Visitante",
+                      selectedConversation.visitorEmail ??
+                      selectedConversation.visitorPhone ??
+                      "Visitante",
                     )}
                   </span>
 
@@ -693,11 +692,11 @@ export function InternalChatClient(props: InternalChatClientProps) {
                       {selectedConversation.visitorPhone ? ` | ${selectedConversation.visitorPhone}` : ""}
                     </p>
                     <small>
-                      Origem: {selectedConversation.source ?? "-"} | Pagina:{" "}
+                      Origem: {selectedConversation.source ?? "-"} | Página:{" "}
                       {selectedConversation.sourcePage ?? "-"}
                     </small>
                     <small>
-                      Atendente responsavel: {selectedConversation.assignedTo?.fullName ?? "Nao atribuido"}
+                      Atendente responsável: {selectedConversation.assignedTo?.fullName ?? "Não atribuído"}
                     </small>
                   </div>
                 </div>
@@ -714,7 +713,7 @@ export function InternalChatClient(props: InternalChatClientProps) {
 
               {isClaimedByAnotherAttendant ? (
                 <p className="admin-feedback error">
-                  Esta conversa esta em atendimento por {claimedAttendantName}. Voce pode acompanhar, mas nao pode assumir ou responder.
+                  Esta conversa está em atendimento por {claimedAttendantName}. Você pode acompanhar, mas não pode assumir ou responder.
                 </p>
               ) : null}
 
@@ -770,7 +769,7 @@ export function InternalChatClient(props: InternalChatClientProps) {
 
                   <form className="admin-chat-reply admin-chat-composer" onSubmit={handleSendMessage}>
                     <label className="admin-chat-composer-label">
-                      Responder cliente
+                      Responder ao cliente
                       <div className="admin-chat-composer-row">
                         <textarea
                           value={message}
@@ -833,13 +832,13 @@ export function InternalChatClient(props: InternalChatClientProps) {
                     </label>
 
                     <label>
-                      Responsavel
+                      Responsável
                       <select
                         value={assigneeId}
                         disabled={!props.canManage || isClaimedByAnotherAttendant}
                         onChange={(event) => setAssigneeId(event.target.value)}
                       >
-                        <option value="">Nao atribuido</option>
+                        <option value="">Não atribuído</option>
                         {props.users.map((user) => {
                           const label = user.fullName.trim();
                           if (!label) {
@@ -876,13 +875,13 @@ export function InternalChatClient(props: InternalChatClientProps) {
                     </article>
 
                     <article className="admin-chat-protocol-card">
-                      <h4>Validacao</h4>
+                      <h4>Validação</h4>
                       {matchedLead ? (
                         <p>
                           Lead encontrado: <strong>{matchedLead.name}</strong>
                         </p>
                       ) : (
-                        <p>Nenhum lead identificado ate agora.</p>
+                        <p>Nenhum lead identificado até agora.</p>
                       )}
                       <small>
                         {matchedLead
@@ -906,7 +905,7 @@ export function InternalChatClient(props: InternalChatClientProps) {
 
                   {recentDeals.length ? (
                     <section className="admin-chat-deals">
-                      <h4>Negocios recentes</h4>
+                      <h4>Negócios recentes</h4>
                       <div className="admin-chat-deals-list">
                         {recentDeals.map((deal) => (
                           <article key={deal.id} className="admin-chat-deal-card">

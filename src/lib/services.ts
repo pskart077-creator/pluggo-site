@@ -5,9 +5,9 @@ export const SERVICES: Service[] = [
     slug: "conta-digital",
     title: "Conta Digital",
     shortDescription:
-      "Movimente e acompanhe a rotina financeira com uma operacao mais simples.",
+      "Movimente e acompanhe a rotina financeira com uma operação mais simples.",
     seoDescription:
-      "Conheca a Conta Digital da Plug Go para pessoas e empresas, com movimentacoes e acompanhamento em um fluxo simples.",
+      "Conheça a Conta Digital da Plug Go para pessoas e empresas, com movimentações e acompanhamento em um fluxo simples.",
     seoKeywords: [
       "conta digital",
       "conta digital empresa",
@@ -15,20 +15,20 @@ export const SERVICES: Service[] = [
       "plug go conta digital",
     ],
     description:
-      "A conta digital da Plug Go foi pensada para pessoas e empresas que precisam de agilidade nas movimentacoes, com visibilidade das entradas e saidas em um unico fluxo.",
+      "A conta digital da Plug Go foi pensada para pessoas e empresas que precisam de agilidade nas movimentações, com visibilidade das entradas e saídas em um único fluxo.",
     highlights: [
       "Abertura e uso em uma jornada objetiva",
-      "Acompanhamento de movimentacoes em tempo real",
-      "Operacao integrada com outras solucoes da plataforma",
+      "Acompanhamento de movimentações em tempo real",
+      "Operação integrada com outras soluções da plataforma",
     ],
   },
   {
     slug: "cobrancas-integradas",
     title: "Cobrancas Integradas",
     shortDescription:
-      "Receba de forma organizada com fluxos de cobranca conectados ao seu negocio.",
+      "Receba de forma organizada com fluxos de cobrança conectados ao seu negócio.",
     seoDescription:
-      "Entenda como as Cobrancas Integradas da Plug Go organizam recebimentos e tornam a operacao financeira mais fluida.",
+      "Entenda como as Cobrancas Integradas da Plug Go organizam recebimentos e tornam a operação financeira mais fluida.",
     seoKeywords: [
       "cobrancas integradas",
       "gestao de cobrancas",
@@ -36,18 +36,18 @@ export const SERVICES: Service[] = [
       "plug go cobrancas",
     ],
     description:
-      "As cobrancas integradas centralizam o processo de recebimento em uma experiencia mais direta, reduzindo friccao operacional e melhorando a rotina financeira.",
+      "As cobranças integradas centralizam o processo de recebimento em uma experiência mais direta, reduzindo fricção operacional e melhorando a rotina financeira.",
     highlights: [
-      "Gestao centralizada de cobrancas",
+      "Gestão centralizada de cobranças",
       "Mais clareza sobre valores a receber",
-      "Fluxo padronizado para pessoa fisica e juridica",
+      "Fluxo padronizado para pessoa física e jurídica",
     ],
   },
   {
     slug: "seguranca-financeira",
     title: "Seguranca Financeira",
     shortDescription:
-      "Tenha mais confianca para operar com estrutura e processos consistentes.",
+      "Tenha mais confiança para operar com estrutura e processos consistentes.",
     seoDescription:
       "Veja como a Seguranca Financeira da Plug Go melhora previsibilidade, controle e confiabilidade no dia a dia.",
     seoKeywords: [
@@ -57,20 +57,20 @@ export const SERVICES: Service[] = [
       "plug go seguranca",
     ],
     description:
-      "A Plug Go estrutura a experiencia financeira com foco em protecao e confiabilidade, apoiando decisoes com mais controle e previsibilidade operacional.",
+      "A Plug Go estrutura a experiência financeira com foco em proteção e confiabilidade, apoiando decisões com mais controle e previsibilidade operacional.",
     highlights: [
       "Processos desenhados para reduzir riscos",
       "Mais previsibilidade no dia a dia financeiro",
-      "Ambiente preparado para crescimento sustentavel",
+      "Ambiente preparado para crescimento sustentável",
     ],
   },
   {
     slug: "cripto",
     title: "Cripto",
     shortDescription:
-      "Acesse possibilidades digitais com uma experiencia integrada ao seu ecossistema.",
+      "Acesse possibilidades digitais com uma experiência integrada ao seu ecossistema.",
     seoDescription:
-      "Conheca a frente de Cripto da Plug Go para acessar operacoes digitais com praticidade e experiencia integrada.",
+      "Conheça a frente de Cripto da Plug Go para acessar operações digitais com praticidade e experiência integrada.",
     seoKeywords: [
       "cripto",
       "ativos digitais",
@@ -78,10 +78,10 @@ export const SERVICES: Service[] = [
       "plug go cripto",
     ],
     description:
-      "A solucao de cripto amplia as alternativas de operacao dentro da plataforma, mantendo uma jornada consistente para quem busca inovacao com praticidade.",
+      "A solução de cripto amplia as alternativas de operação dentro da plataforma, mantendo uma jornada consistente para quem busca inovação com praticidade.",
     highlights: [
-      "Acesso simplificado a operacoes digitais",
-      "Experiencia conectada com os demais servicos",
+      "Acesso simplificado a operações digitais",
+      "Experiência conectada com os demais serviços",
       "Estrutura moderna para acompanhar o mercado",
     ],
   },

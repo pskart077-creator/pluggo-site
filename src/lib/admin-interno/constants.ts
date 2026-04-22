@@ -57,7 +57,7 @@ export const INTERNAL_NOTE_MAX_LENGTH = 5_000;
 
 export const INTERNAL_STATUS_LABEL: Record<InternalLeadStatus, string> = {
   NOVO: "Novo",
-  EM_ANALISE: "Em analise",
+  EM_ANALISE: "Em análise",
   CONTATADO: "Contatado",
   QUALIFICADO: "Qualificado",
   CONVERTIDO: "Convertido",
@@ -67,7 +67,7 @@ export const INTERNAL_STATUS_LABEL: Record<InternalLeadStatus, string> = {
 
 export const INTERNAL_PRIORITY_LABEL: Record<InternalLeadPriority, string> = {
   BAIXA: "Baixa",
-  MEDIA: "Media",
+  MEDIA: "Média",
   ALTA: "Alta",
   URGENTE: "Urgente",
 };
@@ -80,9 +80,9 @@ export const INTERNAL_ROLE_LABEL: Record<InternalAdminRoleKey, string> = {
 
 export const CRM_STAGE_LABEL: Record<CrmDealStage, string> = {
   NOVO_CONTATO: "Novo contato",
-  DIAGNOSTICO: "Diagnostico",
+  DIAGNOSTICO: "Diagnóstico",
   PROPOSTA: "Proposta",
-  NEGOCIACAO: "Negociacao",
+  NEGOCIACAO: "Negociação",
   GANHO: "Ganho",
   PERDIDO: "Perdido",
 };
@@ -149,18 +149,18 @@ export const CHAT_PROTOCOL_MAX_PHONE_DIGITS = 13;
 export const CHAT_PROTOCOL_PROMPT_NAME =
   "Para iniciar o atendimento, informe seu nome completo.";
 export const CHAT_PROTOCOL_PROMPT_NAME_RETRY =
-  "Nao consegui validar o nome completo. Informe nome e sobrenome para continuar.";
+  "Não consegui validar o nome completo. Informe nome e sobrenome para continuar.";
 export const CHAT_PROTOCOL_PROMPT_PHONE =
   "Obrigado. Agora informe o telefone para contato com DDD.";
 export const CHAT_PROTOCOL_PROMPT_PHONE_RETRY =
-  "Telefone invalido. Informe um numero com DDD para prosseguirmos.";
+  "Telefone inválido. Informe um número com DDD para prosseguirmos.";
 export const CHAT_PROTOCOL_PROMPT_READY =
-  "Perfeito, cadastro validado. Um atendente vai seguir com voce em instantes.";
+  "Perfeito, cadastro validado. Um atendente vai seguir com você em instantes.";
 export const CHAT_PROTOCOL_PROMPT_IDLE_WARNING_8_MIN =
-  "Estamos por aqui. Se desejar continuar, responda esta conversa. Ela sera encerrada em 8 minutos por inatividade.";
+  "Estamos por aqui. Se desejar continuar, responda esta conversa. Ela será encerrada em 8 minutos por inatividade.";
 export const CHAT_PROTOCOL_PROMPT_IDLE_WARNING_5_MIN =
-  "Atendimento pausado por falta de resposta. Envie uma mensagem para continuar. Encerramento automatico em 5 minutos.";
+  "Atendimento pausado por falta de resposta. Envie uma mensagem para continuar. Encerramento automático em 5 minutos.";
 export const CHAT_PROTOCOL_PROMPT_IDLE_WARNING_2_MIN =
-  "Ultimo aviso: faltam 2 minutos para encerramento automatico por inatividade. Responda para manter a conversa ativa.";
+  "Último aviso: faltam 2 minutos para encerramento automático por inatividade. Responda para manter a conversa ativa.";
 export const CHAT_PROTOCOL_PROMPT_TIMEOUT =
   "Conversa encerrada por inatividade. Para iniciar novamente, informe nome completo e telefone.";

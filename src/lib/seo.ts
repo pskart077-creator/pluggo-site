@@ -103,7 +103,7 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
     keywords: [
       ...COMMON_KEYWORDS,
       "news",
-      "novidades plug go",
+      "novidades Plug Go",
       "conteúdo financeiro",
     ],
   },

@@ -27,14 +27,14 @@ export default async function InternalAnalyticsPage({
     <div className="admin-page-stack">
       <section className="admin-card">
         <div className="admin-card-header">
-          <h2>Analytics de navegacao</h2>
+          <h2>Analytics de navegação</h2>
           <form method="GET" action="/admin-interno/analytics">
             <label>
-              Periodo
+              Período
               <select name="days" defaultValue={String(overview.rangeDays)}>
                 {RANGE_OPTIONS.map((option) => (
                   <option key={option} value={option}>
-                    Ultimos {option} dias
+                    Últimos {option} dias
                   </option>
                 ))}
               </select>
@@ -46,7 +46,7 @@ export default async function InternalAnalyticsPage({
         </div>
       </section>
 
-      <section className="admin-metrics-grid" aria-label="Metricas de analytics">
+      <section className="admin-metrics-grid" aria-label="Métricas de analytics">
         <article className="admin-metric-card">
           <p>Pageviews</p>
           <strong>{overview.metrics.pageViews}</strong>
@@ -56,26 +56,26 @@ export default async function InternalAnalyticsPage({
           <strong>{overview.metrics.activeVisitors}</strong>
         </article>
         <article className="admin-metric-card">
-          <p>Sessoes ativas</p>
+          <p>Sessões ativas</p>
           <strong>{overview.metrics.activeSessions}</strong>
         </article>
         <article className="admin-metric-card">
-          <p>Conversoes (leads)</p>
+          <p>Conversões (leads)</p>
           <strong>{overview.metrics.leadSubmissions}</strong>
         </article>
         <article className="admin-metric-card">
-          <p>Sessoes com conversao</p>
+          <p>Sessões com conversão</p>
           <strong>{overview.metrics.convertingSessions}</strong>
         </article>
         <article className="admin-metric-card">
-          <p>Taxa de conversao</p>
+          <p>Taxa de conversão</p>
           <strong>{overview.metrics.conversionRate}%</strong>
         </article>
       </section>
 
       <section className="admin-card admin-analytics-grid">
         <article>
-          <h3>Top paginas</h3>
+          <h3>Top páginas</h3>
           <ul className="admin-analytics-list">
             {overview.topPages.map((item) => (
               <li key={item.path}>
@@ -83,7 +83,7 @@ export default async function InternalAnalyticsPage({
                 <strong>{item.count}</strong>
               </li>
             ))}
-            {!overview.topPages.length ? <li>Sem dados no periodo.</li> : null}
+            {!overview.topPages.length ? <li>Sem dados no período.</li> : null}
           </ul>
         </article>
 
@@ -96,7 +96,7 @@ export default async function InternalAnalyticsPage({
                 <strong>{item.count}</strong>
               </li>
             ))}
-            {!overview.topSources.length ? <li>Sem dados no periodo.</li> : null}
+            {!overview.topSources.length ? <li>Sem dados no período.</li> : null}
           </ul>
         </article>
 
@@ -109,7 +109,7 @@ export default async function InternalAnalyticsPage({
                 <strong>{item.count}</strong>
               </li>
             ))}
-            {!overview.devices.length ? <li>Sem dados no periodo.</li> : null}
+            {!overview.devices.length ? <li>Sem dados no período.</li> : null}
           </ul>
         </article>
 
@@ -122,7 +122,7 @@ export default async function InternalAnalyticsPage({
                 <strong>{item.count}</strong>
               </li>
             ))}
-            {!overview.countries.length ? <li>Sem dados no periodo.</li> : null}
+            {!overview.countries.length ? <li>Sem dados no período.</li> : null}
           </ul>
         </article>
       </section>
@@ -135,9 +135,9 @@ export default async function InternalAnalyticsPage({
               <tr>
                 <th>Data</th>
                 <th>Tipo</th>
-                <th>Pagina</th>
+                <th>Página</th>
                 <th>Origem</th>
-                <th>Pais</th>
+                <th>País</th>
                 <th>Dispositivo</th>
               </tr>
             </thead>
@@ -154,7 +154,7 @@ export default async function InternalAnalyticsPage({
               ))}
               {!overview.recentEvents.length ? (
                 <tr>
-                  <td colSpan={6}>Nenhum evento encontrado no periodo.</td>
+                  <td colSpan={6}>Nenhum evento encontrado no período.</td>
                 </tr>
               ) : null}
             </tbody>

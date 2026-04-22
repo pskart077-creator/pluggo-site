@@ -22,7 +22,7 @@ export default async function InternalProfilePage() {
             <strong>{INTERNAL_ROLE_LABEL[session.role]}</strong>
           </div>
           <div className="admin-status-item">
-            <span>Sessao</span>
+            <span>Sessão</span>
             <strong>{session.sessionId.slice(0, 8).toUpperCase()}</strong>
           </div>
         </div>

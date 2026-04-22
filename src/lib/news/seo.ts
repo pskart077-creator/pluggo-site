@@ -28,7 +28,7 @@ export function buildNewsListMetadata(params?: {
 
   const title = "News";
   const description =
-    "Noticias, atualizacoes e analises da Plug Go com foco em tecnologia, seguranca e mercado.";
+    "Notícias, atualizações e análises da Plug Go com foco em tecnologia, segurança e mercado.";
 
   return {
     title,
@@ -146,7 +146,7 @@ export function buildNewsBreadcrumbJsonLd(post: PublicNewsDetailDto) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Inicio",
+        name: "Início",
         item: siteUrl,
       },
       {

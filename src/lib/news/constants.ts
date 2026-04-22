@@ -38,7 +38,7 @@ export const NEWS_STATUS_LABEL: Record<NewsStatus, string> = {
 export const NEWS_ROLE_LABEL: Record<UserRole, string> = {
   SUPER_ADMIN: "Super Admin",
   EDITOR: "Editor",
-  AUTHOR: "Author",
+  AUTHOR: "Autor",
 };
 
 export const SENSITIVE_HTTP_METHODS = new Set(["POST", "PUT", "PATCH", "DELETE"]);

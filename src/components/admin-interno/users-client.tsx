@@ -99,15 +99,15 @@ export function UsersClient({ users, canManage }: UsersClientProps) {
 
       const result = (await response.json().catch(() => null)) as InternalApiResponse | null;
       if (!response.ok || !result?.success) {
-        setError(getErrorMessage(result, "Falha ao criar usuario."));
+        setError(getErrorMessage(result, "Falha ao criar usuário."));
         return;
       }
 
-      setFeedback("Usuario criado com sucesso.");
+      setFeedback("Usuário criado com sucesso.");
       event.currentTarget.reset();
       router.refresh();
     } catch {
-      setError("Falha de conexao ao criar usuario.");
+      setError("Falha de conexão ao criar usuário.");
     } finally {
       setIsPending(false);
     }
@@ -137,14 +137,14 @@ export function UsersClient({ users, canManage }: UsersClientProps) {
 
       const result = (await response.json().catch(() => null)) as InternalApiResponse | null;
       if (!response.ok || !result?.success) {
-        setError(getErrorMessage(result, "Falha ao atualizar usuario."));
+        setError(getErrorMessage(result, "Falha ao atualizar usuário."));
         return;
       }
 
-      setFeedback("Usuario atualizado.");
+      setFeedback("Usuário atualizado.");
       router.refresh();
     } catch {
-      setError("Falha de conexao ao atualizar usuario.");
+      setError("Falha de conexão ao atualizar usuário.");
     } finally {
       setIsPending(false);
     }
@@ -180,7 +180,7 @@ export function UsersClient({ users, canManage }: UsersClientProps) {
       event.currentTarget.reset();
       router.refresh();
     } catch {
-      setError("Falha de conexao ao redefinir senha.");
+      setError("Falha de conexão ao redefinir senha.");
     } finally {
       setIsPending(false);
     }
@@ -189,11 +189,11 @@ export function UsersClient({ users, canManage }: UsersClientProps) {
   return (
     <div className="admin-page-stack">
       <section className="admin-card">
-        <h2>Novo usuario administrativo</h2>
+        <h2>Novo usuário administrativo</h2>
         <form className="admin-form-grid" onSubmit={handleCreate}>
           <label>
             Nome completo
-            <input name="fullName" required maxLength={120} placeholder="Nome do usuario" />
+            <input name="fullName" required maxLength={120} placeholder="Nome do usuário" />
           </label>
 
           <label>
@@ -225,7 +225,7 @@ export function UsersClient({ users, canManage }: UsersClientProps) {
           </label>
 
           <button type="submit" className="admin-primary-button" disabled={!canManage || isPending}>
-            Criar usuario
+            Criar usuário
           </button>
         </form>
       </section>
@@ -234,7 +234,7 @@ export function UsersClient({ users, canManage }: UsersClientProps) {
       {error ? <p className="admin-feedback error">{error}</p> : null}
 
       <section className="admin-card">
-        <h2>Usuarios cadastrados</h2>
+        <h2>Usuários cadastrados</h2>
         <div className="admin-users-stack">
           {users.map((user) => (
             <article className="admin-user-item" key={user.id}>
@@ -262,7 +262,7 @@ export function UsersClient({ users, canManage }: UsersClientProps) {
 
                 <label className="admin-checkbox-line">
                   <input name="isActive" type="checkbox" defaultChecked={user.isActive} />
-                  Usuario ativo
+                  Usuário ativo
                 </label>
 
                 <button type="submit" className="admin-ghost-button" disabled={!canManage || isPending}>

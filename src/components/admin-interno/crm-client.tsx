@@ -443,15 +443,15 @@ export function CrmClient(props: CrmClientProps) {
     <div className="admin-page-stack">
       <section className="admin-metrics-grid">
         <article className="admin-metric-card">
-          <p>Total de negocios</p>
+          <p>Total de negócios</p>
           <strong>{props.metrics.totalDeals}</strong>
         </article>
         <article className="admin-metric-card">
-          <p>Negocios abertos</p>
+          <p>Negócios abertos</p>
           <strong>{props.metrics.openDeals}</strong>
         </article>
         <article className="admin-metric-card">
-          <p>Negocios ganhos</p>
+          <p>Negócios ganhos</p>
           <strong>{props.metrics.wonDeals}</strong>
         </article>
         <article className="admin-metric-card">
@@ -468,19 +468,19 @@ export function CrmClient(props: CrmClientProps) {
         <div className="admin-card-header">
           <h2>CRM Comercial</h2>
           <label>
-            Buscar negocio
+            Buscar negócio
             <input
               type="search"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Titulo, contato, conta ou lead"
+              placeholder="Título, contato, conta ou lead"
             />
           </label>
         </div>
 
         <form className="admin-form-grid admin-crm-create" onSubmit={handleCreateDeal}>
           <label>
-            Titulo
+            Título
             <input name="title" required maxLength={180} placeholder="Ex: Contrato anual PlugGo Pay" />
           </label>
 
@@ -508,9 +508,9 @@ export function CrmClient(props: CrmClientProps) {
           </label>
 
           <label>
-            Responsavel
+            Responsável
             <select name="ownerId" defaultValue="">
-              <option value="">Nao atribuido</option>
+              <option value="">Não atribuído</option>
               {props.users.map((user) => (
                 <option key={user.id} value={user.id}>
                   {user.fullName}
@@ -530,7 +530,7 @@ export function CrmClient(props: CrmClientProps) {
           </label>
 
           <label>
-            Observacoes
+            Observações
             <input name="notes" maxLength={5000} placeholder="Contexto inicial da oportunidade" />
           </label>
 
@@ -539,7 +539,7 @@ export function CrmClient(props: CrmClientProps) {
             className="admin-primary-button"
             disabled={!props.canManage || isPending}
           >
-            Criar negocio
+            Criar negócio
           </button>
         </form>
       </section>
@@ -592,7 +592,7 @@ export function CrmClient(props: CrmClientProps) {
                     </label>
 
                     <label>
-                      Responsavel
+                      Responsável
                       <select
                         value={deal.ownerId ?? ""}
                         onChange={(event) =>
@@ -602,7 +602,7 @@ export function CrmClient(props: CrmClientProps) {
                         }
                         disabled={!props.canManage || isPending}
                       >
-                        <option value="">Nao atribuido</option>
+                        <option value="">Não atribuído</option>
                         {props.users.map((user) => (
                           <option key={user.id} value={user.id}>
                             {user.fullName}
@@ -620,13 +620,13 @@ export function CrmClient(props: CrmClientProps) {
                       Nova atividade
                       <select name="type" defaultValue="NOTE">
                         <option value="NOTE">Nota</option>
-                        <option value="CALL">Ligacao</option>
+                        <option value="CALL">Ligação</option>
                         <option value="EMAIL">E-mail</option>
-                        <option value="MEETING">Reuniao</option>
+                        <option value="MEETING">Reunião</option>
                       </select>
                     </label>
                     <label>
-                      Descricao
+                      Descrição
                       <input name="description" required maxLength={2000} />
                     </label>
                     <button
@@ -665,9 +665,9 @@ export function CrmClient(props: CrmClientProps) {
                       <input name="dueAt" type="datetime-local" />
                     </label>
                     <label>
-                      Responsavel
+                      Responsável
                       <select name="assigneeId" defaultValue="">
-                        <option value="">Nao atribuido</option>
+                        <option value="">Não atribuído</option>
                         {props.users.map((user) => (
                           <option key={user.id} value={user.id}>
                             {user.fullName}
@@ -689,7 +689,7 @@ export function CrmClient(props: CrmClientProps) {
                       <li key={task.id}>
                         <strong>{task.title}</strong>
                         <p>
-                          {task.assignee?.fullName ?? "Sem responsavel"} | Prazo:{" "}
+                          {task.assignee?.fullName ?? "Sem responsável"} | Prazo:{" "}
                           {asDateLabel(task.dueAt)}
                         </p>
                         <label>
@@ -707,7 +707,7 @@ export function CrmClient(props: CrmClientProps) {
                           >
                             <option value="OPEN">Aberta</option>
                             <option value="IN_PROGRESS">Em andamento</option>
-                            <option value="DONE">Concluida</option>
+                            <option value="DONE">Concluída</option>
                             <option value="CANCELED">Cancelada</option>
                           </select>
                         </label>
@@ -718,7 +718,7 @@ export function CrmClient(props: CrmClientProps) {
                 </section>
               ))}
               {!board[stage].length ? (
-                <p className="admin-crm-empty">Nenhum negocio nesta etapa.</p>
+                <p className="admin-crm-empty">Nenhum negócio nesta etapa.</p>
               ) : null}
             </div>
           </article>

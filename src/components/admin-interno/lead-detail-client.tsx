@@ -97,7 +97,7 @@ export function LeadDetailClient(props: LeadDetailClientProps) {
       setFeedback("Lead atualizado com sucesso.");
       router.refresh();
     } catch {
-      setError("Falha de conexao ao atualizar lead.");
+      setError("Falha de conexão ao atualizar lead.");
     } finally {
       setIsSaving(false);
     }
@@ -128,15 +128,15 @@ export function LeadDetailClient(props: LeadDetailClientProps) {
 
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) {
-        setError(result?.error?.message ?? "Falha ao adicionar observacao.");
+        setError(result?.error?.message ?? "Falha ao adicionar observação.");
         return;
       }
 
       setNote("");
-      setFeedback("Observacao adicionada.");
+      setFeedback("Observação adicionada.");
       router.refresh();
     } catch {
-      setError("Falha de conexao ao adicionar observacao.");
+      setError("Falha de conexão ao adicionar observação.");
     } finally {
       setIsSaving(false);
     }
@@ -174,9 +174,9 @@ export function LeadDetailClient(props: LeadDetailClientProps) {
 
         {props.canAssign ? (
           <label>
-            Responsavel
+            Responsável
             <select value={assigneeId} onChange={(event) => setAssigneeId(event.target.value)}>
-              <option value="">Nao atribuido</option>
+              <option value="">Não atribuído</option>
               {props.assignees.map((assignee) => (
                 <option key={assignee.id} value={assignee.id}>
                   {assignee.fullName}
@@ -187,14 +187,14 @@ export function LeadDetailClient(props: LeadDetailClientProps) {
         ) : null}
 
         <button type="submit" className="admin-primary-button" disabled={!props.canUpdate || isSaving}>
-          {isSaving ? "Salvando..." : "Salvar alteracoes"}
+          {isSaving ? "Salvando..." : "Salvar alterações"}
         </button>
       </form>
 
       <form className="admin-card" onSubmit={handleAddNote}>
-        <h3>Observacoes internas</h3>
+        <h3>Observações internas</h3>
         <label>
-          Nova observacao
+          Nova observação
           <textarea
             value={note}
             onChange={(event) => setNote(event.target.value)}
@@ -205,7 +205,7 @@ export function LeadDetailClient(props: LeadDetailClientProps) {
         </label>
 
         <button type="submit" className="admin-primary-button" disabled={!props.canAddNote || isSaving}>
-          {isSaving ? "Enviando..." : "Adicionar observacao"}
+          {isSaving ? "Enviando..." : "Adicionar observação"}
         </button>
       </form>
 

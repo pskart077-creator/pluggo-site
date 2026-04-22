@@ -203,13 +203,13 @@ export function LeadsKanbanClient({ leads: initialLeads, canUpdate }: LeadsKanba
           </label>
 
           <label>
-            Responsavel
+            Responsável
             <select
               value={assigneeFilter}
               onChange={(event) => setAssigneeFilter(event.target.value)}
             >
               <option value="">Todos</option>
-              <option value="__unassigned__">Nao atribuido</option>
+              <option value="__unassigned__">Não atribuído</option>
               {assignees.map((assignee) => (
                 <option key={assignee.id} value={assignee.id}>
                   {assignee.fullName}
@@ -221,7 +221,7 @@ export function LeadsKanbanClient({ leads: initialLeads, canUpdate }: LeadsKanba
 
         {!canUpdate ? (
           <p className="admin-feedback">
-            Seu perfil possui visualizacao apenas. Arrastar e alterar status esta desabilitado.
+            Seu perfil possui visualização apenas. Arrastar e alterar status está desabilitado.
           </p>
         ) : null}
 
@@ -273,7 +273,7 @@ export function LeadsKanbanClient({ leads: initialLeads, canUpdate }: LeadsKanba
                     </div>
 
                     <div className="admin-kanban-card-footer">
-                      <small>{lead.assignee?.fullName ?? "Nao atribuido"}</small>
+                      <small>{lead.assignee?.fullName ?? "Não atribuído"}</small>
                       <small>{new Date(lead.createdAt).toLocaleDateString("pt-BR")}</small>
                     </div>
 

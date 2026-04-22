@@ -89,7 +89,7 @@ export default async function InternalLeadsPage({
           </label>
 
           <label>
-            Responsavel
+            Responsável
             <select name="assigneeId" defaultValue={query.assigneeId ?? ""}>
               <option value="">Todos</option>
               {assignees.map((assignee) => (
@@ -106,7 +106,7 @@ export default async function InternalLeadsPage({
           </label>
 
           <label>
-            Ate
+            Até
             <input type="date" name="to" defaultValue={query.to} />
           </label>
 
@@ -145,9 +145,9 @@ export default async function InternalLeadsPage({
                 <th>Status</th>
                 <th>Prioridade</th>
                 <th>Origem</th>
-                <th>Responsavel</th>
+                <th>Responsável</th>
                 <th>Criado em</th>
-                <th>Acoes</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -158,7 +158,7 @@ export default async function InternalLeadsPage({
                   <td>{INTERNAL_STATUS_LABEL[lead.status]}</td>
                   <td>{INTERNAL_PRIORITY_LABEL[lead.priority]}</td>
                   <td>{lead.source ?? "-"}</td>
-                  <td>{lead.assignee?.fullName ?? "Nao atribuido"}</td>
+                  <td>{lead.assignee?.fullName ?? "Não atribuído"}</td>
                   <td>{lead.createdAt.toLocaleString("pt-BR")}</td>
                   <td>
                     <Link className="admin-inline-link" href={`/admin-interno/leads/${lead.id}`}>
@@ -173,7 +173,7 @@ export default async function InternalLeadsPage({
 
         <div className="admin-pagination">
           <span>
-            Pagina {result.page} de {result.totalPages}
+            Página {result.page} de {result.totalPages}
           </span>
           <div>
             {result.page > 1 ? (
@@ -213,7 +213,7 @@ export default async function InternalLeadsPage({
                   page: String(result.page + 1),
                 }).toString()}`}
               >
-                Proxima
+                Próxima
               </Link>
             ) : null}
           </div>

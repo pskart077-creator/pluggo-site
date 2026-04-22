@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "@/styles/dashboard/dashboard.css";
 
 export const metadata: Metadata = {
-  title: "Area Interna | Plug Go",
-  description: "Area interna privada para operacao de leads",
+  title: "Área Interna",
+  description: "Área interna privada para operação de leads",
   robots: {
     index: false,
     follow: false,

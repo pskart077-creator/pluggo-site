@@ -8,19 +8,19 @@ export function validateStrongPassword(password: string) {
   }
 
   if (INTERNAL_PASSWORD_POLICY.requireUppercase && !/[A-Z]/.test(password)) {
-    issues.push("Senha precisa ter pelo menos uma letra maiuscula.");
+    issues.push("Senha precisa ter pelo menos uma letra maiúscula.");
   }
 
   if (INTERNAL_PASSWORD_POLICY.requireLowercase && !/[a-z]/.test(password)) {
-    issues.push("Senha precisa ter pelo menos uma letra minuscula.");
+    issues.push("Senha precisa ter pelo menos uma letra minúscula.");
   }
 
   if (INTERNAL_PASSWORD_POLICY.requireNumber && !/[0-9]/.test(password)) {
-    issues.push("Senha precisa ter pelo menos um numero.");
+    issues.push("Senha precisa ter pelo menos um número.");
   }
 
   if (INTERNAL_PASSWORD_POLICY.requireSymbol && !/[^A-Za-z0-9]/.test(password)) {
-    issues.push("Senha precisa ter pelo menos um simbolo.");
+    issues.push("Senha precisa ter pelo menos um símbolo.");
   }
 
   return {

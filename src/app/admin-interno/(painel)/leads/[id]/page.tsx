@@ -77,15 +77,15 @@ export default async function InternalLeadDetailPage({
             <p>{INTERNAL_PRIORITY_LABEL[lead.priority]}</p>
           </div>
           <div>
-            <strong>Responsavel</strong>
-            <p>{lead.assignee?.fullName ?? "Nao atribuido"}</p>
+            <strong>Responsável</strong>
+            <p>{lead.assignee?.fullName ?? "Não atribuído"}</p>
           </div>
           <div>
             <strong>Origem</strong>
             <p>{lead.source || "-"}</p>
           </div>
           <div>
-            <strong>Pagina de origem</strong>
+            <strong>Página de origem</strong>
             <p>{lead.sourcePage || "-"}</p>
           </div>
           <div>
@@ -139,7 +139,7 @@ export default async function InternalLeadDetailPage({
       />
 
       <section className="admin-card">
-        <h3>Historico de movimentacao</h3>
+        <h3>Histórico de movimentação</h3>
         <ul className="admin-history-list">
           {lead.history.map((item) => (
             <li key={item.id}>
@@ -170,7 +170,7 @@ export default async function InternalLeadDetailPage({
       </section>
 
       <section className="admin-card">
-        <h3>Observacoes internas</h3>
+        <h3>Observações internas</h3>
         <ul className="admin-notes-list">
           {lead.notes.map((note) => (
             <li key={note.id}>
@@ -180,12 +180,12 @@ export default async function InternalLeadDetailPage({
               </small>
             </li>
           ))}
-          {!lead.notes.length ? <li>Nenhuma observacao registrada.</li> : null}
+          {!lead.notes.length ? <li>Nenhuma observação registrada.</li> : null}
         </ul>
       </section>
 
       <section className="admin-card">
-        <h3>Logs de notificacao</h3>
+        <h3>Logs de notificação</h3>
         <ul className="admin-history-list">
           {lead.notifications.map((notification) => (
             <li key={notification.id}>
@@ -200,7 +200,7 @@ export default async function InternalLeadDetailPage({
               </div>
             </li>
           ))}
-          {!lead.notifications.length ? <li>Sem notificacoes registradas.</li> : null}
+          {!lead.notifications.length ? <li>Sem notificações registradas.</li> : null}
         </ul>
       </section>
     </div>
