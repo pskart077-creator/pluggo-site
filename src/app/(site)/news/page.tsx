@@ -12,6 +12,15 @@ type Props = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
+const DEFAULT_NEWS_QUERY = {
+  page: 1,
+  pageSize: 12,
+  search: "",
+  category: "",
+  tag: "",
+  featured: false,
+} as const;
+
 function pickString(value: string | string[] | undefined) {
   if (Array.isArray(value)) {
     return value[0];
@@ -19,9 +28,8 @@ function pickString(value: string | string[] | undefined) {
   return value;
 }
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const queryRaw = await searchParams;
-  const query = publicNewsQuerySchema.parse({
+function parsePublicNewsQuery(queryRaw: Record<string, string | string[] | undefined>) {
+  const parsed = publicNewsQuerySchema.safeParse({
     page: pickString(queryRaw.page),
     pageSize: pickString(queryRaw.pageSize),
     search: pickString(queryRaw.search),
@@ -30,26 +38,38 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     featured: pickString(queryRaw.featured),
   });
 
-  return generateNewsListPageMetadata({
-    page: query.page,
-    pageSize: query.pageSize,
-    search: query.search,
-    category: query.category,
-    tag: query.tag,
-    featuredOnly: query.featured,
-  });
+  if (!parsed.success) {
+    return DEFAULT_NEWS_QUERY;
+  }
+
+  return parsed.data;
+}
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  try {
+    const queryRaw = await searchParams;
+    const query = parsePublicNewsQuery(queryRaw);
+
+    return generateNewsListPageMetadata({
+      page: query.page,
+      pageSize: query.pageSize,
+      search: query.search,
+      category: query.category,
+      tag: query.tag,
+      featuredOnly: query.featured,
+    });
+  } catch {
+    return {
+      title: "News",
+      description:
+        "Noticias, atualizacoes e analises da Plug Go com foco em tecnologia, seguranca e mercado.",
+    };
+  }
 }
 
 export default async function NewsPage({ searchParams }: Props) {
   const queryRaw = await searchParams;
-  const query = publicNewsQuerySchema.parse({
-    page: pickString(queryRaw.page),
-    pageSize: pickString(queryRaw.pageSize),
-    search: pickString(queryRaw.search),
-    category: pickString(queryRaw.category),
-    tag: pickString(queryRaw.tag),
-    featured: pickString(queryRaw.featured),
-  });
+  const query = parsePublicNewsQuery(queryRaw);
 
   const filters = {
     page: query.page,
@@ -60,7 +80,21 @@ export default async function NewsPage({ searchParams }: Props) {
     featuredOnly: query.featured,
   };
 
-  const result = await listPublicNews(filters);
+  let result: Awaited<ReturnType<typeof listPublicNews>> = {
+    items: [],
+    pagination: {
+      page: filters.page,
+      pageSize: filters.pageSize,
+      total: 0,
+      totalPages: 1,
+    },
+  };
+
+  try {
+    result = await listPublicNews(filters);
+  } catch {
+    // Keep the route available even during transient query/database failures.
+  }
 
   return (
     <>
