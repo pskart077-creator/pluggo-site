@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
 import {
   CONTACT_WIZARD_STEPS,
   LOSS_STAGE_OPTIONS,
@@ -40,6 +39,14 @@ const INITIAL_DATA: ContactWizardData = {
   urgency: "",
   corporateEmail: "",
   improvementGoal: "",
+};
+
+const INITIAL_UTM = {
+  utm_source: "",
+  utm_medium: "",
+  utm_campaign: "",
+  utm_content: "",
+  utm_term: "",
 };
 
 const styles = {
@@ -318,14 +325,14 @@ function ChoiceGroup({ disabled, error, legend, options, value, onChange }: Choi
 }
 
 export function PlugGoContactWizard() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [step, setStep] = useState<ContactWizardStep>(0);
   const [data, setData] = useState<ContactWizardData>(INITIAL_DATA);
   const [errors, setErrors] = useState<ContactWizardErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSavingInitialLead, setIsSavingInitialLead] = useState(false);
   const [capturedLeadId, setCapturedLeadId] = useState<string | null>(null);
+  const [pathname, setPathname] = useState("/contato");
+  const [utmParams, setUtmParams] = useState(INITIAL_UTM);
   const [submitFeedback, setSubmitFeedback] = useState<{
     kind: "success" | "error";
     message: string;
@@ -335,6 +342,23 @@ export function PlugGoContactWizard() {
   const currentStepMeta = CONTACT_WIZARD_STEPS[step];
   const shouldShowProgress = step > 0;
   const isBusy = isSubmitting || isSavingInitialLead;
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    setPathname(window.location.pathname || "/contato");
+
+    const params = new URLSearchParams(window.location.search);
+    setUtmParams({
+      utm_source: params.get("utm_source") || "",
+      utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || "",
+      utm_content: params.get("utm_content") || "",
+      utm_term: params.get("utm_term") || "",
+    });
+  }, []);
 
   useEffect(() => {
     try {
@@ -379,7 +403,7 @@ export function PlugGoContactWizard() {
         }),
       );
     } catch {
-      // Non-blocking persistence for resume behavior.
+      // Persistência não bloqueante.
     }
   }, [capturedLeadId, data, step]);
 
@@ -415,11 +439,11 @@ export function PlugGoContactWizard() {
           source: "site-contato-multistep-inicial",
           sourcePage: pathname || "/contato",
           campaign: "captura-inicial",
-          utm_source: searchParams.get("utm_source") || undefined,
-          utm_medium: searchParams.get("utm_medium") || undefined,
-          utm_campaign: searchParams.get("utm_campaign") || undefined,
-          utm_content: searchParams.get("utm_content") || undefined,
-          utm_term: searchParams.get("utm_term") || undefined,
+          utm_source: utmParams.utm_source || undefined,
+          utm_medium: utmParams.utm_medium || undefined,
+          utm_campaign: utmParams.utm_campaign || undefined,
+          utm_content: utmParams.utm_content || undefined,
+          utm_term: utmParams.utm_term || undefined,
           message: buildPartialLeadMessage(data),
           tags: ["captura-inicial", "fluxo-multistep"],
           captureStage: "partial",
@@ -514,11 +538,11 @@ export function PlugGoContactWizard() {
         source: "site-contato-multistep",
         sourcePage: pathname || "/contato",
         campaign: "solicitar-diagnostico",
-        utm_source: searchParams.get("utm_source") || undefined,
-        utm_medium: searchParams.get("utm_medium") || undefined,
-        utm_campaign: searchParams.get("utm_campaign") || undefined,
-        utm_content: searchParams.get("utm_content") || undefined,
-        utm_term: searchParams.get("utm_term") || undefined,
+        utm_source: utmParams.utm_source || undefined,
+        utm_medium: utmParams.utm_medium || undefined,
+        utm_campaign: utmParams.utm_campaign || undefined,
+        utm_content: utmParams.utm_content || undefined,
+        utm_term: utmParams.utm_term || undefined,
         message: buildLeadMessage(data),
         tags: buildLeadTags(data),
         captureStage: "complete" as const,
@@ -694,6 +718,7 @@ export function PlugGoContactWizard() {
                     />
                     {errors.website ? <p className={styles.errorText}>{errors.website}</p> : null}
                   </div>
+
                   <ChoiceGroup
                     legend="Segmento da empresa"
                     options={SEGMENT_OPTIONS}
@@ -825,7 +850,6 @@ export function PlugGoContactWizard() {
             </div>
 
             <footer className={styles.footer}>
-
               <div className={styles.buttonRow}>
                 {step > 0 ? (
                   <button
