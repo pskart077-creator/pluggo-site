@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { put } from "@vercel/blob";
 import { ApiError } from "@/lib/news/api";
 import {
   NEWS_ALLOWED_UPLOAD_EXTENSIONS,
@@ -117,6 +118,91 @@ function toChecksum(buffer: Buffer) {
   return createHash("sha256").update(buffer).digest("hex");
 }
 
+function getBlobReadWriteToken() {
+  const token = process.env.BLOB_READ_WRITE_TOKEN?.trim();
+  return token || null;
+}
+
+function isReadOnlyFilesystemError(error: unknown) {
+  const code =
+    error && typeof error === "object" && "code" in error
+      ? String((error as { code: unknown }).code)
+      : "";
+  return code === "EROFS" || code === "EACCES" || code === "EPERM";
+}
+
+async function storeInVercelBlob(
+  params: {
+    buffer: Buffer;
+    mimeType: Exclude<DetectedMime, null>;
+    year: string;
+    month: string;
+    safeFileName: string;
+  },
+) {
+  const token = getBlobReadWriteToken();
+  if (!token) {
+    throw new ApiError(
+      503,
+      "UPLOAD_STORAGE_NOT_CONFIGURED",
+      "Upload indisponivel no servidor. Configure o BLOB_READ_WRITE_TOKEN.",
+    );
+  }
+
+  try {
+    const uploadPath = `news/${params.year}/${params.month}/${params.safeFileName}`;
+    const uploaded = await put(uploadPath, params.buffer, {
+      access: "public",
+      addRandomSuffix: false,
+      contentType: params.mimeType,
+      token,
+    });
+
+    return {
+      publicUrl: uploaded.url,
+      storagePath: `vercel-blob:${uploaded.pathname}`,
+    };
+  } catch {
+    throw new ApiError(
+      503,
+      "UPLOAD_STORAGE_UNAVAILABLE",
+      "Nao foi possivel enviar a imagem para o storage.",
+    );
+  }
+}
+
+async function storeInLocalFilesystem(
+  params: {
+    buffer: Buffer;
+    year: string;
+    month: string;
+    safeFileName: string;
+  },
+) {
+  const baseDir = path.resolve(process.cwd(), "public", "uploads", "news");
+  const uploadDir = path.resolve(baseDir, params.year, params.month);
+  await mkdir(uploadDir, { recursive: true });
+
+  const destinationPath = path.resolve(uploadDir, params.safeFileName);
+  const normalizedBaseDir = baseDir.toLowerCase();
+  const normalizedDestination = destinationPath.toLowerCase();
+  const baseWithSeparator = `${normalizedBaseDir}${path.sep}`;
+
+  if (
+    normalizedDestination !== normalizedBaseDir &&
+    !normalizedDestination.startsWith(baseWithSeparator)
+  ) {
+    throw new ApiError(400, "UPLOAD_PATH_INVALID", "Caminho de upload invalido.");
+  }
+
+  await writeFile(destinationPath, params.buffer, { flag: "wx" });
+
+  return {
+    publicUrl: `/uploads/news/${params.year}/${params.month}/${params.safeFileName}`,
+    storagePath: destinationPath,
+  };
+}
+
 export async function storeNewsImageUpload(
   file: File,
   uploaderId: string,
@@ -133,20 +219,42 @@ export async function storeNewsImageUpload(
   }
 
   const { year, month } = buildUploadDirectories();
-  const baseDir = path.resolve(process.cwd(), "public", "uploads", "news");
-  const uploadDir = path.resolve(baseDir, year, month);
-  await mkdir(uploadDir, { recursive: true });
-
   const safeFileName = `${randomUUID().replace(/-/g, "")}${extension}`;
-  const destinationPath = path.resolve(uploadDir, safeFileName);
+  let stored:
+    | {
+        publicUrl: string;
+        storagePath: string;
+      }
+    | null = null;
 
-  if (!destinationPath.startsWith(baseDir)) {
-    throw new ApiError(400, "UPLOAD_PATH_INVALID", "Caminho de upload invalido.");
+  if (getBlobReadWriteToken()) {
+    stored = await storeInVercelBlob({
+      buffer,
+      mimeType: safeMime,
+      year,
+      month,
+      safeFileName,
+    });
+  } else {
+    try {
+      stored = await storeInLocalFilesystem({
+        buffer,
+        year,
+        month,
+        safeFileName,
+      });
+    } catch (error) {
+      if (isReadOnlyFilesystemError(error)) {
+        throw new ApiError(
+          503,
+          "UPLOAD_STORAGE_NOT_CONFIGURED",
+          "Upload indisponivel no servidor. Configure o BLOB_READ_WRITE_TOKEN.",
+        );
+      }
+      throw error;
+    }
   }
 
-  await writeFile(destinationPath, buffer, { flag: "wx" });
-
-  const publicUrl = `/uploads/news/${year}/${month}/${safeFileName}`;
   const created = await prisma.newsAsset.create({
     data: {
       postId: postId ?? null,
@@ -157,8 +265,8 @@ export async function storeNewsImageUpload(
       mimeType: safeMime,
       sizeBytes: file.size,
       checksum: toChecksum(buffer),
-      storagePath: destinationPath,
-      publicUrl,
+      storagePath: stored.storagePath,
+      publicUrl: stored.publicUrl,
     },
   });
 

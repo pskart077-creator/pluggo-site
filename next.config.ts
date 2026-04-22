@@ -23,7 +23,7 @@ const contentSecurityPolicy = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://images.unsplash.com",
+  "img-src 'self' data: blob: https://images.unsplash.com https://*.public.blob.vercel-storage.com",
   "font-src 'self' data:",
   "connect-src 'self' ws: wss:",
   "frame-src 'self' https://www.youtube.com https://player.vimeo.com",
@@ -44,6 +44,10 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
       },
     ],
     localPatterns: [
