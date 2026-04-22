@@ -365,6 +365,46 @@ function dedupeTagIds(tagIds: string[] | undefined) {
   return Array.from(new Set(tagIds));
 }
 
+async function ensureExistingCategoryId(categoryId: string) {
+  const category = await prisma.newsCategory.findFirst({
+    where: {
+      id: categoryId,
+      deletedAt: null,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (!category) {
+    throw new ApiError(400, "CATEGORY_NOT_FOUND", "Categoria selecionada nao encontrada.");
+  }
+
+  return category.id;
+}
+
+async function resolveExistingTagIds(tagIds: string[] | undefined) {
+  const deduped = dedupeTagIds(tagIds);
+  if (deduped.length === 0) {
+    return [];
+  }
+
+  const existingTags = await prisma.newsTag.findMany({
+    where: {
+      id: {
+        in: deduped,
+      },
+      deletedAt: null,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  const allowed = new Set(existingTags.map((tag) => tag.id));
+  return deduped.filter((tagId) => allowed.has(tagId));
+}
+
 export async function publishDueScheduledPosts() {
   await prisma.newsPost.updateMany({
     where: {
@@ -766,13 +806,21 @@ export async function getAdminNewsById(id: string) {
 export async function createNewsPost(input: CreateNewsPostInput, actor: AuthenticatedAdmin) {
   const slugCandidate = sanitizeSlugOrNull(input.slug) ?? input.title;
   const slug = await buildUniquePostSlug(slugCandidate);
+  const categoryId = await ensureExistingCategoryId(input.categoryId);
+  const tagIds = await resolveExistingTagIds(input.tagIds);
 
   return prisma.$transaction(async (tx) => {
     const post = await tx.newsPost.create({
-      data: buildPostData(input, actor.id, slug),
+      data: buildPostData(
+        {
+          ...input,
+          categoryId,
+        },
+        actor.id,
+        slug,
+      ),
     });
 
-    const tagIds = dedupeTagIds(input.tagIds);
     if (tagIds.length > 0) {
       await tx.newsPostTag.createMany({
         data: tagIds.map((tagId) => ({
@@ -836,6 +884,13 @@ export async function updateNewsPost(
     data.slug = await buildUniquePostSlug(slugCandidate, existing.id);
   }
 
+  if (input.categoryId !== undefined) {
+    data.categoryId = await ensureExistingCategoryId(input.categoryId);
+  }
+
+  const tagIdsToPersist =
+    input.tagIds !== undefined ? await resolveExistingTagIds(input.tagIds) : null;
+
   return prisma.$transaction(async (tx) => {
     const post = await tx.newsPost.update({
       where: {
@@ -844,17 +899,16 @@ export async function updateNewsPost(
       data,
     });
 
-    if (input.tagIds) {
-      const tagIds = dedupeTagIds(input.tagIds);
+    if (tagIdsToPersist) {
       await tx.newsPostTag.deleteMany({
         where: {
           postId: post.id,
         },
       });
 
-      if (tagIds.length > 0) {
+      if (tagIdsToPersist.length > 0) {
         await tx.newsPostTag.createMany({
-          data: tagIds.map((tagId) => ({
+          data: tagIdsToPersist.map((tagId) => ({
             postId: post.id,
             tagId,
           })),
