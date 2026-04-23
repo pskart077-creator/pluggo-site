@@ -123,6 +123,11 @@ function getBlobReadWriteToken() {
   return token || null;
 }
 
+function isVercelEnvironment() {
+  const value = process.env.VERCEL?.trim().toLowerCase();
+  return value === "1" || value === "true";
+}
+
 function isReadOnlyFilesystemError(error: unknown) {
   const code =
     error && typeof error === "object" && "code" in error
@@ -226,8 +231,17 @@ export async function storeNewsImageUpload(
         storagePath: string;
       }
     | null = null;
+  const blobToken = getBlobReadWriteToken();
 
-  if (getBlobReadWriteToken()) {
+  if (!blobToken && isVercelEnvironment()) {
+    throw new ApiError(
+      503,
+      "UPLOAD_STORAGE_NOT_CONFIGURED",
+      "Upload indisponivel no servidor. Configure o BLOB_READ_WRITE_TOKEN na Vercel.",
+    );
+  }
+
+  if (blobToken) {
     stored = await storeInVercelBlob({
       buffer,
       mimeType: safeMime,
@@ -248,7 +262,7 @@ export async function storeNewsImageUpload(
         throw new ApiError(
           503,
           "UPLOAD_STORAGE_NOT_CONFIGURED",
-          "Upload indisponivel no servidor. Configure o BLOB_READ_WRITE_TOKEN.",
+          "Upload indisponivel no servidor. Configure o BLOB_READ_WRITE_TOKEN na Vercel.",
         );
       }
       throw error;
