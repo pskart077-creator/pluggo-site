@@ -40,7 +40,7 @@ export default function AdminLoginForm() {
     <form className="pluggo-news-admin-login__card" onSubmit={handleSubmit}>
       <h1 className="pluggo-news-admin-title">Acesso administrativo</h1>
       <p className="pluggo-news-admin-user" style={{ marginBottom: "0.85rem" }}>
-        Area protegida para gerenciamento de noticias.
+        Área protegida para gerenciamento de notícias.
       </p>
 
       <div style={{ display: "grid", gap: "0.7rem" }}>

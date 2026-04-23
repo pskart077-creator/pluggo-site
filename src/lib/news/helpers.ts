@@ -92,7 +92,7 @@ export function sanitizeSlug(raw: string) {
 export function ensureValidSlug(raw: string) {
   const slug = sanitizeSlug(raw);
   if (!slug || !NEWS_SLUG_REGEX.test(slug)) {
-    throw new Error("Slug invalido.");
+    throw new Error("Slug inválido.");
   }
   return slug;
 }
@@ -327,6 +327,6 @@ export function nowUtc() {
   return new Date();
 }
 
-export function neutralApiError(message = "Nao foi possivel processar a solicitacao.") {
+export function neutralApiError(message = "Não foi possível processar a solicitação.") {
   return { message };
 }

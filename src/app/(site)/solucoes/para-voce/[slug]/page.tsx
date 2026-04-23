@@ -12,8 +12,8 @@ export async function generateMetadata(
 
   if (!service) {
     return {
-      title: "Servico nao encontrado",
-      description: "O conteudo solicitado nao foi encontrado.",
+      title: "Serviço não encontrado",
+      description: "O conteúdo solicitado não foi encontrado.",
     };
   }
 
@@ -21,11 +21,11 @@ export async function generateMetadata(
     service,
     `/solucoes/para-voce/${service.slug}`,
     {
-      segmentTitle: "Para Voce",
+      segmentTitle: "Para Você",
       segmentKeywords: [
-        "para voce",
+        "para você",
         "pessoa fisica",
-        "solucoes para pessoa fisica",
+        "soluções para pessoa fisica",
       ],
     },
   );

@@ -10,18 +10,18 @@ function asKnownError(error: unknown) {
   }
 
   if (error.message === "CHAT_CONVERSATION_NOT_FOUND") {
-    return new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa nao encontrada.");
+    return new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa não encontrada.");
   }
 
   if (error.message === "CHAT_MESSAGE_EMPTY") {
-    return new InternalApiError(400, "CHAT_MESSAGE_EMPTY", "Mensagem obrigatoria.");
+    return new InternalApiError(400, "CHAT_MESSAGE_EMPTY", "Mensagem obrigatória.");
   }
 
   if (error.message === "CHAT_CONVERSATION_ASSIGNED_TO_OTHER") {
     return new InternalApiError(
       409,
       "CHAT_CONVERSATION_ASSIGNED_TO_OTHER",
-      "Conversa ja assumida por outro atendente.",
+      "Conversa já assumida por outro atendente.",
     );
   }
 
@@ -59,7 +59,7 @@ export async function POST(
 
     const conversation = await getAdminConversationById(id);
     if (!conversation) {
-      throw new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa nao encontrada.");
+      throw new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa não encontrada.");
     }
 
     return ok({

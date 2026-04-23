@@ -255,15 +255,15 @@ export function CrmClient(props: CrmClientProps) {
 
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) {
-        setError(result?.error?.message ?? "Falha ao criar negocio.");
+        setError(result?.error?.message ?? "Falha ao criar negócio.");
         return;
       }
 
       upsertDeal(result.data.deal as DealRecord);
-      setFeedback("Negocio criado com sucesso.");
+      setFeedback("Negócio criado com sucesso.");
       event.currentTarget.reset();
     } catch {
-      setError("Falha de conexao ao criar negocio.");
+      setError("Falha de conexão ao criar negócio.");
     } finally {
       setIsPending(false);
     }
@@ -286,14 +286,14 @@ export function CrmClient(props: CrmClientProps) {
 
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) {
-        setError(result?.error?.message ?? "Falha ao atualizar negocio.");
+        setError(result?.error?.message ?? "Falha ao atualizar negócio.");
         return;
       }
 
       upsertDeal(result.data.deal as DealRecord);
-      setFeedback("Negocio atualizado.");
+      setFeedback("Negócio atualizado.");
     } catch {
-      setError("Falha de conexao ao atualizar negocio.");
+      setError("Falha de conexão ao atualizar negócio.");
     } finally {
       setIsPending(false);
     }
@@ -344,7 +344,7 @@ export function CrmClient(props: CrmClientProps) {
       setFeedback("Atividade registrada.");
       event.currentTarget.reset();
     } catch {
-      setError("Falha de conexao ao adicionar atividade.");
+      setError("Falha de conexão ao adicionar atividade.");
     } finally {
       setIsPending(false);
     }
@@ -388,7 +388,7 @@ export function CrmClient(props: CrmClientProps) {
       setFeedback("Tarefa criada.");
       event.currentTarget.reset();
     } catch {
-      setError("Falha de conexao ao criar tarefa.");
+      setError("Falha de conexão ao criar tarefa.");
     } finally {
       setIsPending(false);
     }
@@ -433,7 +433,7 @@ export function CrmClient(props: CrmClientProps) {
       );
       setFeedback("Tarefa atualizada.");
     } catch {
-      setError("Falha de conexao ao atualizar tarefa.");
+      setError("Falha de conexão ao atualizar tarefa.");
     } finally {
       setIsPending(false);
     }

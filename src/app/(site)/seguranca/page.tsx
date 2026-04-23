@@ -6,7 +6,7 @@ import Process from "@/components/process/Process";
 import SecurityHero from "@/components/seguranca/SecurityHero";
 import { STATIC_PAGE_SEO, buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = buildPageMetadata(STATIC_PAGE_SEO.seguranca);
+export const metadata: Metadata = buildPageMetadata(STATIC_PAGE_SEO.segurança);
 
 export default function SecurityPage() {
   return (

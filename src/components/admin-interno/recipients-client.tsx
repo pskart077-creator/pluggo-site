@@ -66,15 +66,15 @@ export function RecipientsClient({ recipients, canManage }: RecipientsClientProp
 
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) {
-        setError(result?.error?.message ?? "Falha ao salvar destinatario.");
+        setError(result?.error?.message ?? "Falha ao salvar destinatário.");
         return;
       }
 
-      setFeedback("Destinatario salvo com sucesso.");
+      setFeedback("Destinatário salvo com sucesso.");
       event.currentTarget.reset();
       router.refresh();
     } catch {
-      setError("Falha de conexao ao salvar destinatario.");
+      setError("Falha de conexão ao salvar destinatário.");
     } finally {
       setIsPending(false);
     }
@@ -103,14 +103,14 @@ export function RecipientsClient({ recipients, canManage }: RecipientsClientProp
 
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) {
-        setError(result?.error?.message ?? "Falha ao atualizar destinatario.");
+        setError(result?.error?.message ?? "Falha ao atualizar destinatário.");
         return;
       }
 
-      setFeedback("Destinatario atualizado.");
+      setFeedback("Destinatário atualizado.");
       router.refresh();
     } catch {
-      setError("Falha de conexao ao atualizar destinatario.");
+      setError("Falha de conexão ao atualizar destinatário.");
     } finally {
       setIsPending(false);
     }
@@ -132,14 +132,14 @@ export function RecipientsClient({ recipients, canManage }: RecipientsClientProp
 
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) {
-        setError(result?.error?.message ?? "Falha ao remover destinatario.");
+        setError(result?.error?.message ?? "Falha ao remover destinatário.");
         return;
       }
 
-      setFeedback("Destinatario removido.");
+      setFeedback("Destinatário removido.");
       router.refresh();
     } catch {
-      setError("Falha de conexao ao remover destinatario.");
+      setError("Falha de conexão ao remover destinatário.");
     } finally {
       setIsPending(false);
     }
@@ -171,7 +171,7 @@ export function RecipientsClient({ recipients, canManage }: RecipientsClientProp
       );
       router.refresh();
     } catch {
-      setError("Falha de conexao ao processar fila.");
+      setError("Falha de conexão ao processar fila.");
     } finally {
       setIsPending(false);
     }

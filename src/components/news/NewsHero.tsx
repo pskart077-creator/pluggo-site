@@ -4,7 +4,7 @@ export default function NewsHero() {
   return (
     <PageHero
       title="News"
-      description="Acompanhe as ultimas novidades da Plug Go sobre produto, tecnologia, seguranca e mercado."
+      description="Acompanhe as últimas novidades da Plug Go sobre produto, tecnologia, segurança e mercado."
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "News" },

@@ -12,8 +12,8 @@ export async function generateMetadata(
 
   if (!service) {
     return {
-      title: "Servico nao encontrado",
-      description: "O conteudo solicitado nao foi encontrado.",
+      title: "Serviço não encontrado",
+      description: "O conteúdo solicitado não foi encontrado.",
     };
   }
 
@@ -21,10 +21,10 @@ export async function generateMetadata(
     service,
     `/solucoes/para-negocios-recorrentes/${service.slug}`,
     {
-      segmentTitle: "Para Negocios Recorrentes",
+      segmentTitle: "Para Negócios Recorrentes",
       segmentKeywords: [
-        "para negocios recorrentes",
-        "cobranca recorrente",
+        "para negócios recorrentes",
+        "cobrança recorrente",
         "gestao de assinaturas",
       ],
     },

@@ -62,7 +62,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     return {
       title: "News",
       description:
-        "Noticias, atualizacoes e analises da Plug Go com foco em tecnologia, seguranca e mercado.",
+        "Notícias, atualizações e análises da Plug Go com foco em tecnologia, segurança e mercado.",
     };
   }
 }

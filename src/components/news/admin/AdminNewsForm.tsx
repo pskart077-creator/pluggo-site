@@ -121,7 +121,7 @@ function hasText(value: string | null | undefined) {
 
 function validateUploadFile(file: File) {
   if (file.type && !ALLOWED_UPLOAD_MIME_TYPES.has(file.type)) {
-    return `Formato nao permitido. Envie ${ALLOWED_UPLOAD_EXTENSION_LABEL}.`;
+    return `Formato não permitido. Envie ${ALLOWED_UPLOAD_EXTENSION_LABEL}.`;
   }
 
   if (file.size > NEWS_MAX_UPLOAD_SIZE_BYTES) {
@@ -287,9 +287,9 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
 
   const isEdit = mode === "edit" && Boolean(post?.id);
 
-  const seoPreviewTitle = useMemo(() => seoTitle || title || "Sem titulo", [seoTitle, title]);
+  const seoPreviewTitle = useMemo(() => seoTitle || title || "Sem título", [seoTitle, title]);
   const seoPreviewDescription = useMemo(
-    () => seoDescription || excerpt || "Sem descricao",
+    () => seoDescription || excerpt || "Sem descrição",
     [seoDescription, excerpt],
   );
 
@@ -326,7 +326,7 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
 
       return typeof payload?.data?.asset?.url === "string" ? payload.data.asset.url : null;
     } catch {
-      setError("Falha de conexao durante o upload. Tente novamente.");
+      setError("Falha de conexão durante o upload. Tente novamente.");
       return null;
     }
   };
@@ -376,13 +376,13 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
       }
 
       if (status === NewsStatus.SCHEDULED && !scheduledAt) {
-        setError("Informe a data de agendamento para noticias agendadas.");
+        setError("Informe a data de agendamento para notícias agendadas.");
         return;
       }
 
       const hasContent = content.blocks.some((block) => blockHasMeaningfulContent(block));
       if (!hasContent) {
-        setError("Preencha o conteudo da noticia com ao menos um bloco valido no editor.");
+        setError("Preencha o conteúdo da notícia com ao menos um bloco valido no editor.");
         return;
       }
 
@@ -438,12 +438,12 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
 
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) {
-        setError(extractApiValidationMessage(result, "Nao foi possivel salvar a noticia."));
+        setError(extractApiValidationMessage(result, "Não foi possível salvar a notícia."));
         return;
       }
 
       const savedId = result?.data?.post?.id;
-      setSuccess("Noticia salva com sucesso.");
+      setSuccess("Notícia salva com sucesso.");
       if (savedId) {
         router.push(`/admin/news/${savedId}`);
       }
@@ -461,7 +461,7 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
             className="pluggo-news-admin-input"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-            placeholder="Titulo"
+            placeholder="Título"
             required
           />
 
@@ -520,7 +520,7 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
           </select>
 
           <label>
-            <span>Publicacao</span>
+            <span>Publicação</span>
             <input
               className="pluggo-news-admin-input"
               type="datetime-local"
@@ -559,7 +559,7 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
               checked={allowIndexing}
               onChange={(event) => setAllowIndexing(event.target.checked)}
             />
-            Permitir indexacao
+            Permitir indexação
           </label>
         </div>
       </section>
@@ -616,7 +616,7 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
       </section>
 
       <section className="pluggo-news-admin-panel" style={{ gridColumn: "1 / -1" }}>
-        <h2>Conteudo</h2>
+        <h2>Conteúdo</h2>
         <NewsEditor value={content} onChange={setContent} />
       </section>
 
@@ -730,8 +730,8 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
               : isPending
                 ? "Salvando..."
                 : isEdit
-                  ? "Salvar alteracoes"
-                  : "Criar noticia"}
+                  ? "Salvar alterações"
+                  : "Criar notícia"}
           </button>
 
           <button

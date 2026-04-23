@@ -7,7 +7,7 @@ import Contact from "@/components/contato/Contact";
 import { STATIC_PAGE_SEO, buildPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata(
-  STATIC_PAGE_SEO.solucoesParaVoce,
+  STATIC_PAGE_SEO.solucoesParaVocê,
 );
 
 export default function PjPage() {

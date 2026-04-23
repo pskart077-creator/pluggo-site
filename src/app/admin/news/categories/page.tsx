@@ -19,7 +19,7 @@ export default async function AdminNewsCategoriesPage() {
     <main className="pluggo-news-admin-shell">
       <section className="pluggo-news-admin-card pluggo-news-admin-page-intro">
         <h2 className="pluggo-news-admin-title">Gerenciar categorias</h2>
-        <p className="pluggo-news-admin-user">Categorias principais do ecossistema de noticias.</p>
+        <p className="pluggo-news-admin-user">Categorias principais do ecossistema de notícias.</p>
       </section>
 
       <TaxonomyManager

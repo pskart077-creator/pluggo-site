@@ -42,7 +42,7 @@ export default async function ServiceDetailsPage(
       <SlugDetails
         detail={service}
         backHref="/solucoes"
-        backLabel="Voltar para servicos"
+        backLabel="Voltar para serviços"
         eyebrow="DETALHES DO SERVICO"
       />
       <SiteFooter />

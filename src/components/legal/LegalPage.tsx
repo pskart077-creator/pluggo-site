@@ -25,7 +25,7 @@ export default function LegalPage({
         <header className="legal-page-header">
           <p className="legal-page-eyebrow">{eyebrow}</p>
           <h1 className="legal-page-title">{title}</h1>
-          <p className="legal-page-updated">Ultima atualizacao: {lastUpdated}</p>
+          <p className="legal-page-updated">última atualização: {lastUpdated}</p>
           <p className="legal-page-intro">{intro}</p>
         </header>
 

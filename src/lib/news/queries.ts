@@ -90,7 +90,7 @@ async function buildUniqueSlugFromDesired(
     }
   }
 
-  throw new ApiError(500, "SLUG_GENERATION_FAILED", "Nao foi possivel gerar slug unico.");
+  throw new ApiError(500, "SLUG_GENERATION_FAILED", "Não foi possível gerar slug único.");
 }
 
 async function buildUniquePostSlug(desiredSlug: string, excludePostId?: string) {
@@ -176,7 +176,7 @@ function normalizeStatusLifecycle(input: {
       throw new ApiError(
         400,
         "SCHEDULED_DATE_REQUIRED",
-        "Data de agendamento obrigatoria para status agendado.",
+        "Data de agendamento obrigatória para status agendado.",
       );
     }
 
@@ -202,7 +202,7 @@ function normalizeStatusLifecycle(input: {
       throw new ApiError(
         400,
         "PUBLISHED_AT_IN_FUTURE",
-        "Data de publicacao futura nao permitida para status publicado. Use status agendado.",
+        "Data de publicação futura não permitida para status publicado. Use status agendado.",
       );
     }
 
@@ -381,7 +381,7 @@ async function ensureExistingCategoryId(categoryId: string) {
   });
 
   if (!category) {
-    throw new ApiError(400, "CATEGORY_NOT_FOUND", "Categoria selecionada nao encontrada.");
+    throw new ApiError(400, "CATEGORY_NOT_FOUND", "Categoria selecionada não encontrada.");
   }
 
   return category.id;
@@ -885,11 +885,11 @@ export async function updateNewsPost(
   });
 
   if (!existing) {
-    throw new ApiError(404, "NEWS_NOT_FOUND", "Noticia nao encontrada.");
+    throw new ApiError(404, "NEWS_NOT_FOUND", "Notícia não encontrada.");
   }
 
   if (actor.role === "AUTHOR" && existing.authorId !== actor.id) {
-    throw new ApiError(403, "FORBIDDEN", "Sem permissao para editar esta noticia.");
+    throw new ApiError(403, "FORBIDDEN", "Sem permissão para editar esta notícia.");
   }
 
   if (
@@ -905,7 +905,7 @@ export async function updateNewsPost(
     throw new ApiError(
       403,
       "FORBIDDEN",
-      "Seu perfil nao possui permissao para alterar status editorial ou destaque.",
+      "Seu perfil não possui permissão para alterar status editorial ou destaque.",
     );
   }
 
@@ -966,11 +966,11 @@ export async function deleteNewsPost(postId: string, actor: AuthenticatedAdmin) 
   });
 
   if (!existing) {
-    throw new ApiError(404, "NEWS_NOT_FOUND", "Noticia nao encontrada.");
+    throw new ApiError(404, "NEWS_NOT_FOUND", "Notícia não encontrada.");
   }
 
   if (actor.role === "AUTHOR") {
-    throw new ApiError(403, "FORBIDDEN", "Sem permissao para excluir noticias.");
+    throw new ApiError(403, "FORBIDDEN", "Sem permissão para excluir notícias.");
   }
 
   await prisma.newsPost.update({
@@ -994,7 +994,7 @@ export async function duplicateNewsPost(postId: string, actor: AuthenticatedAdmi
   });
 
   if (!original) {
-    throw new ApiError(404, "NEWS_NOT_FOUND", "Noticia nao encontrada.");
+    throw new ApiError(404, "NEWS_NOT_FOUND", "Notícia não encontrada.");
   }
 
   const slug = await buildUniquePostSlug(`${original.slug}-copy`);
@@ -1053,7 +1053,7 @@ export async function publishNewsPost(
   actorRole: UserRole,
 ) {
   if (!canPublish(actorRole)) {
-    throw new ApiError(403, "FORBIDDEN", "Sem permissao para publicar noticia.");
+    throw new ApiError(403, "FORBIDDEN", "Sem permissão para publicar notícia.");
   }
 
   const existing = await prisma.newsPost.findFirst({
@@ -1064,7 +1064,7 @@ export async function publishNewsPost(
   });
 
   if (!existing) {
-    throw new ApiError(404, "NEWS_NOT_FOUND", "Noticia nao encontrada.");
+    throw new ApiError(404, "NEWS_NOT_FOUND", "Notícia não encontrada.");
   }
 
   const publicationDate = toUtcDateOrNull(publishedAt) ?? nowUtc();
@@ -1121,7 +1121,7 @@ export async function createNewsCategory(
   actorRole: UserRole,
 ) {
   if (!canManageTaxonomy(actorRole)) {
-    throw new ApiError(403, "FORBIDDEN", "Sem permissao para criar categoria.");
+    throw new ApiError(403, "FORBIDDEN", "Sem permissão para criar categoria.");
   }
 
   const generatedSlug = await buildUniqueCategorySlug(input.slug ?? input.name);
@@ -1149,7 +1149,7 @@ export async function updateNewsCategory(
   actorRole: UserRole,
 ) {
   if (!canManageTaxonomy(actorRole)) {
-    throw new ApiError(403, "FORBIDDEN", "Sem permissao para editar categoria.");
+    throw new ApiError(403, "FORBIDDEN", "Sem permissão para editar categoria.");
   }
 
   const existing = await prisma.newsCategory.findFirst({
@@ -1160,7 +1160,7 @@ export async function updateNewsCategory(
   });
 
   if (!existing) {
-    throw new ApiError(404, "CATEGORY_NOT_FOUND", "Categoria nao encontrada.");
+    throw new ApiError(404, "CATEGORY_NOT_FOUND", "Categoria não encontrada.");
   }
 
   const data: Prisma.NewsCategoryUncheckedUpdateInput = {};
@@ -1192,7 +1192,7 @@ export async function updateNewsCategory(
 
 export async function deleteNewsCategory(id: string, actorRole: UserRole) {
   if (!canManageTaxonomy(actorRole)) {
-    throw new ApiError(403, "FORBIDDEN", "Sem permissao para remover categoria.");
+    throw new ApiError(403, "FORBIDDEN", "Sem permissão para remover categoria.");
   }
 
   const inUse = await prisma.newsPost.count({
@@ -1206,7 +1206,7 @@ export async function deleteNewsCategory(id: string, actorRole: UserRole) {
     throw new ApiError(
       409,
       "CATEGORY_IN_USE",
-      "Categoria vinculada a noticias. Remova os vinculos antes de excluir.",
+      "Categoria vinculada a notícias. Remova os vinculos antes de excluir.",
     );
   }
 
@@ -1252,7 +1252,7 @@ export async function createNewsTag(
   actorRole: UserRole,
 ) {
   if (!canManageTaxonomy(actorRole)) {
-    throw new ApiError(403, "FORBIDDEN", "Sem permissao para criar tag.");
+    throw new ApiError(403, "FORBIDDEN", "Sem permissão para criar tag.");
   }
 
   const desiredSlug = sanitizeSlugOrNull(input.slug) ?? input.name;
@@ -1272,7 +1272,7 @@ export async function updateNewsTag(
   actorRole: UserRole,
 ) {
   if (!canManageTaxonomy(actorRole)) {
-    throw new ApiError(403, "FORBIDDEN", "Sem permissao para editar tag.");
+    throw new ApiError(403, "FORBIDDEN", "Sem permissão para editar tag.");
   }
 
   const existing = await prisma.newsTag.findFirst({
@@ -1283,7 +1283,7 @@ export async function updateNewsTag(
   });
 
   if (!existing) {
-    throw new ApiError(404, "TAG_NOT_FOUND", "Tag nao encontrada.");
+    throw new ApiError(404, "TAG_NOT_FOUND", "Tag não encontrada.");
   }
 
   const data: Prisma.NewsTagUncheckedUpdateInput = {};
@@ -1305,7 +1305,7 @@ export async function updateNewsTag(
 
 export async function deleteNewsTag(id: string, actorRole: UserRole) {
   if (!canManageTaxonomy(actorRole)) {
-    throw new ApiError(403, "FORBIDDEN", "Sem permissao para remover tag.");
+    throw new ApiError(403, "FORBIDDEN", "Sem permissão para remover tag.");
   }
 
   await prisma.newsTag.update({

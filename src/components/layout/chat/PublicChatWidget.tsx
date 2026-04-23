@@ -288,7 +288,7 @@ export default function PublicChatWidget() {
                     ? item.senderAdmin?.fullName ?? agentLabel
                     : item.senderType === "SYSTEM"
                       ? systemLabel
-                      : "Voce";
+                      : "Você";
 
                 return (
                   <article

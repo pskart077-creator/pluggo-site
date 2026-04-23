@@ -8,7 +8,7 @@ type NewsCardProps = {
 export default function NewsCard({ item }: NewsCardProps) {
   return (
     <article className="pluggo-news-card">
-      <Link href={`/news/${item.slug}`} aria-label={`Ler noticia ${item.title}`}>
+      <Link href={`/news/${item.slug}`} aria-label={`Ler notícia ${item.title}`}>
         {item.coverImageUrl ? (
           <img
             src={item.coverImageUrl}

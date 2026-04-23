@@ -32,7 +32,7 @@ const urlOrAllowedLocalAssetSchema = z
     } catch {
       return isAllowedLocalAssetPath(value);
     }
-  }, "URL invalida.");
+  }, "URL inválida.");
 
 const headingSchema = z
   .object({
@@ -207,7 +207,7 @@ export const createNewsPostSchema = createNewsPostSchemaBase
     if (value.status === NewsStatus.SCHEDULED && !value.scheduledAt) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Data de agendamento obrigatoria para status agendado.",
+        message: "Data de agendamento obrigatória para status agendado.",
         path: ["scheduledAt"],
       });
     }
@@ -215,7 +215,7 @@ export const createNewsPostSchema = createNewsPostSchemaBase
     if (value.status === NewsStatus.PUBLISHED && !value.publishedAt && !value.scheduledAt) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Data de publicacao obrigatoria para status publicado.",
+        message: "Data de publicação obrigatória para status publicado.",
         path: ["publishedAt"],
       });
     }
@@ -225,7 +225,7 @@ export const createNewsPostSchema = createNewsPostSchemaBase
       if (!Number.isNaN(publicationDate.getTime()) && publicationDate.getTime() > Date.now() + 60_000) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Data futura nao permitida para status publicado. Use status agendado.",
+          message: "Data futura não permitida para status publicado. Use status agendado.",
           path: ["publishedAt"],
         });
       }
@@ -267,7 +267,7 @@ export const updateNewsPostSchema = z
     if (value.status === NewsStatus.SCHEDULED && !value.scheduledAt) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Data de agendamento obrigatoria para status agendado.",
+        message: "Data de agendamento obrigatória para status agendado.",
         path: ["scheduledAt"],
       });
     }
@@ -275,7 +275,7 @@ export const updateNewsPostSchema = z
     if (value.status === NewsStatus.PUBLISHED && !value.publishedAt && !value.scheduledAt) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Data de publicacao obrigatoria para status publicado.",
+        message: "Data de publicação obrigatória para status publicado.",
         path: ["publishedAt"],
       });
     }
@@ -285,7 +285,7 @@ export const updateNewsPostSchema = z
       if (!Number.isNaN(publicationDate.getTime()) && publicationDate.getTime() > Date.now() + 60_000) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Data futura nao permitida para status publicado. Use status agendado.",
+          message: "Data futura não permitida para status publicado. Use status agendado.",
           path: ["publishedAt"],
         });
       }

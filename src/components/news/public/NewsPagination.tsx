@@ -17,7 +17,7 @@ export default function NewsPagination({ page, totalPages, buildHref }: NewsPagi
   );
 
   return (
-    <nav className="pluggo-news-pager" aria-label="Paginacao">
+    <nav className="pluggo-news-pager" aria-label="Paginação">
       {page > 1 ? <Link href={buildHref(page - 1)}>Anterior</Link> : <span>Anterior</span>}
       {pages.map((currentPage) =>
         currentPage === page ? (
@@ -30,7 +30,7 @@ export default function NewsPagination({ page, totalPages, buildHref }: NewsPagi
           </Link>
         ),
       )}
-      {page < totalPages ? <Link href={buildHref(page + 1)}>Proxima</Link> : <span>Proxima</span>}
+      {page < totalPages ? <Link href={buildHref(page + 1)}>Próxima</Link> : <span>Próxima</span>}
     </nav>
   );
 }

@@ -245,7 +245,7 @@ export function assertCsrf(request: NextRequest, session: AuthenticatedAdmin) {
   }
 
   if (!safeEqual(csrfHeader, csrfCookie) || !safeEqual(csrfHeader, session.csrfToken)) {
-    throw new ApiError(403, "CSRF_INVALID", "Token CSRF invalido.");
+    throw new ApiError(403, "CSRF_INVALID", "Token CSRF inválido.");
   }
 }
 
@@ -258,11 +258,11 @@ export async function requireApiAdmin(
 ) {
   const session = await getAuthSessionFromRequest(request);
   if (!session) {
-    throw new ApiError(401, "UNAUTHENTICATED", "Autenticacao obrigatoria.");
+    throw new ApiError(401, "UNAUTHENTICATED", "Autenticação obrigatória.");
   }
 
   if (options?.allowedRoles && !options.allowedRoles.includes(session.role)) {
-    throw new ApiError(403, "FORBIDDEN", "Sem permissao para esta operacao.");
+    throw new ApiError(403, "FORBIDDEN", "Sem permissão para esta operação.");
   }
 
   if (options?.requireCsrf) {

@@ -20,7 +20,7 @@ export async function GET(
     const { id } = await context.params;
     const lead = await getLeadById(id);
     if (!lead) {
-      throw new InternalApiError(404, "LEAD_NOT_FOUND", "Lead nao encontrado.");
+      throw new InternalApiError(404, "LEAD_NOT_FOUND", "Lead não encontrado.");
     }
 
     await writeAuditLog({
@@ -55,12 +55,12 @@ export async function PATCH(
       Object.prototype.hasOwnProperty.call(body, "assigneeId") &&
       !hasPermission(session.role, "leads:assign")
     ) {
-      throw new InternalApiError(403, "FORBIDDEN", "Sem permissao para atribuir responsavel.");
+      throw new InternalApiError(403, "FORBIDDEN", "Sem permissão para atribuir responsável.");
     }
 
     const lead = await updateLead(id, session.userId, body);
     if (!lead) {
-      throw new InternalApiError(404, "LEAD_NOT_FOUND", "Lead nao encontrado.");
+      throw new InternalApiError(404, "LEAD_NOT_FOUND", "Lead não encontrado.");
     }
 
     return ok(lead);

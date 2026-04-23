@@ -32,7 +32,7 @@ function getSecurityActionCopy(action: InternalAuditAction) {
       };
     case InternalAuditAction.SECURITY_LOCKOUT:
       return {
-        title: "Bloqueio de seguranca aplicado",
+        title: "Bloqueio de segurança aplicado",
         href: "/admin-interno/auditoria",
       };
     case InternalAuditAction.NOTIFICATION_FAILED:
@@ -42,7 +42,7 @@ function getSecurityActionCopy(action: InternalAuditAction) {
       };
     default:
       return {
-        title: "Evento de seguranca registrado",
+        title: "Evento de segurança registrado",
         href: "/admin-interno/auditoria",
       };
   }
@@ -177,7 +177,7 @@ export async function GET(request: NextRequest) {
       id: `chat-${conversation.id}`,
       type: "chat",
       title: `Chat pendente: ${sanitizeText(conversation.visitorName, 80) || "Visitante"}`,
-      description: `${conversation.unreadForAdmin} mensagem(ns) nao lida(s)`,
+      description: `${conversation.unreadForAdmin} mensagem(ns) não lida(s)`,
       href: "/admin-interno/chat",
       createdAt: (conversation.lastMessageAt ?? conversation.updatedAt).toISOString(),
     }));

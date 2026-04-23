@@ -10,8 +10,8 @@ type AdminHeaderProps = {
 };
 
 const navItems = [
-  { href: "/admin/news", label: "Noticias" },
-  { href: "/admin/news/new", label: "Nova noticia" },
+  { href: "/admin/news", label: "Notícias" },
+  { href: "/admin/news/new", label: "Nova notícia" },
   { href: "/admin/news/categories", label: "Categorias" },
   { href: "/admin/news/tags", label: "Tags" },
 ];
@@ -29,7 +29,7 @@ export default function AdminHeader({ user, activePath }: AdminHeaderProps) {
         <AdminLogoutButton />
       </div>
 
-      <nav className="pluggo-news-admin-nav" aria-label="Navegacao do painel de news">
+      <nav className="pluggo-news-admin-nav" aria-label="Navegação do painel de news">
         {navItems.map((item) => (
           <Link
             key={item.href}

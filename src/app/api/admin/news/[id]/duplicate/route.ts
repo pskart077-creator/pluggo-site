@@ -41,7 +41,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
       actorId: session.id,
       entityType: "news_post",
       entityId: post?.id,
-      description: "Noticia duplicada no painel administrativo.",
+      description: "Notícia duplicada no painel administrativo.",
       metadata: {
         sourcePostId: id,
       },

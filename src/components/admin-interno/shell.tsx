@@ -114,7 +114,7 @@ export function InternalAdminShell({ children, user }: InternalShellProps) {
 
       setNotifications(payload.data);
     } catch {
-      setNotificationsError("Nao foi possivel carregar notificacoes.");
+      setNotificationsError("Não foi possível carregar notificacoes.");
     } finally {
       setIsNotificationsLoading(false);
     }

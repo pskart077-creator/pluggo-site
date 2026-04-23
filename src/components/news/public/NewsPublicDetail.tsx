@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import type { PublicNewsCardDto, PublicNewsDetailDto } from "@/lib/news/mappings";
 import NewsCard from "@/components/news/public/NewsCard";
 import NewsRichContent from "@/components/news/public/NewsRichContent";
@@ -68,7 +68,7 @@ export default function NewsPublicDetail({ post, related, recent }: NewsPublicDe
 
         {related.length > 0 ? (
           <section className="pluggo-news-related">
-            <h2>Noticias relacionadas</h2>
+            <h2>Notícias relacionadas</h2>
             <div className="pluggo-news-grid">
               {related.map((item) => (
                 <NewsCard key={item.id} item={item} />
@@ -79,7 +79,7 @@ export default function NewsPublicDetail({ post, related, recent }: NewsPublicDe
 
         {recent.length > 0 ? (
           <section className="pluggo-news-recent">
-            <h2>Noticias recentes</h2>
+            <h2>Notícias recentes</h2>
             <div className="pluggo-news-grid">
               {recent.map((item) => (
                 <NewsCard key={item.id} item={item} />

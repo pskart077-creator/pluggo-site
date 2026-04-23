@@ -10,7 +10,7 @@ export default function Solutions() {
   ];
 
   return (
-    <section id="solucoes" className="solutions-section section-anchor">
+    <section id="soluções" className="solutions-section section-anchor">
       <div className="solutions-layout">
         <div className="solutions-visual">
           <Image

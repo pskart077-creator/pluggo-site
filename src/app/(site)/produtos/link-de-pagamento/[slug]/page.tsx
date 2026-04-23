@@ -12,8 +12,8 @@ export async function generateMetadata(
 
   if (!service) {
     return {
-      title: "Servico nao encontrado",
-      description: "O conteudo solicitado nao foi encontrado.",
+      title: "Serviço não encontrado",
+      description: "O conteúdo solicitado não foi encontrado.",
     };
   }
 
@@ -25,7 +25,7 @@ export async function generateMetadata(
       segmentKeywords: [
         "para e-commerce",
         "pagamentos para ecommerce",
-        "conversao no checkout",
+        "conversão no checkout",
       ],
     },
   );

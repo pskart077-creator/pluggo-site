@@ -10,18 +10,18 @@ function assertAnalyticsToken(request: NextRequest) {
     throw new InternalApiError(
       503,
       "ANALYTICS_NOT_CONFIGURED",
-      "Ingestao de analytics indisponivel.",
+      "Ingestão de analytics indisponível.",
     );
   }
 
   const provided = request.headers.get("x-analytics-ingest-token")?.trim();
   if (!provided) {
-    throw new InternalApiError(401, "UNAUTHORIZED_INGEST", "Token de ingestao invalido.");
+    throw new InternalApiError(401, "UNAUTHORIZED_INGEST", "Token de ingestão inválido.");
   }
 
   const isValid = safeEqual(sha256(provided), sha256(expected));
   if (!isValid) {
-    throw new InternalApiError(401, "UNAUTHORIZED_INGEST", "Token de ingestao invalido.");
+    throw new InternalApiError(401, "UNAUTHORIZED_INGEST", "Token de ingestão inválido.");
   }
 }
 

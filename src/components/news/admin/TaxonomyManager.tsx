@@ -95,7 +95,7 @@ export default function TaxonomyManager({ type, items }: TaxonomyManagerProps) {
 
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) {
-        setError(result?.error?.message ?? "Nao foi possivel criar.");
+        setError(result?.error?.message ?? "Não foi possível criar.");
         return;
       }
 
@@ -131,7 +131,7 @@ export default function TaxonomyManager({ type, items }: TaxonomyManagerProps) {
 
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) {
-        setError(result?.error?.message ?? "Nao foi possivel remover.");
+        setError(result?.error?.message ?? "Não foi possível remover.");
         return;
       }
 
@@ -167,7 +167,7 @@ export default function TaxonomyManager({ type, items }: TaxonomyManagerProps) {
                 className="pluggo-news-admin-textarea"
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
-                placeholder="Descricao"
+                placeholder="Descrição"
               />
 
               <input
@@ -183,7 +183,7 @@ export default function TaxonomyManager({ type, items }: TaxonomyManagerProps) {
                   checked={allowIndexing}
                   onChange={(event) => setAllowIndexing(event.target.checked)}
                 />
-                Permitir indexacao
+                Permitir indexação
               </label>
             </>
           ) : null}
@@ -206,7 +206,7 @@ export default function TaxonomyManager({ type, items }: TaxonomyManagerProps) {
               <th>Nome</th>
               <th>Slug</th>
               <th>Posts</th>
-              <th>Acoes</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>

@@ -32,7 +32,7 @@ export async function PATCH(
     });
 
     if (!exists) {
-      throw new InternalApiError(404, "RECIPIENT_NOT_FOUND", "Destinatario nao encontrado.");
+      throw new InternalApiError(404, "RECIPIENT_NOT_FOUND", "Destinatario não encontrado.");
     }
 
     const updated = await prisma.notificationRecipient.update({
@@ -88,7 +88,7 @@ export async function DELETE(
     });
 
     if (!updated.count) {
-      throw new InternalApiError(404, "RECIPIENT_NOT_FOUND", "Destinatario nao encontrado.");
+      throw new InternalApiError(404, "RECIPIENT_NOT_FOUND", "Destinatario não encontrado.");
     }
 
     await writeAuditLog({

@@ -64,7 +64,7 @@ export default function NewsEditor({ value, onChange }: NewsEditorProps) {
   const blockTypes = useMemo(
     () =>
       [
-        { label: "Titulo", value: "heading" },
+        { label: "Título", value: "heading" },
         { label: "Paragrafo", value: "paragraph" },
         { label: "Lista", value: "list" },
         { label: "Citacao", value: "quote" },
@@ -308,7 +308,7 @@ export default function NewsEditor({ value, onChange }: NewsEditorProps) {
                 </select>
                 <input
                   value={block.title || ""}
-                  placeholder="Titulo"
+                  placeholder="Título"
                   onChange={(event) => {
                     setDraft((previous) =>
                       cloneWithUpdatedBlock(previous, index, {
@@ -359,7 +359,7 @@ export default function NewsEditor({ value, onChange }: NewsEditorProps) {
               <>
                 <input
                   value={block.title}
-                  placeholder="Titulo"
+                  placeholder="Título"
                   onChange={(event) => {
                     setDraft((previous) =>
                       cloneWithUpdatedBlock(previous, index, {
@@ -371,7 +371,7 @@ export default function NewsEditor({ value, onChange }: NewsEditorProps) {
                 />
                 <textarea
                   value={block.text}
-                  placeholder="Descricao"
+                  placeholder="Descrição"
                   onChange={(event) => {
                     setDraft((previous) =>
                       cloneWithUpdatedBlock(previous, index, {

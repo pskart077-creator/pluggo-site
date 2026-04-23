@@ -390,10 +390,10 @@ export async function createLeadFromPublicInput(input: {
         toPriority: InternalLeadPriority.MEDIA,
         note:
           captureStage === "partial"
-            ? "Captura inicial registrada na etapa 1 do formulario publico."
+            ? "Captura inicial registrada na etapa 1 do formulário público."
             : operation === "updated"
-              ? "Lead concluido a partir de uma captura inicial do formulario publico."
-              : "Lead recebido via endpoint publico.",
+              ? "Lead concluído a partir de uma captura inicial do formulário público."
+              : "Lead recebido via endpoint público.",
       },
     });
 
@@ -1059,8 +1059,8 @@ export async function getDashboardOverview(days = 30) {
       assignees: assigneeRows.map((item) => ({
         assignee:
           item.assigneeId
-            ? assigneeNameMap.get(item.assigneeId) ?? "Responsavel removido"
-            : "Sem responsavel",
+            ? assigneeNameMap.get(item.assigneeId) ?? "Responsável removido"
+            : "Sem responsável",
         count: item._count.id,
         percent: toPercentShare(item._count.id, totalCurrent),
       })),

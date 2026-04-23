@@ -97,7 +97,7 @@ export default function AdminNewsList({
 
   const kpis = [
     {
-      label: "Total de noticias",
+      label: "Total de notícias",
       value: dashboard.counts.total,
       tone: "neutral",
     },
@@ -146,7 +146,7 @@ export default function AdminNewsList({
 
       const payload = await response.json().catch(() => null);
       if (!response.ok || !payload?.success) {
-        setError(payload?.error?.message ?? "Falha na operacao.");
+        setError(payload?.error?.message ?? "Falha na operação.");
         return;
       }
 
@@ -162,7 +162,7 @@ export default function AdminNewsList({
           <p className="pluggo-news-admin-eyebrow">News Operations</p>
           <h2 className="pluggo-news-admin-title">Central de comando editorial</h2>
           <p className="pluggo-news-admin-user">
-            Protecoes ativas: sessao segura, CSRF, replay protection e rate limit.
+            Proteções ativas: sessão segura, CSRF, replay protection e rate limit.
           </p>
         </div>
 
@@ -172,7 +172,7 @@ export default function AdminNewsList({
         </div>
       </div>
 
-      <section className="pluggo-news-admin-kpi-grid" aria-label="Indicadores de operacao">
+      <section className="pluggo-news-admin-kpi-grid" aria-label="Indicadores de operação">
         {kpis.map((item) => (
           <article key={item.label} className="pluggo-news-admin-kpi-card" data-tone={item.tone}>
             <span>{item.label}</span>
@@ -185,7 +185,7 @@ export default function AdminNewsList({
         <article className="pluggo-news-admin-panel">
           <h3>Top categorias</h3>
           {dashboard.topCategories.length === 0 ? (
-            <p className="pluggo-news-admin-user">Sem categorias com noticias publicadas.</p>
+            <p className="pluggo-news-admin-user">Sem categorias com notícias publicadas.</p>
           ) : (
             <ul className="pluggo-news-admin-ranking-list">
               {dashboard.topCategories.map((category) => (
@@ -199,9 +199,9 @@ export default function AdminNewsList({
         </article>
 
         <article className="pluggo-news-admin-panel">
-          <h3>Ultimas alteracoes</h3>
+          <h3>Últimas alterações</h3>
           {dashboard.recentUpdates.length === 0 ? (
-            <p className="pluggo-news-admin-user">Nenhuma atualizacao recente.</p>
+            <p className="pluggo-news-admin-user">Nenhuma atualização recente.</p>
           ) : (
             <ul className="pluggo-news-admin-update-list">
               {dashboard.recentUpdates.map((item) => (
@@ -225,7 +225,7 @@ export default function AdminNewsList({
           type="search"
           name="search"
           defaultValue={filters.search}
-          placeholder="Buscar por titulo ou slug"
+          placeholder="Buscar por título ou slug"
         />
 
         <select className="pluggo-news-admin-select" name="status" defaultValue={filters.status || ""}>
@@ -276,18 +276,18 @@ export default function AdminNewsList({
         <table className="pluggo-news-admin-table">
           <thead>
             <tr>
-              <th>Titulo</th>
+              <th>Título</th>
               <th>Status</th>
               <th>Categoria</th>
               <th>Tags</th>
-              <th>Publicacao</th>
-              <th>Acoes</th>
+              <th>Publicação</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
             {items.length === 0 ? (
               <tr>
-                <td colSpan={6}>Nenhuma noticia encontrada com os filtros atuais.</td>
+                <td colSpan={6}>Nenhuma notícia encontrada com os filtros atuais.</td>
               </tr>
             ) : (
               items.map((item) => (
@@ -339,7 +339,7 @@ export default function AdminNewsList({
                               method: "POST",
                               body: JSON.stringify({}),
                             },
-                            "Noticia duplicada com sucesso.",
+                            "Notícia duplicada com sucesso.",
                           )
                         }
                       >
@@ -358,7 +358,7 @@ export default function AdminNewsList({
                                 method: "POST",
                                 body: JSON.stringify({}),
                               },
-                              "Noticia publicada com sucesso.",
+                              "Notícia publicada com sucesso.",
                             )
                           }
                         >
@@ -372,7 +372,7 @@ export default function AdminNewsList({
                           type="button"
                           disabled={isPending}
                           onClick={() => {
-                            if (!window.confirm("Tem certeza que deseja excluir esta noticia?")) {
+                            if (!window.confirm("Tem certeza que deseja excluir esta notícia?")) {
                               return;
                             }
                             mutate(
@@ -381,7 +381,7 @@ export default function AdminNewsList({
                                 method: "DELETE",
                                 body: JSON.stringify({}),
                               },
-                              "Noticia excluida com sucesso.",
+                              "Notícia excluída com sucesso.",
                             );
                           }}
                         >
@@ -407,9 +407,9 @@ export default function AdminNewsList({
           {pagination.page}/{pagination.totalPages}
         </span>
         {pagination.page < pagination.totalPages ? (
-          <Link href={buildPageHref(baseQuery, pagination.page + 1)}>Proxima</Link>
+          <Link href={buildPageHref(baseQuery, pagination.page + 1)}>Próxima</Link>
         ) : (
-          <span>Proxima</span>
+          <span>Próxima</span>
         )}
       </div>
     </section>

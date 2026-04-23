@@ -4,7 +4,7 @@ export default function AboutHero() {
   return (
     <PageHero
       title="Sobre Nos"
-      description="Conheca a Plug Go e nossa forma de conectar solucoes financeiras para pessoas e empresas."
+      description="Conheca a Plug Go e nossa forma de conectar soluções financeiras para pessoas e empresas."
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Sobre Nos" },

@@ -19,8 +19,8 @@ export async function generateMetadata(
 
   if (!topic) {
     return {
-      title: "Conteudo nao encontrado",
-      description: "O conteudo solicitado nao foi encontrado.",
+      title: "Conteúdo não encontrado",
+      description: "O conteúdo solicitado não foi encontrado.",
     };
   }
 

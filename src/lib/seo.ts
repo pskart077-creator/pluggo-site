@@ -21,13 +21,13 @@ type PageSeo = {
 export type StaticPageSlug =
   | "sobre"
   | "contato"
-  | "solucoes"
+  | "soluções"
   | "segmentos"
   | "news"
-  | "seguranca"
+  | "segurança"
   | "pf"
   | "pj"
-  | "solucoesParaVoce"
+  | "solucoesParaVocê"
   | "solucoesParaEmpresas"
   | "solucoesParaFintechs"
   | "solucoesParaEcommerce"
@@ -71,7 +71,7 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
       "atendimento financeiro",
     ],
   },
-  solucoes: {
+  soluções: {
     title: "Soluções",
     description:
       "Explore os serviços da Plug Go e veja como nossas soluções atendem pessoas e empresas com mais praticidade, segurança e eficiência.",
@@ -107,7 +107,7 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
       "conteúdo financeiro",
     ],
   },
-  seguranca: {
+  segurança: {
     title: "Segurança",
     description:
       "Conheça como a Plug Go estrutura processos para oferecer mais segurança, confiança e previsibilidade operacional.",
@@ -145,16 +145,16 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
       "serviços para empresas",
     ],
   },
-  solucoesParaVoce: {
+  solucoesParaVocê: {
     title: "Soluções para Você",
     description:
       "Conheça as soluções da Plug Go para pessoa física e descubra mais praticidade, segurança e agilidade no dia a dia.",
     path: "/solucoes/para-voce",
     keywords: [
       ...COMMON_KEYWORDS,
-      "solucoes para voce",
+      "soluções para você",
       "pessoa fisica",
-      "servicos para pessoa fisica",
+      "serviços para pessoa fisica",
     ],
   },
   solucoesParaEmpresas: {
@@ -164,9 +164,9 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
     path: "/solucoes/para-empresa",
     keywords: [
       ...COMMON_KEYWORDS,
-      "solucoes para empresas",
+      "soluções para empresas",
       "pessoa juridica",
-      "servicos para empresas",
+      "serviços para empresas",
     ],
   },
   solucoesParaFintechs: {
@@ -176,7 +176,7 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
     path: "/solucoes/para-fintechs",
     keywords: [
       ...COMMON_KEYWORDS,
-      "solucoes para fintechs",
+      "soluções para fintechs",
       "infraestrutura para fintech",
       "pagamentos digitais",
     ],
@@ -188,9 +188,9 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
     path: "/solucoes/para-e-commerce",
     keywords: [
       ...COMMON_KEYWORDS,
-      "solucoes para e-commerce",
+      "soluções para e-commerce",
       "pagamentos para ecommerce",
-      "conversao em checkout",
+      "conversão em checkout",
     ],
   },
   solucoesParaMarketplaces: {
@@ -200,7 +200,7 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
     path: "/solucoes/para-marketplaces",
     keywords: [
       ...COMMON_KEYWORDS,
-      "solucoes para marketplaces",
+      "soluções para marketplaces",
       "repasses marketplace",
       "pagamentos marketplace",
     ],
@@ -212,7 +212,7 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
     path: "/solucoes/para-plataformas-digitais",
     keywords: [
       ...COMMON_KEYWORDS,
-      "solucoes para plataformas digitais",
+      "soluções para plataformas digitais",
       "integracao financeira",
       "automacao financeira",
     ],
@@ -224,8 +224,8 @@ export const STATIC_PAGE_SEO: Record<StaticPageSlug, PageSeo> = {
     path: "/solucoes/para-negocios-recorrentes",
     keywords: [
       ...COMMON_KEYWORDS,
-      "solucoes para negocios recorrentes",
-      "cobranca recorrente",
+      "soluções para negócios recorrentes",
+      "cobrança recorrente",
       "gestao de assinaturas",
     ],
   },

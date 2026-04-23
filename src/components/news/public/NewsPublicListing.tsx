@@ -52,7 +52,7 @@ export default function NewsPublicListing({
       <div className="pluggo-news-page__shell">
         {items.length === 0 ? (
           <div className="pluggo-news-page__empty">
-            Nenhuma not\u00edcia publicada no momento.
+            Nenhuma notícia publicada no momento.
           </div>
         ) : (
           <>
@@ -107,7 +107,7 @@ export default function NewsPublicListing({
             {result.pagination.totalPages > 1 ? (
               <nav
                 className="pluggo-news-page__pagination"
-                aria-label="Pagina\u00e7\u00e3o das not\u00edcias"
+                aria-label="Paginação das notícias"
               >
                 {Array.from(
                   { length: result.pagination.totalPages },

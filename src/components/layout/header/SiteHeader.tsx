@@ -185,7 +185,7 @@ export default function SiteHeader() {
         <Link
           href="/"
           className="site-logo"
-          aria-label="PlugGo Inicio"
+          aria-label="PlugGo Início"
           onClick={closeMenu}
         >
           <Image
@@ -214,7 +214,7 @@ export default function SiteHeader() {
         <nav
           id="site-nav"
           className={cn("site-nav", isMenuOpen && "is-open")}
-          aria-label="Navegacao principal"
+          aria-label="Navegação principal"
         >
           {SITE_NAV_ITEMS.map((item) => {
             const isLinkActive = isActiveRoute(pathname, item.href);

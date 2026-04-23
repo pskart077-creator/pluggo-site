@@ -12,14 +12,14 @@ function asKnownError(error: unknown) {
   }
 
   if (error.message === "CHAT_CONVERSATION_NOT_FOUND") {
-    return new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa nao encontrada.");
+    return new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa não encontrada.");
   }
 
   if (error.message === "CHAT_CONVERSATION_ASSIGNED_TO_OTHER") {
     return new InternalApiError(
       409,
       "CHAT_CONVERSATION_ASSIGNED_TO_OTHER",
-      "Conversa ja assumida por outro atendente.",
+      "Conversa já assumida por outro atendente.",
     );
   }
 
@@ -27,7 +27,7 @@ function asKnownError(error: unknown) {
     return new InternalApiError(
       409,
       "CHAT_CONVERSATION_REASSIGN_FORBIDDEN",
-      "Nao e permitido transferir conversa ja assumida.",
+      "Não é permitido transferir conversa já assumida.",
     );
   }
 
@@ -48,7 +48,7 @@ export async function GET(
     const { id } = await context.params;
     const conversation = await getAdminConversationById(id);
     if (!conversation) {
-      throw new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa nao encontrada.");
+      throw new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa não encontrada.");
     }
 
     const trackView = request.nextUrl.searchParams.get("trackView");
@@ -99,7 +99,7 @@ export async function PATCH(
       });
 
       if (!assignee) {
-        throw new InternalApiError(404, "ASSIGNEE_NOT_FOUND", "Responsavel nao encontrado.");
+        throw new InternalApiError(404, "ASSIGNEE_NOT_FOUND", "Responsável não encontrado.");
       }
     }
 
@@ -114,7 +114,7 @@ export async function PATCH(
     });
 
     if (!conversation) {
-      throw new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa nao encontrada.");
+      throw new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa não encontrada.");
     }
 
     return ok({

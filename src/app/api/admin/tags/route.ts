@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       actorId: session.id,
       entityType: "news_tag",
       entityId: tag.id,
-      description: "Tag criada no painel de noticias.",
+      description: "Tag criada no painel de notícias.",
       metadata: {
         slug: tag.slug,
       },

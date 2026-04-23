@@ -21,7 +21,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
     const post = await getAdminNewsById(id);
 
     if (!post) {
-      throw new ApiError(404, "NEWS_NOT_FOUND", "Noticia nao encontrada.");
+      throw new ApiError(404, "NEWS_NOT_FOUND", "Notícia não encontrada.");
     }
 
     return ok({ post });
@@ -51,7 +51,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       actorId: session.id,
       entityType: "news_post",
       entityId: id,
-      description: "Noticia atualizada no painel de noticias.",
+      description: "Notícia atualizada no painel de notícias.",
       metadata: {
         status: updated?.status,
       },
@@ -85,7 +85,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       actorId: session.id,
       entityType: "news_post",
       entityId: id,
-      description: "Noticia removida no painel de noticias.",
+      description: "Notícia removida no painel de notícias.",
       ipAddress,
       userAgent,
     });

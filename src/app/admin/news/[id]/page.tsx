@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const metadata = {
-  title: "Editar Noticia | Admin",
+  title: "Editar Notícia | Admin",
   robots: {
     index: false,
     follow: false,
@@ -30,7 +30,7 @@ export default async function AdminNewsEditPage({ params }: Props) {
   return (
     <main className="pluggo-news-admin-shell">
       <section className="pluggo-news-admin-card pluggo-news-admin-page-intro">
-        <h2 className="pluggo-news-admin-title">Editar noticia</h2>
+        <h2 className="pluggo-news-admin-title">Editar notícia</h2>
         <p className="pluggo-news-admin-user">ID interno: {post.id}</p>
       </section>
 

@@ -19,7 +19,7 @@ export default function NewsFilterBar({ filters, categories, tags }: NewsFilterB
         type="search"
         name="search"
         defaultValue={filters.search}
-        placeholder="Buscar por titulo ou resumo"
+        placeholder="Buscar por título ou resumo"
       />
 
       <select className="pluggo-news-select" name="category" defaultValue={filters.category}>

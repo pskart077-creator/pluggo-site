@@ -500,7 +500,7 @@ export function InternalChatClient(props: InternalChatClientProps) {
       setFeedback("Conversa atualizada.");
       await Promise.all([refreshList(), refreshConversation(selectedConversation.id)]);
     } catch {
-      setError("Falha de conexao ao atualizar conversa.");
+      setError("Falha de conexão ao atualizar conversa.");
     } finally {
       setIsPending(false);
     }
@@ -543,7 +543,7 @@ export function InternalChatClient(props: InternalChatClientProps) {
       setFeedback("Mensagem enviada.");
       await Promise.all([refreshList(), refreshConversation(selectedConversation.id)]);
     } catch {
-      setError("Falha de conexao ao enviar mensagem.");
+      setError("Falha de conexão ao enviar mensagem.");
     } finally {
       setIsPending(false);
     }

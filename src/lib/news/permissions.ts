@@ -34,7 +34,7 @@ const ROLE_PERMISSIONS: Record<UserRole, Set<NewsActionName>> = {
 };
 
 export class PermissionError extends Error {
-  constructor(message = "Sem permissao para esta operacao.") {
+  constructor(message = "Sem permissão para esta operação.") {
     super(message);
     this.name = "PermissionError";
   }

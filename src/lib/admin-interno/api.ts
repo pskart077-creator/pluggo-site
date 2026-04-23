@@ -60,7 +60,7 @@ export async function parseJsonBody<T = unknown>(request: Request, maxChars = 51
   try {
     return JSON.parse(raw) as T;
   } catch {
-    throw new InternalApiError(400, "INVALID_JSON", "JSON invalido.");
+    throw new InternalApiError(400, "INVALID_JSON", "JSON inválido.");
   }
 }
 
@@ -70,7 +70,7 @@ export function fromUnknownError(error: unknown) {
   }
 
   if (error instanceof ZodError) {
-    return fail(400, "VALIDATION_ERROR", "Dados invalidos.", error.flatten());
+    return fail(400, "VALIDATION_ERROR", "Dados inválidos.", error.flatten());
   }
 
   if (error instanceof Error) {

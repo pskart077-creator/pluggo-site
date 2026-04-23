@@ -24,16 +24,16 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "cobrancas-integradas",
-    title: "Cobrancas Integradas",
+    title: "Cobranças Integradas",
     shortDescription:
       "Receba de forma organizada com fluxos de cobrança conectados ao seu negócio.",
     seoDescription:
-      "Entenda como as Cobrancas Integradas da Plug Go organizam recebimentos e tornam a operação financeira mais fluida.",
+      "Entenda como as Cobranças Integradas da Plug Go organizam recebimentos e tornam a operação financeira mais fluida.",
     seoKeywords: [
-      "cobrancas integradas",
-      "gestao de cobrancas",
+      "cobranças integradas",
+      "gestao de cobranças",
       "recebimentos",
-      "plug go cobrancas",
+      "plug go cobranças",
     ],
     description:
       "As cobranças integradas centralizam o processo de recebimento em uma experiência mais direta, reduzindo fricção operacional e melhorando a rotina financeira.",
@@ -45,16 +45,16 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "seguranca-financeira",
-    title: "Seguranca Financeira",
+    title: "Segurança Financeira",
     shortDescription:
       "Tenha mais confiança para operar com estrutura e processos consistentes.",
     seoDescription:
-      "Veja como a Seguranca Financeira da Plug Go melhora previsibilidade, controle e confiabilidade no dia a dia.",
+      "Veja como a Segurança Financeira da Plug Go melhora previsibilidade, controle e confiabilidade no dia a dia.",
     seoKeywords: [
-      "seguranca financeira",
+      "segurança financeira",
       "controle financeiro",
       "gestao de risco",
-      "plug go seguranca",
+      "plug go segurança",
     ],
     description:
       "A Plug Go estrutura a experiência financeira com foco em proteção e confiabilidade, apoiando decisões com mais controle e previsibilidade operacional.",
@@ -74,7 +74,7 @@ export const SERVICES: Service[] = [
     seoKeywords: [
       "cripto",
       "ativos digitais",
-      "servicos financeiros digitais",
+      "serviços financeiros digitais",
       "plug go cripto",
     ],
     description:

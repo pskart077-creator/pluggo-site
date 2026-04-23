@@ -343,11 +343,11 @@ export function assertInternalCsrf(
   }
 
   if (!safeEqual(headerToken, cookieToken)) {
-    throw new InternalApiError(403, "CSRF_INVALID", "Token CSRF invalido.");
+    throw new InternalApiError(403, "CSRF_INVALID", "Token CSRF inválido.");
   }
 
   if (!safeEqual(sha256(headerToken), session.csrfTokenHash)) {
-    throw new InternalApiError(403, "CSRF_INVALID", "Token CSRF invalido.");
+    throw new InternalApiError(403, "CSRF_INVALID", "Token CSRF inválido.");
   }
 }
 
@@ -360,11 +360,11 @@ export async function requireInternalApiSession(
 ) {
   const session = await getInternalAuthFromRequest(request);
   if (!session) {
-    throw new InternalApiError(401, "UNAUTHENTICATED", "Autenticacao obrigatoria.");
+    throw new InternalApiError(401, "UNAUTHENTICATED", "Autenticação obrigatória.");
   }
 
   if (options?.permission && !hasPermission(session.role, options.permission)) {
-    throw new InternalApiError(403, "FORBIDDEN", "Permissao insuficiente.");
+    throw new InternalApiError(403, "FORBIDDEN", "Permissão insuficiente.");
   }
 
   if (options?.requireCsrf) {

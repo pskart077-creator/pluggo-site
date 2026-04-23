@@ -6,16 +6,16 @@ export default function NotFoundPage() {
       <div className="not-found-card">
         <p className="not-found-code">404</p>
 
-        <h1 className="not-found-title">Pagina nao encontrada</h1>
+        <h1 className="not-found-title">Página não encontrada</h1>
 
         <p className="not-found-description">
-          A pagina que voce tentou acessar nao existe ou foi movida. Voce pode
+          A página que você tentou acessar não existe ou foi movida. Você pode
           voltar para a home ou falar com nosso time.
         </p>
 
         <div className="not-found-actions">
           <Link href="/" className="site-contact-btn">
-            Ir para inicio
+            Ir para início
           </Link>
 
           <Link href="/contato" className="not-found-secondary">

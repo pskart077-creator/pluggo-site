@@ -86,24 +86,24 @@ function assertUploadAllowed(file: File, detectedMime: DetectedMime) {
   }
 
   if (file.size > NEWS_MAX_UPLOAD_SIZE_BYTES) {
-    throw new ApiError(413, "UPLOAD_TOO_LARGE", "Arquivo excede o tamanho maximo permitido.");
+    throw new ApiError(413, "UPLOAD_TOO_LARGE", "Arquivo excede o tamanho máximo permitido.");
   }
 
   if (!detectedMime || !NEWS_ALLOWED_UPLOAD_MIME[detectedMime]) {
     throw new ApiError(
       415,
       "UPLOAD_INVALID_TYPE",
-      "Tipo de arquivo nao permitido. Use JPG, PNG, WEBP ou AVIF.",
+      "Tipo de arquivo não permitido. Use JPG, PNG, WEBP ou AVIF.",
     );
   }
 
   const requestedExtension = getRequestedExtension(file.name);
   if (requestedExtension && !NEWS_ALLOWED_UPLOAD_EXTENSIONS.has(requestedExtension)) {
-    throw new ApiError(415, "UPLOAD_INVALID_EXTENSION", "Extensao de arquivo nao permitida.");
+    throw new ApiError(415, "UPLOAD_INVALID_EXTENSION", "Extensão de arquivo não permitida.");
   }
 
   if (file.type && normalizeDeclaredMime(file.type) !== detectedMime) {
-    throw new ApiError(415, "UPLOAD_MIME_MISMATCH", "MIME declarado nao confere com o conteudo.");
+    throw new ApiError(415, "UPLOAD_MIME_MISMATCH", "MIME declarado não confere com o conteúdo.");
   }
 }
 
@@ -150,7 +150,7 @@ async function storeInVercelBlob(
     throw new ApiError(
       503,
       "UPLOAD_STORAGE_NOT_CONFIGURED",
-      "Upload indisponivel no servidor. Configure o BLOB_READ_WRITE_TOKEN.",
+      "Upload indisponível no servidor. Configure o BLOB_READ_WRITE_TOKEN.",
     );
   }
 
@@ -171,7 +171,7 @@ async function storeInVercelBlob(
     throw new ApiError(
       503,
       "UPLOAD_STORAGE_UNAVAILABLE",
-      "Nao foi possivel enviar a imagem para o storage.",
+      "Não foi possível enviar a imagem para o storage.",
     );
   }
 }
@@ -197,7 +197,7 @@ async function storeInLocalFilesystem(
     normalizedDestination !== normalizedBaseDir &&
     !normalizedDestination.startsWith(baseWithSeparator)
   ) {
-    throw new ApiError(400, "UPLOAD_PATH_INVALID", "Caminho de upload invalido.");
+    throw new ApiError(400, "UPLOAD_PATH_INVALID", "Caminho de upload inválido.");
   }
 
   await writeFile(destinationPath, params.buffer, { flag: "wx" });
@@ -220,7 +220,7 @@ export async function storeNewsImageUpload(
 
   const extension = getExtensionForMime(safeMime);
   if (!extension) {
-    throw new ApiError(415, "UPLOAD_INVALID_TYPE", "Nao foi possivel determinar a extensao.");
+    throw new ApiError(415, "UPLOAD_INVALID_TYPE", "Não foi possível determinar a extensão.");
   }
 
   const { year, month } = buildUploadDirectories();
@@ -237,7 +237,7 @@ export async function storeNewsImageUpload(
     throw new ApiError(
       503,
       "UPLOAD_STORAGE_NOT_CONFIGURED",
-      "Upload indisponivel no servidor. Configure o BLOB_READ_WRITE_TOKEN na Vercel.",
+      "Upload indisponível no servidor. Configure o BLOB_READ_WRITE_TOKEN na Vercel.",
     );
   }
 
@@ -262,7 +262,7 @@ export async function storeNewsImageUpload(
         throw new ApiError(
           503,
           "UPLOAD_STORAGE_NOT_CONFIGURED",
-          "Upload indisponivel no servidor. Configure o BLOB_READ_WRITE_TOKEN na Vercel.",
+          "Upload indisponível no servidor. Configure o BLOB_READ_WRITE_TOKEN na Vercel.",
         );
       }
       throw error;

@@ -53,7 +53,7 @@ export default function CookieConsentBanner() {
       </button>
 
       <p className="cookie-consent-text">
-        Usamos cookies para melhorar sua experiencia de navegacao. Leia nossos{" "}
+        Usamos cookies para melhorar sua experiência de navegação. Leia nossos{" "}
         <Link href="/terms-of-services">Termos de Serviço</Link> e{" "}
         <Link href="/privacy-policy">Política de Privacidade</Link>.
       </p>

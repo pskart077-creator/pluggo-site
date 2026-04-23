@@ -45,7 +45,7 @@ export const ABOUT_TOPICS: SlugPageDetail[] = [
     seoKeywords: [
       "visao plug go",
       "futuro financeiro",
-      "inovacao em solucoes financeiras",
+      "inovação em soluções financeiras",
     ],
     description:
       "Queremos transformar a relação com soluções financeiras, entregando mais clareza, confiança e eficiência em cada etapa.",

@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
 
     const payload = await getPublicConversation(ensured.visitorToken);
     if (!payload) {
-      throw new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa nao encontrada.");
+      throw new InternalApiError(404, "CHAT_CONVERSATION_NOT_FOUND", "Conversa não encontrada.");
     }
 
     const response = NextResponse.json({

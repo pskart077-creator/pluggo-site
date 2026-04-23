@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) {
     return {
-      title: "Noticia nao encontrada",
+      title: "Notícia não encontrada",
       robots: {
         index: false,
         follow: false,

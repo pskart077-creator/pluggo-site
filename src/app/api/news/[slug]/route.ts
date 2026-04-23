@@ -17,7 +17,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
     const post = await getPublicNewsBySlug(slug);
 
     if (!post) {
-      throw new ApiError(404, "NEWS_NOT_FOUND", "Noticia nao encontrada.");
+      throw new ApiError(404, "NEWS_NOT_FOUND", "Notícia não encontrada.");
     }
 
     const related = await getRelatedPublicNews(post.id, post.category.id, 3);

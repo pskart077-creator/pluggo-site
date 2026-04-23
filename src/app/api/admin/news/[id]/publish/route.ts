@@ -43,7 +43,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
       actorId: session.id,
       entityType: "news_post",
       entityId: id,
-      description: "Noticia publicada via acao administrativa.",
+      description: "Notícia publicada via ação administrativa.",
       metadata: {
         publishedAt: post.publishedAt,
       },

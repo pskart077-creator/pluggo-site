@@ -24,11 +24,11 @@ export function requireSameOrigin(request: NextRequest) {
   try {
     originUrl = new URL(origin);
   } catch {
-    throw new InternalApiError(403, "INVALID_ORIGIN", "Origem invalida.");
+    throw new InternalApiError(403, "INVALID_ORIGIN", "Origem inválida.");
   }
 
   if (originUrl.host !== request.nextUrl.host) {
-    throw new InternalApiError(403, "INVALID_ORIGIN", "Origem nao permitida.");
+    throw new InternalApiError(403, "INVALID_ORIGIN", "Origem não permitida.");
   }
 }
 
@@ -100,11 +100,11 @@ export function requireTrustedOrigin(request: NextRequest) {
   try {
     originUrl = new URL(origin);
   } catch {
-    throw new InternalApiError(403, "INVALID_ORIGIN", "Origem invalida.");
+    throw new InternalApiError(403, "INVALID_ORIGIN", "Origem inválida.");
   }
 
   if (!/^https?:$/i.test(originUrl.protocol)) {
-    throw new InternalApiError(403, "INVALID_ORIGIN", "Origem invalida.");
+    throw new InternalApiError(403, "INVALID_ORIGIN", "Origem inválida.");
   }
 
   const trustedHosts = new Set<string>();
@@ -127,7 +127,7 @@ export function requireTrustedOrigin(request: NextRequest) {
     }
   }
 
-  throw new InternalApiError(403, "INVALID_ORIGIN", "Origem nao permitida.");
+  throw new InternalApiError(403, "INVALID_ORIGIN", "Origem não permitida.");
 }
 
 export function applyAdminSecurityHeaders(response: Response) {

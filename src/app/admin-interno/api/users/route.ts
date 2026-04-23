@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (exists) {
-      throw new InternalApiError(409, "USER_ALREADY_EXISTS", "Ja existe usuario com este email.");
+      throw new InternalApiError(409, "USER_ALREADY_EXISTS", "Já existe usuário com este e-mail.");
     }
 
     const passwordHash = await hashPassword(body.password);
@@ -90,14 +90,14 @@ export async function POST(request: NextRequest) {
     });
 
     if (!role) {
-      throw new InternalApiError(400, "INVALID_ROLE", "Papel invalido.");
+      throw new InternalApiError(400, "INVALID_ROLE", "Papel inválido.");
     }
 
     if (!canAssignAdminRole(session.role, role.key)) {
       throw new InternalApiError(
         403,
         "FORBIDDEN",
-        "Voce nao possui permissao para atribuir este papel.",
+        "Você não possui permissão para atribuir este papel.",
       );
     }
 

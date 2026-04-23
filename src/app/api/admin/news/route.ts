@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
       actorId: session.id,
       entityType: "news_post",
       entityId: post?.id,
-      description: "Noticia criada no painel de noticias.",
+      description: "Notícia criada no painel de notícias.",
       metadata: {
         status: post?.status,
       },

@@ -44,7 +44,7 @@ async function assertUserExists(tx: Prisma.TransactionClient, userId: string) {
   });
 
   if (!user) {
-    throw new InternalApiError(404, "USER_NOT_FOUND", "Usuario responsavel nao encontrado.");
+    throw new InternalApiError(404, "USER_NOT_FOUND", "Usuário responsável não encontrado.");
   }
 }
 
@@ -93,7 +93,7 @@ async function ensureLeadContact(
   });
 
   if (!lead) {
-    throw new InternalApiError(404, "LEAD_NOT_FOUND", "Lead informado nao foi encontrado.");
+    throw new InternalApiError(404, "LEAD_NOT_FOUND", "Lead informado não foi encontrado.");
   }
 
   const existingContact = await tx.crmContact.findUnique({
@@ -360,7 +360,7 @@ export async function createCrmDeal(
       });
 
       if (!account) {
-        throw new InternalApiError(404, "ACCOUNT_NOT_FOUND", "Conta CRM nao encontrada.");
+        throw new InternalApiError(404, "ACCOUNT_NOT_FOUND", "Conta CRM não encontrada.");
       }
     }
 
@@ -377,7 +377,7 @@ export async function createCrmDeal(
       });
 
       if (!contact) {
-        throw new InternalApiError(404, "CONTACT_NOT_FOUND", "Contato CRM nao encontrado.");
+        throw new InternalApiError(404, "CONTACT_NOT_FOUND", "Contato CRM não encontrado.");
       }
 
       if (!accountId && contact.accountId) {
@@ -415,7 +415,7 @@ export async function createCrmDeal(
         dealId: deal.id,
         actorId,
         type: CrmActivityType.SYSTEM,
-        description: `Negocio criado em ${stage}.`,
+        description: `Negócio criado em ${stage}.`,
         metadata: {
           stage,
         },
@@ -487,7 +487,7 @@ export async function createCrmDeal(
   });
 
   if (!created) {
-    throw new InternalApiError(500, "CRM_CREATE_FAILED", "Falha ao criar negocio.");
+    throw new InternalApiError(500, "CRM_CREATE_FAILED", "Falha ao criar negócio.");
   }
 
   await writeAuditLog({
@@ -531,7 +531,7 @@ export async function updateCrmDeal(
     });
 
     if (!current) {
-      throw new InternalApiError(404, "DEAL_NOT_FOUND", "Negocio nao encontrado.");
+      throw new InternalApiError(404, "DEAL_NOT_FOUND", "Negócio não encontrado.");
     }
 
     if (input.ownerId) {
@@ -549,7 +549,7 @@ export async function updateCrmDeal(
         },
       });
       if (!account) {
-        throw new InternalApiError(404, "ACCOUNT_NOT_FOUND", "Conta CRM nao encontrada.");
+        throw new InternalApiError(404, "ACCOUNT_NOT_FOUND", "Conta CRM não encontrada.");
       }
     }
 
@@ -564,7 +564,7 @@ export async function updateCrmDeal(
         },
       });
       if (!contact) {
-        throw new InternalApiError(404, "CONTACT_NOT_FOUND", "Contato CRM nao encontrado.");
+        throw new InternalApiError(404, "CONTACT_NOT_FOUND", "Contato CRM não encontrado.");
       }
     }
 
@@ -731,7 +731,7 @@ export async function addCrmActivity(
   });
 
   if (!deal) {
-    throw new InternalApiError(404, "DEAL_NOT_FOUND", "Negocio nao encontrado.");
+    throw new InternalApiError(404, "DEAL_NOT_FOUND", "Negócio não encontrado.");
   }
 
   const activity = await prisma.crmActivity.create({
@@ -791,7 +791,7 @@ export async function addCrmTask(
     });
 
     if (!deal) {
-      throw new InternalApiError(404, "DEAL_NOT_FOUND", "Negocio nao encontrado.");
+      throw new InternalApiError(404, "DEAL_NOT_FOUND", "Negócio não encontrado.");
     }
 
     if (input.assigneeId) {
@@ -864,11 +864,11 @@ export async function updateCrmTask(
     });
 
     if (!current || current.deal.deletedAt) {
-      throw new InternalApiError(404, "TASK_NOT_FOUND", "Tarefa CRM nao encontrada.");
+      throw new InternalApiError(404, "TASK_NOT_FOUND", "Tarefa CRM não encontrada.");
     }
 
     if (current.deal.id !== dealId) {
-      throw new InternalApiError(404, "TASK_NOT_FOUND", "Tarefa CRM nao encontrada.");
+      throw new InternalApiError(404, "TASK_NOT_FOUND", "Tarefa CRM não encontrada.");
     }
 
     if (input.assigneeId) {

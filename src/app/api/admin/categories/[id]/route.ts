@@ -34,7 +34,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
     });
 
     if (!category) {
-      throw new ApiError(404, "CATEGORY_NOT_FOUND", "Categoria nao encontrada.");
+      throw new ApiError(404, "CATEGORY_NOT_FOUND", "Categoria não encontrada.");
     }
 
     return ok({
@@ -74,7 +74,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       actorId: session.id,
       entityType: "news_category",
       entityId: category.id,
-      description: "Categoria atualizada no painel de noticias.",
+      description: "Categoria atualizada no painel de notícias.",
       ipAddress,
       userAgent,
     });
@@ -105,7 +105,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       actorId: session.id,
       entityType: "news_category",
       entityId: id,
-      description: "Categoria removida no painel de noticias.",
+      description: "Categoria removida no painel de notícias.",
       ipAddress,
       userAgent,
     });

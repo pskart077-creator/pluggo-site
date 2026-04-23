@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      throw new InternalApiError(401, "INVALID_CREDENTIALS", "Credenciais invalidas.");
+      throw new InternalApiError(401, "INVALID_CREDENTIALS", "Credenciais inválidas.");
     }
 
     await registerInternalLoginSuccess({

@@ -34,13 +34,13 @@ export async function POST(request: NextRequest) {
         message.includes("max body") ||
         message.includes("content length")
       ) {
-        throw new ApiError(413, "UPLOAD_TOO_LARGE", "Arquivo excede o tamanho maximo permitido.");
+        throw new ApiError(413, "UPLOAD_TOO_LARGE", "Arquivo excede o tamanho máximo permitido.");
       }
 
       throw new ApiError(
         400,
         "INVALID_MULTIPART",
-        "Nao foi possivel processar o upload. Reenvie o arquivo e tente novamente.",
+        "Não foi possível processar o upload. Reenvie o arquivo e tente novamente.",
       );
     }
 
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     const postId = formData.get("postId");
 
     if (!(upload instanceof File)) {
-      throw new ApiError(400, "UPLOAD_REQUIRED", "Arquivo nao informado.");
+      throw new ApiError(400, "UPLOAD_REQUIRED", "Arquivo não informado.");
     }
 
     const asset = await storeNewsImageUpload(
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
       actorId: session.id,
       entityType: "news_asset",
       entityId: asset.id,
-      description: "Upload de imagem realizado no painel de noticias.",
+      description: "Upload de imagem realizado no painel de notícias.",
       metadata: {
         mimeType: asset.mimeType,
         sizeBytes: asset.sizeBytes,

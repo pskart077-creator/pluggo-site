@@ -50,15 +50,15 @@ export async function PATCH(
     });
 
     if (!existing) {
-      throw new InternalApiError(404, "USER_NOT_FOUND", "Usuario nao encontrado.");
+      throw new InternalApiError(404, "USER_NOT_FOUND", "Usuário não encontrado.");
     }
 
     if (!canManageAdminUser(session.role, existing.role.key)) {
-      throw new InternalApiError(403, "FORBIDDEN", "Permissao insuficiente para editar este usuario.");
+      throw new InternalApiError(403, "FORBIDDEN", "Permissão insuficiente para editar este usuário.");
     }
 
     if (session.userId === id && body.isActive === false) {
-      throw new InternalApiError(400, "INVALID_OPERATION", "Voce nao pode desativar seu proprio usuario.");
+      throw new InternalApiError(400, "INVALID_OPERATION", "Você não pode desativar seu próprio usuário.");
     }
 
     let nextRoleId: string | undefined;
@@ -74,14 +74,14 @@ export async function PATCH(
       });
 
       if (!role) {
-        throw new InternalApiError(400, "INVALID_ROLE", "Papel invalido.");
+        throw new InternalApiError(400, "INVALID_ROLE", "Papel inválido.");
       }
 
       if (!canAssignAdminRole(session.role, role.key)) {
         throw new InternalApiError(
           403,
           "FORBIDDEN",
-          "Voce nao possui permissao para atribuir este papel.",
+          "Você não possui permissão para atribuir este papel.",
         );
       }
 

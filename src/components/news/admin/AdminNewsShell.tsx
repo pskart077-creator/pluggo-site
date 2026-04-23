@@ -30,7 +30,7 @@ const navItems: NavItem[] = [
   },
   {
     href: "/admin/news/new",
-    label: "Nova noticia",
+    label: "Nova notícia",
     icon: CirclePlus,
     matchPrefix: false,
   },
@@ -65,7 +65,7 @@ export default function AdminNewsShell({ children, user }: AdminNewsShellProps) 
 
   return (
     <div className="admin-layout-shell news-admin-layout-shell">
-      <aside className="admin-sidebar news-admin-sidebar" aria-label="Navegacao do painel de news">
+      <aside className="admin-sidebar news-admin-sidebar" aria-label="Navegação do painel de news">
         <div className="admin-sidebar-top news-admin-sidebar-top">
           <div className="news-admin-brand">
             <span className="news-admin-brand-mark">N</span>
@@ -104,11 +104,11 @@ export default function AdminNewsShell({ children, user }: AdminNewsShellProps) 
 
         <div className="admin-sidebar-bottom">
           <nav className="admin-sidebar-nav">
-            <Link href="/news" className="admin-sidebar-link" title="Ir para News publico">
+            <Link href="/news" className="admin-sidebar-link" title="Ir para News público">
               <span className="admin-sidebar-link-icon">
                 <House size={18} />
               </span>
-              <span className="admin-sidebar-link-label">News publico</span>
+              <span className="admin-sidebar-link-label">News público</span>
             </Link>
           </nav>
         </div>
@@ -118,11 +118,11 @@ export default function AdminNewsShell({ children, user }: AdminNewsShellProps) 
         <header className="admin-header news-admin-header">
           <div className="admin-header-copy">
             <h1>Dashboard editorial de news</h1>
-            <p>Operacao segura com controle de publicacao, SEO e auditoria.</p>
+            <p>Operação segura com controle de publicação, SEO e auditoria.</p>
           </div>
 
           <div className="news-admin-header-actions">
-            <div className="news-admin-user-pill" aria-label="Usuario autenticado">
+            <div className="news-admin-user-pill" aria-label="Usuário autenticado">
               <ShieldCheck size={16} />
               <span>
                 {user.displayName} - {user.roleLabel}

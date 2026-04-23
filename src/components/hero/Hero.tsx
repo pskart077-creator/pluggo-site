@@ -4,7 +4,7 @@ import { ArrowUpRight, Globe } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section id="inicio" className="pluggo-hero section-anchor">
+    <section id="início" className="pluggo-hero section-anchor">
       <div className="pluggo-hero__bg" aria-hidden="true">
         <div className="pluggo-hero__overlay" />
       </div>

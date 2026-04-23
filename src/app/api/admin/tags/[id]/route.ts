@@ -34,7 +34,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
     });
 
     if (!tag) {
-      throw new ApiError(404, "TAG_NOT_FOUND", "Tag nao encontrada.");
+      throw new ApiError(404, "TAG_NOT_FOUND", "Tag não encontrada.");
     }
 
     return ok({
@@ -71,7 +71,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       actorId: session.id,
       entityType: "news_tag",
       entityId: tag.id,
-      description: "Tag atualizada no painel de noticias.",
+      description: "Tag atualizada no painel de notícias.",
       ipAddress,
       userAgent,
     });
@@ -102,7 +102,7 @@ export async function DELETE(request: NextRequest, context: RouteContext) {
       actorId: session.id,
       entityType: "news_tag",
       entityId: id,
-      description: "Tag removida no painel de noticias.",
+      description: "Tag removida no painel de notícias.",
       ipAddress,
       userAgent,
     });

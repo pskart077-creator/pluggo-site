@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
         actorId: user?.id ?? null,
         entityType: "auth",
         entityId: null,
-        description: "Falha de autenticacao no painel de noticias.",
+        description: "Falha de autenticação no painel de notícias.",
         metadata: {
           email: body.email,
         },
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
         userAgent,
       });
 
-      throw new ApiError(401, "INVALID_CREDENTIALS", "Credenciais invalidas.");
+      throw new ApiError(401, "INVALID_CREDENTIALS", "Credenciais inválidas.");
     }
 
     const sessionPayload = await createSessionForUser(user.id, {

@@ -45,11 +45,11 @@ export async function POST(
     });
 
     if (!user) {
-      throw new InternalApiError(404, "USER_NOT_FOUND", "Usuario nao encontrado.");
+      throw new InternalApiError(404, "USER_NOT_FOUND", "Usuário não encontrado.");
     }
 
     if (!canManageAdminUser(session.role, user.role.key)) {
-      throw new InternalApiError(403, "FORBIDDEN", "Permissao insuficiente para redefinir esta senha.");
+      throw new InternalApiError(403, "FORBIDDEN", "Permissão insuficiente para redefinir esta senha.");
     }
 
     await updateInternalAdminPassword(id, body.password);

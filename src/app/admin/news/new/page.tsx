@@ -2,7 +2,7 @@ import AdminNewsForm from "@/components/news/admin/AdminNewsForm";
 import { listNewsCategories, listNewsTags } from "@/lib/news/queries";
 
 export const metadata = {
-  title: "Nova Noticia | Admin",
+  title: "Nova Notícia | Admin",
   robots: {
     index: false,
     follow: false,
@@ -15,8 +15,8 @@ export default async function AdminNewsNewPage() {
   return (
     <main className="pluggo-news-admin-shell">
       <section className="pluggo-news-admin-card pluggo-news-admin-page-intro">
-        <h2 className="pluggo-news-admin-title">Criar noticia</h2>
-        <p className="pluggo-news-admin-user">Preencha os dados editoriais, conteudo e SEO.</p>
+        <h2 className="pluggo-news-admin-title">Criar notícia</h2>
+        <p className="pluggo-news-admin-user">Preencha os dados editoriais, conteúdo e SEO.</p>
       </section>
 
       <AdminNewsForm

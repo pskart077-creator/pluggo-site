@@ -44,7 +44,7 @@ export default function AdminLogoutButton({
       });
 
       if (!response.ok) {
-        setError("Nao foi possivel encerrar a sessao.");
+        setError("Não foi possível encerrar a sessão.");
         return;
       }
 
