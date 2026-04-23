@@ -262,6 +262,7 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
 
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [isUploadingCover, setIsUploadingCover] = useState(false);
 
   const isEdit = mode === "edit" && Boolean(post?.id);
 
@@ -322,7 +323,13 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
       return;
     }
 
-    const uploadedUrl = await uploadCoverAsset(file);
+    setIsUploadingCover(true);
+    let uploadedUrl: string | null = null;
+    try {
+      uploadedUrl = await uploadCoverAsset(file);
+    } finally {
+      setIsUploadingCover(false);
+    }
     event.target.value = "";
     if (!uploadedUrl) {
       return;
@@ -341,6 +348,11 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
     startTransition(async () => {
       setError(null);
       setSuccess(null);
+
+      if (isUploadingCover) {
+        setError("Aguarde o upload da imagem antes de salvar.");
+        return;
+      }
 
       if (status === NewsStatus.SCHEDULED && !scheduledAt) {
         setError("Informe a data de agendamento para noticias agendadas.");
@@ -539,13 +551,25 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
             type="file"
             accept={COVER_UPLOAD_ACCEPT}
             onChange={handleUploadCover}
+            disabled={isPending || isUploadingCover}
           />
-          <input
-            className="pluggo-news-admin-input"
-            value={coverImageUrl}
-            onChange={(event) => setCoverImageUrl(event.target.value)}
-            placeholder="URL da imagem"
-          />
+          <p className="pluggo-news-admin-user">
+            {isUploadingCover
+              ? "Enviando imagem..."
+              : coverImageUrl
+                ? "Imagem enviada com sucesso pelo sistema."
+                : `Nenhuma imagem enviada ainda. Formatos: ${ALLOWED_UPLOAD_EXTENSION_LABEL}. Maximo ${MAX_UPLOAD_SIZE_MB} MB.`}
+          </p>
+          {coverImageUrl ? (
+            <button
+              className="pluggo-news-admin-button is-muted"
+              type="button"
+              onClick={() => setCoverImageUrl("")}
+              disabled={isPending || isUploadingCover}
+            >
+              Remover imagem de capa
+            </button>
+          ) : null}
           <input
             className="pluggo-news-admin-input"
             value={coverImageAlt}
@@ -672,8 +696,14 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
 
       <section className="pluggo-news-admin-panel" style={{ gridColumn: "1 / -1" }}>
         <div style={{ display: "flex", gap: "0.7rem", flexWrap: "wrap" }}>
-          <button className="pluggo-news-admin-button" type="submit" disabled={isPending}>
-            {isPending ? "Salvando..." : isEdit ? "Salvar alteracoes" : "Criar noticia"}
+          <button className="pluggo-news-admin-button" type="submit" disabled={isPending || isUploadingCover}>
+            {isUploadingCover
+              ? "Enviando imagem..."
+              : isPending
+                ? "Salvando..."
+                : isEdit
+                  ? "Salvar alteracoes"
+                  : "Criar noticia"}
           </button>
 
           <button
