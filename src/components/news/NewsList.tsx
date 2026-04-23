@@ -9,7 +9,7 @@ type NewsListProps = {
 };
 
 export default async function NewsList({ limit = 3 }: NewsListProps) {
-  const fallback = {
+  const fallback: Awaited<ReturnType<typeof listPublicNews>> = {
     items: [],
     pagination: {
       page: 1,
