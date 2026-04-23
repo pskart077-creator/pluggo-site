@@ -37,6 +37,11 @@ const contentSecurityPolicy = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
 
+  experimental: {
+    // Keep multipart bodies intact through proxy so the API can return proper upload errors.
+    proxyClientMaxBodySize: "25mb",
+  },
+
   allowedDevOrigins: getAllowedDevOrigins(),
 
   images: {

@@ -4,6 +4,7 @@ import { NewsStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useMemo, useState, useTransition } from "react";
 import NewsEditor from "@/components/news/admin/NewsEditor";
+import { NEWS_ALLOWED_UPLOAD_MIME, NEWS_MAX_UPLOAD_SIZE_BYTES } from "@/lib/news/constants";
 import type { NewsContentBlock, NewsContentDocument } from "@/lib/news/types";
 
 type Option = {
@@ -48,6 +49,16 @@ type AdminNewsFormProps = {
   categories: Option[];
   tags: Option[];
 };
+
+const ALLOWED_UPLOAD_MIME_TYPES = new Set(Object.keys(NEWS_ALLOWED_UPLOAD_MIME));
+const ALLOWED_UPLOAD_EXTENSION_LABEL = Array.from(
+  new Set(Object.values(NEWS_ALLOWED_UPLOAD_MIME).flat()),
+)
+  .map((extension) => extension.replace(".", "").toUpperCase())
+  .join(", ");
+const MAX_UPLOAD_SIZE_MB = Math.round((NEWS_MAX_UPLOAD_SIZE_BYTES / (1024 * 1024)) * 10) / 10;
+const COVER_UPLOAD_ACCEPT =
+  ".jpg,.jpeg,.png,.webp,.avif,image/jpeg,image/png,image/webp,image/avif";
 
 function readCookie(name: string) {
   if (typeof document === "undefined") {
@@ -106,6 +117,18 @@ function toIsoOrNull(value: string | null | undefined) {
 
 function hasText(value: string | null | undefined) {
   return typeof value === "string" && value.trim().length > 0;
+}
+
+function validateUploadFile(file: File) {
+  if (file.type && !ALLOWED_UPLOAD_MIME_TYPES.has(file.type)) {
+    return `Formato nao permitido. Envie ${ALLOWED_UPLOAD_EXTENSION_LABEL}.`;
+  }
+
+  if (file.size > NEWS_MAX_UPLOAD_SIZE_BYTES) {
+    return `Arquivo excede ${MAX_UPLOAD_SIZE_MB} MB.`;
+  }
+
+  return null;
 }
 
 function blockHasMeaningfulContent(block: NewsContentBlock) {
@@ -253,13 +276,9 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
     setSelectedTagIds(values);
   };
 
-  const handleUploadCover = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) {
-      return;
-    }
-
+  const uploadCoverAsset = async (file: File) => {
     setError(null);
+    setSuccess(null);
     const csrfToken = readCookie("pluggo_admin_csrf");
 
     const body = new FormData();
@@ -268,21 +287,51 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
       body.append("postId", post.id);
     }
 
-    const response = await fetch("/api/admin/news/upload", {
-      method: "POST",
-      headers: {
-        "x-csrf-token": csrfToken,
-      },
-      body,
-    });
+    try {
+      const response = await fetch("/api/admin/news/upload", {
+        method: "POST",
+        headers: {
+          "x-csrf-token": csrfToken,
+        },
+        body,
+      });
 
-    const payload = await response.json().catch(() => null);
-    if (!response.ok || !payload?.success) {
-      setError(payload?.error?.message ?? "Falha ao enviar imagem.");
+      const payload = await response.json().catch(() => null);
+      if (!response.ok || !payload?.success) {
+        setError(extractApiValidationMessage(payload, "Falha ao enviar imagem."));
+        return null;
+      }
+
+      return typeof payload?.data?.asset?.url === "string" ? payload.data.asset.url : null;
+    } catch {
+      setError("Falha de conexao durante o upload. Tente novamente.");
+      return null;
+    }
+  };
+
+  const handleUploadCover = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) {
       return;
     }
 
-    setCoverImageUrl(payload.data.asset.url);
+    const validationError = validateUploadFile(file);
+    if (validationError) {
+      setError(validationError);
+      event.target.value = "";
+      return;
+    }
+
+    const uploadedUrl = await uploadCoverAsset(file);
+    event.target.value = "";
+    if (!uploadedUrl) {
+      return;
+    }
+
+    setCoverImageUrl(uploadedUrl);
+    if (!ogImage) {
+      setOgImage(uploadedUrl);
+    }
     setSuccess("Imagem enviada com sucesso.");
   };
 
@@ -485,7 +534,12 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
         <h2>Imagem de capa</h2>
 
         <div style={{ display: "grid", gap: "0.65rem" }}>
-          <input className="pluggo-news-admin-input" type="file" accept="image/*" onChange={handleUploadCover} />
+          <input
+            className="pluggo-news-admin-input"
+            type="file"
+            accept={COVER_UPLOAD_ACCEPT}
+            onChange={handleUploadCover}
+          />
           <input
             className="pluggo-news-admin-input"
             value={coverImageUrl}

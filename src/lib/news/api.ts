@@ -61,6 +61,18 @@ export function fromUnknownError(error: unknown) {
     return fail(400, "DATABASE_VALIDATION_ERROR", "Dados invalidos para persistencia.");
   }
 
+  if (error instanceof Prisma.PrismaClientInitializationError) {
+    return fail(503, "DATABASE_UNAVAILABLE", "Servico de dados indisponivel no momento.");
+  }
+
+  if (error instanceof Prisma.PrismaClientRustPanicError) {
+    return fail(500, "DATABASE_ERROR", "Falha ao salvar dados no banco.");
+  }
+
+  if (error instanceof Prisma.PrismaClientUnknownRequestError) {
+    return fail(500, "DATABASE_ERROR", "Falha ao salvar dados no banco.");
+  }
+
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     if (error.code === "P2002") {
       return fail(409, "CONFLICT", "Ja existe um registro com os mesmos dados.");
@@ -82,6 +94,33 @@ export function fromUnknownError(error: unknown) {
   }
 
   if (error instanceof Error) {
+    const lowerMessage = error.message.toLowerCase();
+
+    if (
+      (lowerMessage.includes("multipart") &&
+        (lowerMessage.includes("boundary") ||
+          lowerMessage.includes("unexpected end") ||
+          lowerMessage.includes("malformed") ||
+          lowerMessage.includes("parse"))) ||
+      lowerMessage.includes("failed to parse body")
+    ) {
+      return fail(
+        400,
+        "INVALID_MULTIPART",
+        "Nao foi possivel processar o upload. Reenvie o arquivo e tente novamente.",
+      );
+    }
+
+    if (
+      (lowerMessage.includes("body") &&
+        (lowerMessage.includes("too large") ||
+          lowerMessage.includes("exceeded") ||
+          lowerMessage.includes("content length"))) ||
+      lowerMessage.includes("payload too large")
+    ) {
+      return fail(413, "PAYLOAD_TOO_LARGE", "Arquivo excede o tamanho maximo permitido.");
+    }
+
     if (/unique constraint failed/i.test(error.message)) {
       return fail(409, "CONFLICT", "Ja existe um registro com os mesmos dados.");
     }
@@ -98,9 +137,11 @@ export function fromUnknownError(error: unknown) {
       return fail(404, "NOT_FOUND", "Registro nao encontrado.");
     }
 
+    console.error("[news-api] unexpected error", error);
     return fail(500, "INTERNAL_ERROR", "Erro interno de servidor.");
   }
 
+  console.error("[news-api] unknown non-error rejection", error);
   return fail(500, "INTERNAL_ERROR", "Erro interno de servidor.");
 }
 
