@@ -131,6 +131,27 @@ function validateUploadFile(file: File) {
   return null;
 }
 
+function normalizeAssetUrl(value: string | null | undefined) {
+  if (!value) {
+    return "";
+  }
+
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return "";
+  }
+
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed;
+  }
+
+  if (trimmed.startsWith("/")) {
+    return trimmed;
+  }
+
+  return `/${trimmed.replace(/^\/+/, "")}`;
+}
+
 function blockHasMeaningfulContent(block: NewsContentBlock) {
   switch (block.type) {
     case "heading":
@@ -229,7 +250,7 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
   const [excerpt, setExcerpt] = useState(post?.excerpt ?? "");
   const [content, setContent] = useState<NewsContentDocument>(post?.content ?? EMPTY_CONTENT);
 
-  const [coverImageUrl, setCoverImageUrl] = useState(post?.coverImageUrl ?? "");
+  const [coverImageUrl, setCoverImageUrl] = useState(normalizeAssetUrl(post?.coverImageUrl));
   const [coverImageAlt, setCoverImageAlt] = useState(post?.coverImageAlt ?? "");
 
   const [categoryId, setCategoryId] = useState(post?.categoryId ?? categories[0]?.id ?? "");
@@ -247,7 +268,7 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
   const [seoKeywords, setSeoKeywords] = useState(post?.seoKeywords ?? "");
   const [ogTitle, setOgTitle] = useState(post?.ogTitle ?? "");
   const [ogDescription, setOgDescription] = useState(post?.ogDescription ?? "");
-  const [ogImage, setOgImage] = useState(post?.ogImage ?? "");
+  const [ogImage, setOgImage] = useState(normalizeAssetUrl(post?.ogImage));
   const [twitterTitle, setTwitterTitle] = useState(post?.twitterTitle ?? "");
   const [twitterDescription, setTwitterDescription] = useState(post?.twitterDescription ?? "");
 
@@ -335,9 +356,9 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
       return;
     }
 
-    setCoverImageUrl(uploadedUrl);
+    setCoverImageUrl(normalizeAssetUrl(uploadedUrl));
     if (!ogImage) {
-      setOgImage(uploadedUrl);
+      setOgImage(normalizeAssetUrl(uploadedUrl));
     }
     setSuccess("Imagem enviada com sucesso.");
   };
@@ -369,13 +390,14 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
         toIsoOrNull(publishedAt) ??
         (status === NewsStatus.PUBLISHED && !scheduledAt ? new Date().toISOString() : null);
       const payloadScheduledAt = toIsoOrNull(scheduledAt);
+      const normalizedCoverImageUrl = normalizeAssetUrl(coverImageUrl) || null;
 
       const payload = {
         title,
         slug,
         excerpt,
         content,
-        coverImageUrl,
+        coverImageUrl: normalizedCoverImageUrl,
         coverImageAlt,
         categoryId,
         tagIds: selectedTagIds,
@@ -391,7 +413,7 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
         seoKeywords,
         ogTitle,
         ogDescription,
-        ogImage,
+        ogImage: normalizeAssetUrl(ogImage) || null,
         twitterTitle,
         twitterDescription,
         ctaTitle,
@@ -564,7 +586,13 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
             <button
               className="pluggo-news-admin-button is-muted"
               type="button"
-              onClick={() => setCoverImageUrl("")}
+              onClick={() => {
+                const normalizedCover = normalizeAssetUrl(coverImageUrl);
+                setCoverImageUrl("");
+                if (normalizeAssetUrl(ogImage) === normalizedCover) {
+                  setOgImage("");
+                }
+              }}
               disabled={isPending || isUploadingCover}
             >
               Remover imagem de capa
@@ -579,7 +607,7 @@ export default function AdminNewsForm({ mode, post, categories, tags }: AdminNew
 
           {coverImageUrl ? (
             <img
-              src={coverImageUrl}
+              src={normalizeAssetUrl(coverImageUrl)}
               alt={coverImageAlt || "Preview"}
               style={{ width: "100%", borderRadius: 12, border: "1px solid rgba(255,255,255,0.15)" }}
             />

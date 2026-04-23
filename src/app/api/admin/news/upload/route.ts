@@ -7,6 +7,8 @@ import { RATE_LIMIT_WINDOWS } from "@/lib/news/constants";
 import { asRateLimitResponse, getRequestIp, getUserAgent, requireRateLimit } from "@/lib/news/http";
 import { storeNewsImageUpload } from "@/lib/news/uploads";
 
+export const runtime = "nodejs";
+
 export async function POST(request: NextRequest) {
   const ipAddress = getRequestIp(request);
   const userAgent = getUserAgent(request);
@@ -19,7 +21,29 @@ export async function POST(request: NextRequest) {
       requireCsrf: true,
     });
 
-    const formData = await request.formData();
+    let formData: FormData;
+    try {
+      formData = await request.formData();
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message.toLowerCase() : String(error).toLowerCase();
+
+      if (
+        message.includes("too large") ||
+        message.includes("payload") ||
+        message.includes("max body") ||
+        message.includes("content length")
+      ) {
+        throw new ApiError(413, "UPLOAD_TOO_LARGE", "Arquivo excede o tamanho maximo permitido.");
+      }
+
+      throw new ApiError(
+        400,
+        "INVALID_MULTIPART",
+        "Nao foi possivel processar o upload. Reenvie o arquivo e tente novamente.",
+      );
+    }
+
     const upload = formData.get("file");
     const postId = formData.get("postId");
 
@@ -50,6 +74,7 @@ export async function POST(request: NextRequest) {
 
     return ok({ asset }, { status: 201 });
   } catch (error) {
+    console.error("[news-upload] request failed", error);
     return asRateLimitResponse(error) ?? fromUnknownError(error);
   }
 }

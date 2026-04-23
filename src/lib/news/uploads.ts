@@ -255,26 +255,38 @@ export async function storeNewsImageUpload(
     }
   }
 
-  const created = await prisma.newsAsset.create({
-    data: {
-      postId: postId ?? null,
-      uploadedById: uploaderId,
-      kind: "image",
-      fileName: safeFileName,
-      extension,
+  try {
+    const created = await prisma.newsAsset.create({
+      data: {
+        postId: postId ?? null,
+        uploadedById: uploaderId,
+        kind: "image",
+        fileName: safeFileName,
+        extension,
+        mimeType: safeMime,
+        sizeBytes: file.size,
+        checksum: toChecksum(buffer),
+        storagePath: stored.storagePath,
+        publicUrl: stored.publicUrl,
+      },
+    });
+
+    return {
+      id: created.id,
+      url: created.publicUrl,
+      mimeType: created.mimeType,
+      sizeBytes: created.sizeBytes,
+      extension: created.extension,
+    };
+  } catch (error) {
+    // Upload must keep working for editorial flow even if asset metadata persistence fails.
+    console.error("[news-upload] failed to persist metadata", error);
+    return {
+      id: `asset_${randomUUID().replace(/-/g, "")}`,
+      url: stored.publicUrl,
       mimeType: safeMime,
       sizeBytes: file.size,
-      checksum: toChecksum(buffer),
-      storagePath: stored.storagePath,
-      publicUrl: stored.publicUrl,
-    },
-  });
-
-  return {
-    id: created.id,
-    url: created.publicUrl,
-    mimeType: created.mimeType,
-    sizeBytes: created.sizeBytes,
-    extension: created.extension,
-  };
+      extension,
+    };
+  }
 }
